@@ -90,20 +90,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          1.5313031,
-          42.5070847
-        ]
-      },
-      "properties": {
-        "name": "El Tall a taula",
-        "description": "Tipo: mediterranea, asiática"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           1.5981063,
           42.5658557
         ]
@@ -1021,20 +1007,6 @@
       "properties": {
         "name": "California Grill",
         "description": "Tipo: Internacional, Mexicano Must: alitas; burrito; tarta tatin"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          1.520904,
-          42.5074283
-        ]
-      },
-      "properties": {
-        "name": "Japomex",
-        "description": "Tipo: fusíon mexicano y japonés Must: Nachos"
       }
     },
     {
