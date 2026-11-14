@@ -324,5 +324,19 @@
     "section": "Cerca de ti",
     "priority": 23,
     "coordinateStatus": "Pendiente de verificación GPS"
+  },
+  {
+    "id": "AND-S024",
+    "name": "Bugaderia Vidiella",
+    "icon": "🧺",
+    "category": "Lavanderías automáticas",
+    "town": "Soldeu",
+    "address": "Centro de Soldeu (dirección exacta pendiente de verificar)",
+    "phone": "",
+    "source": "https://www.tripadvisor.com/ShowTopic-g190404-i2943-k14704320-Laundrette-Soldeu_Canillo_Parish.html",
+    "section": "Cerca de ti",
+    "priority": 24,
+    "coordinateStatus": "Pendiente de verificar",
+    "note": "Nombre facilitado por anfitrión. Referencia de lavandería entre Piolets y telecabina, sin confirmar que sea este establecimiento."
   }
 ]
