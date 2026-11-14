@@ -9,7 +9,10 @@
     "phone": "",
     "source": "https://guia.ad/es/parroquia/canillo",
     "section": "Cerca de ti",
-    "priority": 1
+    "priority": 1,
+    "lat": 42.58019,
+    "lon": 1.65144,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S002",
@@ -21,7 +24,10 @@
     "phone": "",
     "source": "https://guia.ad/es/poble/ransol",
     "section": "Cerca de ti",
-    "priority": 2
+    "priority": 2,
+    "lat": 42.57963,
+    "lon": 1.6413,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S003",
@@ -33,7 +39,10 @@
     "phone": "",
     "source": "https://guia.ad/es/poble/ransol",
     "section": "Cerca de ti",
-    "priority": 3
+    "priority": 3,
+    "lat": 42.5792,
+    "lon": 1.642,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S004",
@@ -45,7 +54,10 @@
     "phone": "",
     "source": "https://www.govern.ad/documents/d/guest/jep_2021_llista_canillo-pdf?download=true",
     "section": "Cerca de ti",
-    "priority": 4
+    "priority": 4,
+    "lat": 42.57655,
+    "lon": 1.66827,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S005",
@@ -57,7 +69,10 @@
     "phone": "",
     "source": "https://enandorra.com/supermercat-de-la-posta-soldeu-andorra/",
     "section": "Cerca de ti",
-    "priority": 5
+    "priority": 5,
+    "lat": 42.57687,
+    "lon": 1.66633,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S006",
@@ -69,7 +84,10 @@
     "phone": "",
     "source": "https://guia.ad/es/parroquia/canillo",
     "section": "Cerca de ti",
-    "priority": 6
+    "priority": 6,
+    "lat": 42.56613,
+    "lon": 1.59864,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S007",
@@ -81,7 +99,10 @@
     "phone": "",
     "source": "https://guia.ad/es/parroquia/canillo",
     "section": "Cerca de ti",
-    "priority": 7
+    "priority": 7,
+    "lat": 42.56585,
+    "lon": 1.59794,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S008",
@@ -90,10 +111,11 @@
     "category": "Farmacias",
     "town": "Soldeu",
     "address": "Carretera General 2, Hotel Piolets",
-    "phone": "",
+    "phone": "+376852296",
     "source": "https://www.farmaciapiolets.com/farmacia-piolets",
     "section": "Cerca de ti",
-    "priority": 8
+    "priority": 8,
+    "note": "Ubicación GPS pendiente de verificación: directorio con coordenadas contradictorias"
   },
   {
     "id": "AND-S009",
@@ -105,7 +127,10 @@
     "phone": "",
     "source": "https://all-andorra.com/pharmacies/",
     "section": "Cerca de ti",
-    "priority": 9
+    "priority": 9,
+    "lat": 42.5672606,
+    "lon": 1.6010376,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S010",
@@ -117,7 +142,8 @@
     "phone": "",
     "source": "https://guia.ad/es/poble/ransol",
     "section": "Cerca de ti",
-    "priority": 10
+    "priority": 10,
+    "note": "Ubicación GPS pendiente de verificar"
   },
   {
     "id": "AND-S011",
@@ -129,7 +155,10 @@
     "phone": "",
     "source": "https://www.pyreneespass.com/service_tarrado-1%261205",
     "section": "Cerca de ti",
-    "priority": 11
+    "priority": 11,
+    "lat": 42.567078,
+    "lon": 1.600943,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S012",
@@ -141,7 +170,8 @@
     "phone": "",
     "source": "https://www.pyreneespass.com/service_tarrado-1%261205",
     "section": "Cerca de ti",
-    "priority": 12
+    "priority": 12,
+    "note": "Ubicación GPS pendiente de verificar"
   },
   {
     "id": "AND-S013",
@@ -153,7 +183,10 @@
     "phone": "",
     "source": "https://guia.ad/es/parroquia/canillo",
     "section": "Cerca de ti",
-    "priority": 13
+    "priority": 13,
+    "lat": 42.56682,
+    "lon": 1.59988,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S014",
@@ -165,7 +198,10 @@
     "phone": "",
     "source": "https://www.grandvalira.com/sites/default/files/document/2025-07/YDRAY-GuiaCanillo_2025-CAT-ESP_AF_compressed.pdf",
     "section": "Cerca de ti",
-    "priority": 14
+    "priority": 14,
+    "lat": 42.56624,
+    "lon": 1.59931,
+    "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
     "id": "AND-S015",
