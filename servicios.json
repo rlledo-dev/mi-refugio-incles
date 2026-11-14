@@ -226,5 +226,61 @@
     "source": "https://www.grandvalira.com/sites/default/files/document/2025-07/YDRAY-GuiaCanillo_2025-CAT-ESP_AF_compressed.pdf",
     "section": "Cerca de ti",
     "priority": 16
+  },
+  {
+    "id": "AND-S017",
+    "name": "Hospital Nostra Senyora de Meritxell",
+    "icon": "🏥",
+    "category": "Hospitales",
+    "town": "Escaldes-Engordany",
+    "address": "Av. Fiter i Rossell 13",
+    "lat": 42.51147,
+    "lon": 1.53393,
+    "phone": "+376871000",
+    "source": "https://mapcarta.com/es/W194554955",
+    "section": "Cerca de ti",
+    "priority": 17
+  },
+  {
+    "id": "AND-S018",
+    "name": "Carrefour City Escaldes",
+    "icon": "🛒",
+    "category": "Supermercados",
+    "town": "Escaldes-Engordany",
+    "address": "Plaça de les Pubilles",
+    "lat": 42.50938,
+    "lon": 1.54088,
+    "phone": "",
+    "source": "https://mapcarta.com/es/N12944424501",
+    "section": "Cerca de ti",
+    "priority": 18
+  },
+  {
+    "id": "AND-S019",
+    "name": "La Poste · Andorra la Vella",
+    "icon": "📮",
+    "category": "Correos",
+    "town": "Andorra la Vella",
+    "address": "",
+    "lat": 42.50732,
+    "lon": 1.52839,
+    "phone": "",
+    "source": "https://mapcarta.com/es/N1999150911",
+    "section": "Cerca de ti",
+    "priority": 19
+  },
+  {
+    "id": "AND-S020",
+    "name": "Hiper Pas IV",
+    "icon": "🛒",
+    "category": "Supermercados",
+    "town": "Pas de la Casa",
+    "address": "",
+    "lat": 42.54321,
+    "lon": 1.73548,
+    "phone": "",
+    "source": "https://mapcarta.com/es/N690708612",
+    "section": "Cerca de ti",
+    "priority": 20
   }
 ]
