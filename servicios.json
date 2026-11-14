@@ -282,5 +282,47 @@
     "source": "https://mapcarta.com/es/N690708612",
     "section": "Cerca de ti",
     "priority": 20
+  },
+  {
+    "id": "AND-S021",
+    "name": "Bugaderia La Font",
+    "icon": "🧺",
+    "category": "Lavanderías automáticas",
+    "town": "Canillo",
+    "address": "Plaça de Montaup, 5",
+    "phone": "",
+    "source": "https://citymaps.ad/otro/canillo/bugaderia-la-font/",
+    "hours": "7:00–22:00",
+    "section": "Cerca de ti",
+    "priority": 21,
+    "coordinateStatus": "Pendiente de verificación GPS"
+  },
+  {
+    "id": "AND-S022",
+    "name": "Rentaki · Bugaderia Autoservei",
+    "icon": "🧺",
+    "category": "Lavanderías automáticas",
+    "town": "Encamp",
+    "address": "Av. de Joan Martí, 65",
+    "phone": "+376321139",
+    "source": "https://www.empreses.ad/empresa/rentaki-bugaderia-autoservei",
+    "hours": "6:00–24:00",
+    "section": "Cerca de ti",
+    "priority": 22,
+    "coordinateStatus": "Pendiente de verificación GPS"
+  },
+  {
+    "id": "AND-S023",
+    "name": "Prime Lavanderia Autoservicio",
+    "icon": "🧺",
+    "category": "Lavanderías automáticas",
+    "town": "Encamp",
+    "address": "Av. de François Mitterrand, 116",
+    "phone": "+376335410",
+    "source": "https://directoriandorra.com/es/encamp/prime-lavanderia-autoservicio",
+    "hours": "7:00–22:00",
+    "section": "Cerca de ti",
+    "priority": 23,
+    "coordinateStatus": "Pendiente de verificación GPS"
   }
 ]
