@@ -358,5 +358,20 @@
     "priority": 24,
     "coordinateStatus": "Pendiente de verificar",
     "note": "Nombre facilitado por anfitrión. Referencia de lavandería entre Piolets y telecabina, sin confirmar que sea este establecimiento."
+  },
+  {
+    "id": "AND-S025",
+    "name": "Bombers de Canillo",
+    "icon": "🚒",
+    "category": "Emergencias",
+    "town": "Canillo",
+    "address": "Ubicación facilitada por el anfitrión",
+    "lat": 42.5694371249313,
+    "lon": 1.6045787478587623,
+    "phone": "",
+    "source": "Coordenadas facilitadas por el anfitrión",
+    "section": "Cerca de ti",
+    "priority": 25,
+    "coordinateStatus": "GPS facilitado por anfitrión"
   }
 ]
