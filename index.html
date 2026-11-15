@@ -138,11 +138,12 @@ function skiLockerView(){
   show('detail');
   if(typeof L!=='undefined'){
     const coords=[42.57867400406187,1.6480697721328446];
-    const m=L.map(map).setView(coords,16);
+    const m=L.map(map,{zoomControl:true}).setView(coords,16);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(m);
     const lockerIcon=L.divIcon({className:'ski-locker-map-icon',html:'<span style="display:grid;place-items:center;width:44px;height:44px;background:#176579;color:white;border:3px solid white;border-radius:50%;box-shadow:0 3px 12px #0006;font-size:23px">🎿</span>',iconSize:[44,44],iconAnchor:[22,22],popupAnchor:[0,-23]});
     L.marker(coords,{icon:lockerIcon,title:'Sport Calbó Panini · Ski Locker'}).addTo(m).bindPopup('🎿 Sport Calbó Panini · Ski Locker');
+    // Solo un marcador en este mapa; el icono predeterminado de Leaflet no se utiliza.
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
-function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}window.addEventListener('DOMContentLoaded',loadRefugeGuest);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6').catch(()=>{}));</script></body></html>
+function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}window.addEventListener('DOMContentLoaded',loadRefugeGuest);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7').catch(()=>{}));</script></body></html>
