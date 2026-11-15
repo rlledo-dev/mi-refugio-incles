@@ -139,11 +139,15 @@
     "category": "Gasolineras",
     "town": "El Tarter",
     "address": "CG-2, zona Ransol",
-    "phone": "",
+    "phone": "+376871325",
     "source": "https://guia.ad/es/poble/ransol",
     "section": "Cerca de ti",
     "priority": 10,
-    "note": "Ubicación GPS pendiente de verificar"
+    "note": "Ubicación GPS pendiente de verificar",
+    "lat": 42.5795091,
+    "lon": 1.640177,
+    "coordinateSource": "https://ad.near-place.com/shell-suma-el-tarter-el-tarter-canillo",
+    "coordinateStatus": "Coordenadas publicadas para la estación Shell-Suma El Tarter"
   },
   {
     "id": "AND-S011",
