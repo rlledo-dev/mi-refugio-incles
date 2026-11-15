@@ -1,5 +1,5 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
-const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView()',start);const code=html.slice(start,end).replace("const REFUGE_RESERVATION_API='';","const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
+const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView()',start);const code=html.slice(start,end).replace(/const REFUGE_RESERVATION_API='[^']*';/,"const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
 function setup(query='?reserva='+'a'.repeat(64)){
 const removed=[],timers=new Map(),calls=[],listeners={};let id=0;const nodes=[];const target={prepend:e=>nodes.push(e)};
 const doc={hidden:false,getElementById:()=>null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:()=>({append(){},remove(){},className:'',textContent:''})};

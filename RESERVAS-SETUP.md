@@ -2,10 +2,11 @@
 
 ## Estado de esta revisión
 
-- Código del servicio guardado en el proyecto vinculado a la hoja privada.
-- Despliegue /exec pendiente: requiere aprobar expresamente el acceso «Cualquier usuario» y autorizar Google.
-- `REFUGE_RESERVATION_API` permanece vacío hasta obtener y probar la URL real. No inventar una URL ni dar por verificada la integración.
-- No modificar la reserva de Isa ni regenerar el token válido de CODETEST.
+- Servicio desplegado: versión 1, ejecución como propietario y acceso anónimo aprobado por el propietario.
+- URL /exec configurada en index.html. API real comprobada: reserva de prueba válida, token incorrecto y GET sin token.
+- La respuesta real incluye Access-Control-Allow-Origin: * y Cache-Control: no-cache, no-store.
+- CODETEST conserva su token y su entrada original de enero de 2026. No se modificaron datos de Isa.
+- Verificación visual publicada todavía en curso; no confundir comprobación de API con prueba completa del navegador.
 
 ## Privacidad y transporte
 
@@ -53,6 +54,6 @@ BE es `Ski Locker - establecimiento`. Sus valores son identificadores, no númer
 - Sintaxis de JavaScript y service worker: correcta.
 - Comparación con main: otras secciones sin cambios y coordenadas/marcador único conservados.
 - Hoja privada: estructura real comprobada; añadido BE y asignado el establecimiento solo a CODETEST; token existente conservado.
-- Editor Apps Script: código guardado en el proyecto vinculado. Implementación detenida por revisión automática al elegir acceso anónimo («Cualquier usuario»); requiere aprobación expresa del propietario antes de continuar.
+- Editor Apps Script: código guardado y versión 1 desplegada después de la aprobación expresa del propietario y de la autorización de Google.
 - La batería de navegador está preparada, pero no se ha podido ejecutar: descarga de WebKit interrumpida y Chromium local bloqueado por el entorno. No se afirma validación móvil, Safari ni CORS real.
-- Pendientes: obtener /exec, configurar cliente, autorizar Google, probar integración real y publicar en main.
+- Pendientes al preparar la publicación: comprobación visual de GitHub Pages y validación del navegador móvil.
