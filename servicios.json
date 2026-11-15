@@ -315,7 +315,10 @@
     "hours": "7:00–22:00",
     "section": "Cerca de ti",
     "priority": 21,
-    "coordinateStatus": "Pendiente de verificación GPS"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "lat": 42.566789067763715,
+    "lon": 1.5991980413346145,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
   },
   {
     "id": "AND-S022",
@@ -329,7 +332,10 @@
     "hours": "6:00–24:00",
     "section": "Cerca de ti",
     "priority": 22,
-    "coordinateStatus": "Pendiente de verificación GPS"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "lat": 42.532892069023134,
+    "lon": 1.5771836271578823,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
   },
   {
     "id": "AND-S023",
@@ -343,7 +349,10 @@
     "hours": "7:00–22:00",
     "section": "Cerca de ti",
     "priority": 23,
-    "coordinateStatus": "Pendiente de verificación GPS"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "lat": 42.534787376399215,
+    "lon": 1.587657643983142,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
   },
   {
     "id": "AND-S024",
@@ -351,13 +360,16 @@
     "icon": "🧺",
     "category": "Lavanderías automáticas",
     "town": "Soldeu",
-    "address": "Centro de Soldeu (dirección exacta pendiente de verificar)",
+    "address": "Soldeu · ubicación GPS facilitada por el anfitrión",
     "phone": "",
     "source": "https://www.tripadvisor.com/ShowTopic-g190404-i2943-k14704320-Laundrette-Soldeu_Canillo_Parish.html",
     "section": "Cerca de ti",
     "priority": 24,
-    "coordinateStatus": "Pendiente de verificar",
-    "note": "Nombre facilitado por anfitrión. Referencia de lavandería entre Piolets y telecabina, sin confirmar que sea este establecimiento."
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "note": "Nombre facilitado por anfitrión. Referencia de lavandería entre Piolets y telecabina, sin confirmar que sea este establecimiento.",
+    "lat": 42.57683414616487,
+    "lon": 1.6676812621152557,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
   },
   {
     "id": "AND-S025",
