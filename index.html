@@ -23,7 +23,7 @@ function activityRequest(a){
  if(!peopleInput?.checkValidity()){peopleInput?.reportValidity();return}
  const date=dateInput.value;
  const people=peopleInput.value;
- const message='Hola, Ramón. Estoy interesado/a en la actividad '+a.name+'.\nFecha: '+date+'.\nPersonas: '+people+'.\n¿Me puedes informar de la disponibilidad y los precios, por favor?';
+ const message='Hola, Ramón. ¿Me informas de la disponibilidad y los precios de la actividad '+a.name+' para el '+date+' para '+people+' persona'+(Number(people)===1?'':'s')+', por favor?';
  // Sin teléfono verificado del anfitrión no se envía a un destinatario arbitrario.
  if(!window.REFUGE_HOST_WHATSAPP){alert('La solicitud aún no está habilitada: falta configurar el WhatsApp del anfitrión.');return}
  window.open('https://wa.me/'+window.REFUGE_HOST_WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
