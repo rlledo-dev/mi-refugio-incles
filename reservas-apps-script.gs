@@ -1,76 +1,101 @@
-/**
- * Mi Refugio en Incles — API privada de reservas.
- * Crear un proyecto de Apps Script desde la hoja PRIVADA de reservas y pegar este código.
- * Desplegar como aplicación web: ejecutar como propietario; acceso "Cualquier usuario".
- * Solo expone nombre de pila, fechas, personas, nombre de local y número de taquilla
- * cuando el token secreto está vigente. Nunca expone datos ROAT.
- */
+/** Mi Refugio en Incles: solo datos de estancia, nunca campos ROAT. */
 const CONFIG = Object.freeze({
+  spreadsheetId: '1L1pTnkNUy0tmycRaY9yj3FeoMSrRmaxDr2CSvzC-TD0',
   sheetName: 'Reservas',
   timezone: 'Europe/Andorra',
-  skiLockerName: 'Sport Calbó Panini'
+  defaultLocker: 'sport-calbo-panini',
+  lockerNames: Object.freeze({'sport-calbo-panini': 'Sport Calbó Panini'})
 });
-function doGet(e) {
-  const token = String((e && e.parameter && e.parameter.token) || '');
-  const output = lookupGuest_(token);
-  return ContentService.createTextOutput(JSON.stringify(output))
-    .setMimeType(ContentService.MimeType.JSON);
+// GET nunca devuelve reservas: los tokens se envían en el cuerpo de un POST.
+function doGet() { return jsonOutput_({ok:false}); }
+function doPost(e) {
+  try {
+    const body=JSON.parse(String(e && e.postData && e.postData.contents || '{}'));
+    return jsonOutput_(lookupGuest_(body.token));
+  } catch (_) { return jsonOutput_({ok:false}); }
 }
-function lookupGuest_(token) {
-  if (!/^[a-f0-9]{64}$/.test(token)) return {ok:false,reason:'invalid'};
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.sheetName);
-  if (!sheet) return {ok:false,reason:'unavailable'};
-  const rows = sheet.getDataRange().getDisplayValues();
-  const today = Utilities.formatDate(new Date(), CONFIG.timezone, 'yyyy-MM-dd');
-  for (let i=1; i<rows.length; i++) {
-    const r=rows[i];
-    if (String(r[8]).trim()!==token) continue;
-    const status=String(r[1]).trim().toLowerCase();
-    const checkin=normaliseDate_(r[2]);
-    const checkout=normaliseDate_(r[4]);
-    if (!['confirmada','confirmado'].includes(status) || !checkin || !checkout || today<checkin || today>checkout)
-      return {ok:false,reason:'expired'};
-    // Fecha del día de entrada: visible desde 00:01 hora local de Andorra.
-    const minute=Utilities.formatDate(new Date(),CONFIG.timezone,'HH:mm');
-    if(today===checkin && minute<'00:01')return {ok:false,reason:'not_started'};
-    return {ok:true,guest:{
-      firstName:String(r[14]||'').trim().slice(0,80),
-      checkin,checkout,
-      people:Math.max(1,Math.min(20,Number(r[6])||1)),
-      lockerName:CONFIG.skiLockerName,
-      lockerNumber:String(r[55]||'').trim().slice(0,40)
-    }};
-  }
-  return {ok:false,reason:'invalid'};
+function jsonOutput_(data) {
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
 }
-function normaliseDate_(v) {
-  const s=String(v||'').trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+function bookingSheet_() {
+  const sheet=SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheetByName(CONFIG.sheetName);
+  if(!sheet)throw Error('Configuración de reservas no disponible');
+  return sheet;
+}
+function bookingColumns_(sheet) {
+  const names=sheet.getRange(1,1,1,sheet.getLastColumn()).getDisplayValues()[0];
+  const required=['Código reserva','Estado reserva','Entrada','Salida','Número huéspedes','Token enlace','Huésped 1 - Nombre','Ski Locker - número'];
+  const cols={};
+  required.forEach(name=>{const ix=names.indexOf(name);if(ix<0 || names.lastIndexOf(name)!==ix)throw Error('Revisar columnas de reservas');cols[name]=ix+1;});
+  cols.locker=names.indexOf('Ski Locker - establecimiento')+1;
+  return cols;
+}
+function lookupGuest_(token, now) {
+  if(typeof token!=='string'||!/^[a-f0-9]{64}$/.test(token))return {ok:false};
+  const sheet=bookingSheet_(),cols=bookingColumns_(sheet),last=sheet.getLastRow();
+  if(last<2)return {ok:false};
+  // Solo se lee la columna de tokens; no se carga la tabla de documentos ROAT.
+  const tokens=sheet.getRange(2,cols['Token enlace'],last-1,1).getDisplayValues();
+  const matches=[];
+  tokens.forEach((r,i)=>{if(String(r[0]).trim()===token)matches.push(i+2);});
+  if(matches.length!==1)return {ok:false};
+  const row=matches[0],read=name=>sheet.getRange(row,cols[name]).getValue();
+  const status=String(read('Estado reserva')).trim().toLowerCase();
+  if(!['confirmada','confirmado'].includes(status))return {ok:false};
+  const checkin=normaliseDate_(read('Entrada')),checkout=normaliseDate_(read('Salida'));
+  if(!checkin||!checkout||checkout<checkin)return {ok:false};
+  const startsAt=Utilities.parseDate(checkin+' 00:01',CONFIG.timezone,'yyyy-MM-dd HH:mm').getTime();
+  const nextDay=new Date(checkout+'T00:00:00Z');nextDay.setUTCDate(nextDay.getUTCDate()+1);
+  const expiresAt=Utilities.parseDate(nextDay.toISOString().slice(0,10)+' 00:00',CONFIG.timezone,'yyyy-MM-dd HH:mm').getTime();
+  const serverNow=(now || new Date()).getTime();
+  if(serverNow<startsAt||serverNow>=expiresAt)return {ok:false};
+  const people=Number(read('Número huéspedes'));
+  if(!Number.isInteger(people)||people<1||people>20)return {ok:false};
+  const lockerId=cols.locker?String(sheet.getRange(row,cols.locker).getValue()||CONFIG.defaultLocker).trim():CONFIG.defaultLocker;
+  if(!Object.prototype.hasOwnProperty.call(CONFIG.lockerNames,lockerId))return {ok:false};
+  return {ok:true,serverNow,expiresAt,guest:{
+    firstName:String(read('Huésped 1 - Nombre')||'').trim().slice(0,80),
+    checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
+    lockerNumber:String(read('Ski Locker - número')||'').trim().slice(0,40)
+  }};
+}
+function normaliseDate_(value) {
+  if(value instanceof Date && Number.isFinite(value.getTime()))return Utilities.formatDate(value,CONFIG.timezone,'yyyy-MM-dd');
+  let s=String(value||'').trim();
   const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  return m ? m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0') : '';
+  if(m)s=m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return '';
+  const d=new Date(s+'T00:00:00Z');
+  return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===s?s:'';
 }
-/** Ejecutar UNA vez para crear tokens aleatorios criptográficos en I (solo donde falten). */
+function newToken_(){return (Utilities.getUuid()+Utilities.getUuid()).replace(/-/g,'').toLowerCase();}
+/** Solo el propietario. Conserva todos los tokens existentes. */
 function issueMissingTokens() {
-  const sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.sheetName);
-  if(!sheet)throw Error('No existe la pestaña Reservas');
-  const last=sheet.getLastRow();
-  if(last<2)return;
-  const rows=sheet.getRange(2,1,last-1,9).getDisplayValues();
-  rows.forEach((r,i)=>{
-    if(r[0] && !String(r[8]).trim()) {
-      // Dos UUID v4 independientes aportan 244 bits aleatorios aproximadamente.
-      const token=(Utilities.getUuid()+Utilities.getUuid()).replace(/-/g,'').toLowerCase();
-      sheet.getRange(i+2,9).setValue(token);
+  const sheet=bookingSheet_(),cols=bookingColumns_(sheet),lock=LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    for(let row=2;row<=sheet.getLastRow();row++){
+      if(sheet.getRange(row,cols['Código reserva']).getValue()&&!String(sheet.getRange(row,cols['Token enlace']).getValue()).trim())sheet.getRange(row,cols['Token enlace']).setValue(newToken_());
     }
-  });
+  } finally {lock.releaseLock();}
 }
-/** Opcional: reemitir token para revocar un enlace, usando el código interno de reserva. */
-function revokeAndReplaceToken(bookingCode) {
-  const sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.sheetName);
-  const rows=sheet.getRange(2,1,Math.max(1,sheet.getLastRow()-1),1).getDisplayValues();
-  const ix=rows.findIndex(r=>r[0]===bookingCode);
-  if(ix<0)throw Error('Reserva no encontrada');
-  const token=(Utilities.getUuid()+Utilities.getUuid()).replace(/-/g,'').toLowerCase();
-  sheet.getRange(ix+2,9).setValue(token);
-  return token;
+/** Menú privado: genera/recupera SOLO el enlace de la fila seleccionada. */
+function onOpen(){SpreadsheetApp.getUi().createMenu('Mi Refugio').addItem('Enlace privado de la reserva seleccionada','showSelectedBookingLink').addToUi();}
+function showSelectedBookingLink(){
+  const sheet=SpreadsheetApp.getActiveSheet();
+  if(!sheet||sheet.getName()!==CONFIG.sheetName)throw Error('Selecciona una reserva en la pestaña Reservas');
+  const row=sheet.getActiveRange().getRow(),cols=bookingColumns_(sheet);
+  if(row<2||!sheet.getRange(row,cols['Código reserva']).getValue())throw Error('Selecciona una fila de reserva');
+  let token=String(sheet.getRange(row,cols['Token enlace']).getValue()||'').trim();
+  if(token&&!/^[a-f0-9]{64}$/.test(token))throw Error('El token existente no es válido; revísalo antes de reemplazarlo');
+  if(!token){token=newToken_();sheet.getRange(row,cols['Token enlace']).setValue(token);}
+  SpreadsheetApp.getUi().alert('Enlace privado del huésped','https://rlledo-dev.github.io/mi-refugio-incles/?reserva='+token,SpreadsheetApp.getUi().ButtonSet.OK);
+}
+/** Solo propietario; revoca el enlace anterior, nunca se llama desde doPost. */
+function revokeAndReplaceToken(bookingCode){
+  const sheet=bookingSheet_(),cols=bookingColumns_(sheet);
+  const codes=sheet.getRange(2,cols['Código reserva'],Math.max(1,sheet.getLastRow()-1),1).getDisplayValues();
+  const matches=[];codes.forEach((r,i)=>{if(r[0]===bookingCode)matches.push(i+2);});
+  if(matches.length!==1)throw Error('Reserva no encontrada o duplicada');
+  const token=newToken_();sheet.getRange(matches[0],cols['Token enlace']).setValue(token);return token;
 }

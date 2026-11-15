@@ -1,21 +1,58 @@
-# Activación de reservas personalizadas (pendiente de despliegue)
+# Reservas personalizadas: activación y uso
 
-La web GitHub Pages es pública. **Nunca** subir aquí la hoja de reservas, datos ROAT ni el número de taquilla.
+## Estado de esta revisión
 
-## Estado
-- `index.html`: ficha Ski Locker de Sport Calbó Panini, fotografías, mapa y bienvenida personalizada implementados.
-- `reservas-apps-script.gs`: código del servicio de consulta privada preparado, **no desplegado**.
-- `REFUGE_RESERVATION_API` en `index.html`: vacío hasta desplegar Apps Script. Mientras esté vacío, NO se mostrarán datos privados.
+- Código del servicio guardado en el proyecto vinculado a la hoja privada.
+- Despliegue /exec pendiente: requiere aprobar expresamente el acceso «Cualquier usuario» y autorizar Google.
+- `REFUGE_RESERVATION_API` permanece vacío hasta obtener y probar la URL real. No inventar una URL ni dar por verificada la integración.
+- No modificar la reserva de Isa ni regenerar el token válido de CODETEST.
 
-## Pasos pendientes
-1. Desde la cuenta `mi.refugio.incles@gmail.com`, abrir la hoja privada `Mi Refugio en Incles - Reservas privadas` (ID `1L1pTnkNUy0tmycRaY9yj3FeoMSrRmaxDr2CSvzC-TD0`).
-2. Menú Extensiones > Apps Script. Pegar el contenido de `reservas-apps-script.gs` en `Código.gs`, guardar.
-3. Ejecutar `issueMissingTokens` una vez y autorizar los permisos. Rellena columna I con tokens secretos de 64 caracteres para reservas existentes, incluida CODETEST. No compartir tokens salvo con el huésped correspondiente.
-4. Implementar > Nueva implementación > Aplicación web > Ejecutar como yo > Quién tiene acceso: Cualquier usuario. Copiar URL `https://script.google.com/macros/s/.../exec`.
-5. En `index.html`, sustituir `const REFUGE_RESERVATION_API='';` por la URL de la implementación. Publicar en GitHub.
-6. Probar `?reserva=TOKEN_CODETEST` con la reserva CODETEST. Comprobar que se muestra la taquilla 158 solo dentro de fechas; cancelar o salir del periodo debe ocultarla. Probar sin token, token incorrecto, y con fecha fuera del periodo.
-7. Antes de producción, comprobar compatibilidad CORS de la respuesta de Apps Script en Safari/Chrome. Si falla, usar un proxy seguro en el mismo origen, nunca publicar el Sheet.
+## Privacidad y transporte
 
-**Nota:** La API solo devuelve nombre de pila, fechas, número de personas, establecimiento y taquilla. No devuelve DNI, apellidos ni otros datos ROAT. El enlace es una credencial de acceso y se debe tratar como secreto. Revocar cambiando el token en la columna I.
+La guía es pública; la hoja y sus datos ROAT siguen siendo privados. El token aleatorio de 64 caracteres es la credencial del enlace. No incluir tokens, respuestas reales ni documentos en el repositorio, informes o capturas públicas.
 
-**Ubicación:** El mapa utiliza las coordenadas ya existentes del enlace antiguo de Ski Locker, pendientes de validar con la ubicación exacta de Sport Calbó Panini.
+El cliente envía el token en un POST `text/plain` con JSON, sin cookies, sin referrer y con `cache: no-store`. Esto evita preflight por cabeceras no simples y evita poner la credencial en la URL del servicio. La redirección de ContentService debe probarse en Chrome y WebKit/Safari reales después de desplegar. GET no consulta reservas; no se implementa JSONP.
+
+La API solo devuelve nombre (columna O), entrada, salida, personas, establecimiento y taquilla. Busca por token en I y después lee únicamente las celdas necesarias. No lee documentos, direcciones ni apellidos. Códigos de reserva, parámetros de fecha enviados por el cliente y tokens duplicados no permiten acceso.
+
+El servidor valida estado Confirmada/Confirmado y fechas entre las 00:01 de entrada y el final del minuto 23:59 de salida, zona Europe/Andorra. A medianoche del día siguiente rechaza la consulta. Las fechas inexistentes también se rechazan. Las negativas tienen el mismo cuerpo `{ok:false}`. Un token largo evita enumerar reservas; no hay endpoint para listar o buscar por código.
+
+El cliente no guarda tokens ni respuestas en localStorage, sessionStorage o IndexedDB; borra el antiguo token persistido. La credencial sigue en el enlace privado solicitado (`?reserva=TOKEN`), por lo que ese enlace debe compartirse solo con su huésped. La política global de referrer impide enviarlo a los recursos externos. Se retiran los datos al ocultar/salir de la página y se revalidan al volver. Una sesión visible se revalida cada 30 segundos, y caduca con el plazo del servidor sin confiar en el reloj del teléfono.
+
+El service worker v8 excluye POST, recursos externos y URLs con `reserva` o `token`. Solo cachea recursos de la guía; elimina sus cachés antiguas. Una navegación con token requiere conexión.
+
+## Activar (propietario)
+
+1. En la hoja privada, abrir Extensiones → Apps Script y usar el proyecto vinculado existente.
+2. Guardar `reservas-apps-script.gs` en `Code.gs`. No ejecutar `issueMissingTokens` para CODETEST: ya tiene token válido.
+3. Nueva implementación → Aplicación web → Ejecutar como `mi.refugio.incles@gmail.com`. El acceso «Cualquier usuario» permite que los huéspedes consulten sin cuenta Google; la autorización efectiva de datos sigue siendo el token validado por el servidor. Este permiso requiere aprobación expresa antes del despliegue.
+4. Autorizar los permisos de Google y copiar la URL /exec.
+5. Sustituir únicamente el valor vacío de `REFUGE_RESERVATION_API` por esa URL. Probar el POST y el flujo completo antes de publicar en main.
+6. Verificar CODETEST sin cambiar su entrada de enero de 2026. Verificar sin token, token inválido, cancelación y caducidad con datos ficticios. No editar Isa para estas pruebas.
+7. Publicar el código y comprobar GitHub Pages, fotos, marcador único y cachés. Verificar Chrome, WebKit y un iPhone real; distinguir pruebas locales con respuesta simulada de la integración publicada.
+
+## Uso diario para una nueva reserva Airbnb
+
+1. Rellenar la reserva en `Reservas`: estado, entrada, salida, número de huéspedes y nombre en O.
+2. Asignar taquilla en BD y establecimiento en BE (`sport-calbo-panini` actualmente).
+3. Seleccionar una celda de esa reserva y abrir el menú **Mi Refugio → Enlace privado de la reserva seleccionada**. El menú aparece al recargar la hoja tras guardar el script.
+4. Copiar el enlace del diálogo privado y enviarlo al huésped por Airbnb. Si I ya tiene un token válido, lo conserva; si está vacío, crea uno solo para esa fila.
+5. Para revocar un enlace, usar `revokeAndReplaceToken(codigoInterno)` desde el editor como propietario. No publicar ni registrar el token en logs. Las sesiones abiertas se revalidan en un máximo aproximado de 30 segundos mientras tengan conexión.
+
+## Otros establecimientos en el futuro
+
+BE es `Ski Locker - establecimiento`. Sus valores son identificadores, no números de taquilla. Para añadir otro local, registrar el identificador y nombre en `CONFIG.lockerNames` del servidor y sus datos públicos (nombre, coordenadas y fotos) en `REFUGE_SKI_LOCKERS` del cliente; ampliar el desplegable de BE y desplegar/publicar las nuevas versiones. Después solo se asignan el identificador en BE y el número en BD para cada reserva. Un identificador desconocido no devuelve datos. Las filas antiguas con BE vacío conservan Sport Calbó Panini por compatibilidad.
+
+## Pruebas automatizadas
+
+`node --test tests/reservas.test.cjs` comprueba el servidor con hoja y reloj simulados: no modifica la hoja real. `node tests/reservas-browser.cjs` prueba la interfaz en Chromium y WebKit con respuestas ficticias y viewport de escritorio/iPhone. Estas pruebas no sustituyen la prueba CORS del despliegue real.
+
+## Comprobaciones ejecutadas el 15-11-2026
+
+- 11 pruebas de servidor y cliente: aprobadas (`node --test tests/reservas.test.cjs tests/reservas-client.test.cjs`).
+- Sintaxis de JavaScript y service worker: correcta.
+- Comparación con main: otras secciones sin cambios y coordenadas/marcador único conservados.
+- Hoja privada: estructura real comprobada; añadido BE y asignado el establecimiento solo a CODETEST; token existente conservado.
+- Editor Apps Script: código guardado en el proyecto vinculado. Implementación detenida por revisión automática al elegir acceso anónimo («Cualquier usuario»); requiere aprobación expresa del propietario antes de continuar.
+- La batería de navegador está preparada, pero no se ha podido ejecutar: descarga de WebKit interrumpida y Chromium local bloqueado por el entorno. No se afirma validación móvil, Safari ni CORS real.
+- Pendientes: obtener /exec, configurar cliente, autorizar Google, probar integración real y publicar en main.
