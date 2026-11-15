@@ -57,3 +57,12 @@ BE es `Ski Locker - establecimiento`. Sus valores son identificadores, no númer
 - Editor Apps Script: código guardado y versión 1 desplegada después de la aprobación expresa del propietario y de la autorización de Google.
 - La batería de navegador está preparada, pero no se ha podido ejecutar: descarga de WebKit interrumpida y Chromium local bloqueado por el entorno. No se afirma validación móvil, Safari ni CORS real.
 - GitHub Pages publicado y comprobado visualmente. El mapa carga después de conservar strict-origin (sin revelar el token). Service worker v9 publicado. La comprobación directa de Safari/iPhone real sigue pendiente.
+
+
+### Wi-Fi personalizado
+
+La columna «Huésped 1 - Teléfono» se guarda como texto con `+` y código de país. El servidor construye el SSID `Mi Refugio_` seguido del primer apellido del titular y la contraseña con su teléfono internacional (sin espacios, guiones ni paréntesis). No se publica ningún teléfono en GitHub. Si faltan datos, el prefijo es inválido o el SSID excede 32 bytes, no se presenta un QR que pueda fallar.
+
+La app genera el QR WPA localmente, sin servicios externos, únicamente durante una reserva válida. Se borra junto con el resto de datos privados al caducar o denegarse el acceso. La respuesta privada no se almacena en caché. `wifi-qr.js` es QR Code Generator de Kazuhiko Arase, licencia MIT, distribuido con su aviso original.
+
+Actualizar los datos de una reserva actualiza la guía en su siguiente consulta (30 segundos o al volver a abrirla). Esto no modifica el router: configurar en Deco la misma red y contraseña antes de la llegada del huésped.

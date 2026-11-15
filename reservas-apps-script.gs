@@ -27,6 +27,8 @@ function bookingColumns_(sheet) {
   const required=['Código reserva','Estado reserva','Entrada','Salida','Número huéspedes','Token enlace','Huésped 1 - Nombre','Ski Locker - número'];
   const cols={};
   required.forEach(name=>{const ix=names.indexOf(name);if(ix<0 || names.lastIndexOf(name)!==ix)throw Error('Revisar columnas de reservas');cols[name]=ix+1;});
+  cols.wifiSurname=names.indexOf('Huésped 1 - Primer apellido')+1;
+  cols.wifiPhone=names.indexOf('Huésped 1 - Teléfono')+1;
   cols.locker=names.indexOf('Ski Locker - establecimiento')+1;
   return cols;
 }
@@ -54,10 +56,22 @@ function lookupGuest_(token, now) {
   const lockerId=cols.locker?String(sheet.getRange(row,cols.locker).getValue()||CONFIG.defaultLocker).trim():CONFIG.defaultLocker;
   if(!Object.prototype.hasOwnProperty.call(CONFIG.lockerNames,lockerId))return {ok:false};
   return {ok:true,serverNow,expiresAt,guest:{
+    wifi:bookingWifi_(sheet,row,cols),
     firstName:String(read('Huésped 1 - Nombre')||'').trim().slice(0,80),
     checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
     lockerNumber:String(read('Ski Locker - número')||'').trim().slice(0,40)
   }};
+}
+// Se calcula después de validar token, estado y fechas. Nunca se devuelve el teléfono por separado.
+function bookingWifi_(sheet,row,cols){
+  if(!cols.wifiSurname||!cols.wifiPhone)return null;
+  const surname=String(sheet.getRange(row,cols.wifiSurname).getValue()||'').trim();
+  const password=String(sheet.getRange(row,cols.wifiPhone).getDisplayValues()[0][0]||'').trim().replace(/[\s()-]/g,'');
+  const ssid='Mi Refugio_'+surname;
+  // Un SSID admite 32 bytes; no truncar porque dejaría de coincidir con Deco.
+  const bytes=encodeURIComponent(ssid).replace(/%[A-F\d]{2}/gi,'x').length;
+  if(!surname||bytes>32||/[\x00-\x1f\x7f]/.test(surname)||!/^\+[1-9]\d{7,14}$/.test(password))return null;
+  return {ssid,password,security:'WPA'};
 }
 function normaliseDate_(value) {
   if(value instanceof Date && Number.isFinite(value.getTime()))return Utilities.formatDate(value,CONFIG.timezone,'yyyy-MM-dd');
