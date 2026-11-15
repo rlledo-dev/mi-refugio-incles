@@ -16,8 +16,12 @@ for(const [i,x] of items.entries()){for(const target of ['grid','exploreGrid']){
 };
 const ACTIVITY_INFO_ONLY=new Set(['Esquí nocturno']);
 function activityRequest(a){
- const date=document.getElementById('activityDate')?.value||'fecha por concretar';
- const people=document.getElementById('activityPeople')?.value||'número de personas por concretar';
+ const dateInput=document.getElementById('activityDate');
+ const peopleInput=document.getElementById('activityPeople');
+ if(!dateInput?.checkValidity()){dateInput?.reportValidity();return}
+ if(!peopleInput?.checkValidity()){peopleInput?.reportValidity();return}
+ const date=dateInput.value;
+ const people=peopleInput.value;
  const message='Hola, Ramón. Estoy interesado/a en la actividad '+a.name+'.\nFecha: '+date+'.\nPersonas: '+people+'.\n¿Me puedes informar de la disponibilidad y los precios, por favor?';
  // Sin teléfono verificado del anfitrión no se envía a un destinatario arbitrario.
  if(!window.REFUGE_HOST_WHATSAPP){alert('La solicitud aún no está habilitada: falta configurar el WhatsApp del anfitrión.');return}
@@ -38,8 +42,8 @@ function activityDetail(index,filter){
   const link=document.createElement('a');link.className='link';link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Consultar información oficial ↗';root.append(link);
  }else{
   const box=document.createElement('div');box.className='card';const heading=document.createElement('h3');heading.textContent='Solicitar reserva';box.append(heading);
-  const label1=document.createElement('label');label1.textContent='Fecha deseada';label1.style.cssText='display:block;margin:10px 0';const date=document.createElement('input');date.id='activityDate';date.type='date';date.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label1.append(date);box.append(label1);
-  const label2=document.createElement('label');label2.textContent='Número de personas';label2.style.cssText='display:block;margin:10px 0';const people=document.createElement('input');people.id='activityPeople';people.type='number';people.min='1';people.max='30';people.value='2';people.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label2.append(people);box.append(label2);
+  const label1=document.createElement('label');label1.textContent='Fecha deseada';label1.style.cssText='display:block;margin:10px 0';const date=document.createElement('input');date.id='activityDate';date.type='date';date.required=true;date.min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);date.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label1.append(date);box.append(label1);
+  const label2=document.createElement('label');label2.textContent='Número de personas';label2.style.cssText='display:block;margin:10px 0';const people=document.createElement('input');people.id='activityPeople';people.type='number';people.min='1';people.max='30';people.required=true;people.value='';people.placeholder='Indica cuántas personas sois';people.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label2.append(people);box.append(label2);
   const btn=document.createElement('button');btn.className='link';btn.style.border='0';btn.textContent='Solicitar por WhatsApp';btn.onclick=()=>activityRequest(a);box.append(btn);
   const hint=document.createElement('p');hint.className='note';hint.style.marginTop='10px';hint.textContent='Solicitud sin compromiso. Precio final, disponibilidad y condiciones se confirmarán antes de contratar. '+(!window.REFUGE_HOST_WHATSAPP?'Pendiente de configurar el contacto del anfitrión.':'');box.append(hint);root.append(box);
  }
