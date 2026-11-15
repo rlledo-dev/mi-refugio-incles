@@ -12,7 +12,8 @@
     "priority": 1,
     "lat": 42.58019,
     "lon": 1.65144,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 3
   },
   {
     "id": "AND-S003",
@@ -27,7 +28,8 @@
     "priority": 3,
     "lat": 42.5792,
     "lon": 1.642,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 3
   },
   {
     "id": "AND-S004",
@@ -57,7 +59,8 @@
     "priority": 5,
     "lat": 42.57687,
     "lon": 1.66633,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 3
   },
   {
     "id": "AND-S006",
@@ -72,7 +75,8 @@
     "priority": 6,
     "lat": 42.56613,
     "lon": 1.59864,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 4
   },
   {
     "id": "AND-S007",
@@ -104,7 +108,8 @@
     "lat": 42.57691682829172,
     "lon": 1.6673583468914088,
     "coordinateSource": "Coordenadas facilitadas por el anfitrión",
-    "coordinateStatus": "GPS facilitado por anfitrión"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "hostRating": 5
   },
   {
     "id": "AND-S009",
@@ -119,7 +124,8 @@
     "priority": 9,
     "lat": 42.5672606,
     "lon": 1.6010376,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 4
   },
   {
     "id": "AND-S010",
@@ -136,7 +142,8 @@
     "lat": 42.5795091,
     "lon": 1.640177,
     "coordinateSource": "https://ad.near-place.com/shell-suma-el-tarter-el-tarter-canillo",
-    "coordinateStatus": "Coordenadas publicadas para la estación Shell-Suma El Tarter"
+    "coordinateStatus": "Coordenadas publicadas para la estación Shell-Suma El Tarter",
+    "hostRating": 3
   },
   {
     "id": "AND-S011",
@@ -151,7 +158,8 @@
     "priority": 11,
     "lat": 42.567078,
     "lon": 1.600943,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 3
   },
   {
     "id": "AND-S012",
@@ -183,7 +191,8 @@
     "priority": 13,
     "lat": 42.56682,
     "lon": 1.59988,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 4
   },
   {
     "id": "AND-S014",
@@ -198,7 +207,8 @@
     "priority": 14,
     "lat": 42.56624,
     "lon": 1.59931,
-    "coordinateSource": "OpenStreetMap / directorios locales"
+    "coordinateSource": "OpenStreetMap / directorios locales",
+    "hostRating": 5
   },
   {
     "id": "AND-S015",
@@ -214,7 +224,8 @@
     "lat": 42.507847165730226,
     "lon": 1.5381155307949907,
     "coordinateSource": "Coordenadas facilitadas por el anfitrión",
-    "coordinateStatus": "GPS facilitado por anfitrión"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "hostRating": 5
   },
   {
     "id": "AND-S016",
@@ -230,7 +241,8 @@
     "lat": 42.49455005654409,
     "lon": 1.4995890923496142,
     "coordinateSource": "Coordenadas facilitadas por el anfitrión",
-    "coordinateStatus": "GPS facilitado por anfitrión"
+    "coordinateStatus": "GPS facilitado por anfitrión",
+    "hostRating": 5
   },
   {
     "id": "AND-S017",
@@ -244,7 +256,8 @@
     "phone": "+376871000",
     "source": "https://mapcarta.com/es/W194554955",
     "section": "Cerca de ti",
-    "priority": 17
+    "priority": 17,
+    "hostRating": 5
   },
   {
     "id": "AND-S018",
@@ -258,7 +271,8 @@
     "phone": "",
     "source": "https://mapcarta.com/es/N12944424501",
     "section": "Cerca de ti",
-    "priority": 18
+    "priority": 18,
+    "hostRating": 4
   },
   {
     "id": "AND-S019",
@@ -286,7 +300,8 @@
     "phone": "",
     "source": "https://mapcarta.com/es/N690708612",
     "section": "Cerca de ti",
-    "priority": 20
+    "priority": 20,
+    "hostRating": 3
   },
   {
     "id": "AND-S021",
@@ -303,7 +318,8 @@
     "coordinateStatus": "GPS facilitado por anfitrión",
     "lat": 42.566789067763715,
     "lon": 1.5991980413346145,
-    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "hostRating": 3
   },
   {
     "id": "AND-S022",
@@ -320,7 +336,8 @@
     "coordinateStatus": "GPS facilitado por anfitrión",
     "lat": 42.532892069023134,
     "lon": 1.5771836271578823,
-    "coordinateSource": "Coordenadas facilitadas por el anfitrión"
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "hostRating": 3
   },
   {
     "id": "AND-S023",
