@@ -433,5 +433,19 @@
     "priority": 28,
     "hostRating": 4,
     "coordinateStatus": "GPS pendiente de confirmar"
+  },
+  {
+    "id": "AND-S029",
+    "name": "Crèdit Andorrà · Cajero automático El Tarter",
+    "icon": "🏧",
+    "category": "Bancos y cajeros",
+    "town": "El Tarter",
+    "address": "Junto al Hotel Llop Gris, El Tarter",
+    "phone": "",
+    "source": "Ubicación indicada por el anfitrión",
+    "section": "Cerca de ti",
+    "priority": 29,
+    "hostRating": 4,
+    "coordinateStatus": "GPS pendiente de confirmar"
   }
 ]
