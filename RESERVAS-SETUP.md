@@ -6,7 +6,7 @@
 - URL /exec configurada en index.html. API real comprobada: reserva de prueba válida, token incorrecto y GET sin token.
 - La respuesta real incluye Access-Control-Allow-Origin: * y Cache-Control: no-cache, no-store.
 - CODETEST conserva su token y su entrada original de enero de 2026. No se modificaron datos de Isa.
-- Verificación visual publicada todavía en curso; no confundir comprobación de API con prueba completa del navegador.
+- Publicación comprobada en Chrome: bienvenida, fechas, personas y taquilla de la reserva de prueba; fotos y mapa con un marcador único. Sin token o con token incorrecto no se muestran datos privados. Vista de 390 × 844 comprobada sin desbordamiento. Safari/iPhone real pendiente de prueba directa.
 
 ## Privacidad y transporte
 
@@ -56,4 +56,4 @@ BE es `Ski Locker - establecimiento`. Sus valores son identificadores, no númer
 - Hoja privada: estructura real comprobada; añadido BE y asignado el establecimiento solo a CODETEST; token existente conservado.
 - Editor Apps Script: código guardado y versión 1 desplegada después de la aprobación expresa del propietario y de la autorización de Google.
 - La batería de navegador está preparada, pero no se ha podido ejecutar: descarga de WebKit interrumpida y Chromium local bloqueado por el entorno. No se afirma validación móvil, Safari ni CORS real.
-- Pendientes al preparar la publicación: comprobación visual de GitHub Pages y validación del navegador móvil.
+- GitHub Pages publicado y comprobado visualmente. El mapa carga después de conservar strict-origin (sin revelar el token). Service worker v9 publicado. La comprobación directa de Safari/iPhone real sigue pendiente.
