@@ -18,7 +18,7 @@ const ACTIVITY_INFO_ONLY=new Set(['Esquí nocturno']);
 function activityRequest(a){
  const date=document.getElementById('activityDate')?.value||'fecha por concretar';
  const people=document.getElementById('activityPeople')?.value||'número de personas por concretar';
- const message='Hola, estoy alojado/a en Mi Refugio en Incles y quisiera consultar disponibilidad y precio para '+a.name+'. Fecha: '+date+'. Personas: '+people+'. ¿Me ayudas a reservar?';
+ const message='Hola, Ramón. Estoy interesado/a en la actividad '+a.name+'.\nFecha: '+date+'.\nPersonas: '+people+'.\n¿Me puedes informar de la disponibilidad y los precios, por favor?';
  // Sin teléfono verificado del anfitrión no se envía a un destinatario arbitrario.
  if(!window.REFUGE_HOST_WHATSAPP){alert('La solicitud aún no está habilitada: falta configurar el WhatsApp del anfitrión.');return}
  window.open('https://wa.me/'+window.REFUGE_HOST_WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
