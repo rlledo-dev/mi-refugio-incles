@@ -15,21 +15,6 @@
     "coordinateSource": "OpenStreetMap / directorios locales"
   },
   {
-    "id": "AND-S002",
-    "name": "Comerç Espunyes",
-    "icon": "🛒",
-    "category": "Supermercados",
-    "town": "El Tarter",
-    "address": "CG-2, zona Ransol",
-    "phone": "",
-    "source": "https://guia.ad/es/poble/ransol",
-    "section": "Cerca de ti",
-    "priority": 2,
-    "lat": 42.57963,
-    "lon": 1.6413,
-    "coordinateSource": "OpenStreetMap / directorios locales"
-  },
-  {
     "id": "AND-S003",
     "name": "Caves Manacor",
     "icon": "🛒",
