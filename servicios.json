@@ -115,7 +115,11 @@
     "source": "https://www.farmaciapiolets.com/farmacia-piolets",
     "section": "Cerca de ti",
     "priority": 8,
-    "note": "Ubicación GPS pendiente de verificación: directorio con coordenadas contradictorias"
+    "note": "Ubicación GPS pendiente de verificación: directorio con coordenadas contradictorias",
+    "lat": 42.57691682829172,
+    "lon": 1.6673583468914088,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "coordinateStatus": "GPS facilitado por anfitrión"
   },
   {
     "id": "AND-S009",
