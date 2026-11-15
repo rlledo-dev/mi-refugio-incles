@@ -140,8 +140,8 @@ function skiLockerView(){
     const coords=[42.57867400406187,1.6480697721328446];
     const m=L.map(map).setView(coords,16);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(m);
-    L.marker(coords).addTo(m).bindPopup('Sport Calbó Panini · Ski Locker');
-    addRefugeMarker(m);
+    const lockerIcon=L.divIcon({className:'ski-locker-map-icon',html:'<span style="display:grid;place-items:center;width:44px;height:44px;background:#176579;color:white;border:3px solid white;border-radius:50%;box-shadow:0 3px 12px #0006;font-size:23px">🎿</span>',iconSize:[44,44],iconAnchor:[22,22],popupAnchor:[0,-23]});
+    L.marker(coords,{icon:lockerIcon,title:'Sport Calbó Panini · Ski Locker'}).addTo(m).bindPopup('🎿 Sport Calbó Panini · Ski Locker');
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
