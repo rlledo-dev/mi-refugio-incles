@@ -15,6 +15,17 @@ for(const [i,x] of items.entries()){for(const target of ['grid','exploreGrid']){
 'Cena de montaña':'Disfruta de una cena en un entorno de montaña. Menús, transporte y disponibilidad deben confirmarse previamente.'
 };
 const ACTIVITY_PUBLIC_PRICES={"Mushing · trineos con perros":["Desde 53,50 € en El Tarter (30 min); desde 84 € en Grau Roig (2 km).","El Tarter requiere forfait de esquiador o peatón. Condiciones y suplementos según participantes."],"Motos de nieve":["85 € (30 min), 175 € (60 min), 290 € (120 min); paseo privado biplaza 60 min: 230 €. Nocturno: desde 165 €.","Precio por moto, máximo 2 personas. Seguro no incluido."],"Raquetas de nieve":["Desde 30,50 € por excursión (oferta publicada por Grandvalira).","La tarifa depende del recorrido y de si incluye forfait peatón."],"Màgic Gliss":["18,50 € (3 bajadas online); 25 € (5 bajadas); 38,50 € (3 bajadas con forfait peatón).","Precios por persona. Seguro no incluido."],"Tirolina de Canillo":["Desde 21 € sentada; desde 26,50 € tumbada; desde 37,50 € tándem.","Requiere forfait válido. Opciones con forfait desde 41 €."],"Snake Gliss":["29,50 € por persona a partir de 6 años; de 3 a 5 años gratis con adulto.","Seguro no incluido. Consulta requisitos de edad y equipo."],"Primera nieve":["31 € por persona.","Requiere forfait válido. Incluye desayuno; seguro no incluido."],"Packs de aventura":["Desde 34 € Pack Explorer sin forfait; desde 45,50 € Pack Aventura sin forfait; con forfait desde 54 €.","El precio depende de las actividades y del forfait elegido."]};
+const ADVENTURE_PACKS=[
+ {name:'Pack Explorer · sin forfait',price:'34 €',includes:'Tirolina sentado: 1 bajada · Màgic Gliss: 3 bajadas (1 con realidad virtual) · Explor Games.'},
+ {name:'Pack Explorer · con forfait peatón',price:'54 €',includes:'Tirolina sentado: 1 bajada · Màgic Gliss: 3 bajadas (1 con realidad virtual) · Explor Games · Forfait peatón.'},
+ {name:'Pack Aventura · sin forfait',price:'45,50 €',includes:'Tirolina sentado: 1 bajada · Màgic Gliss: 3 bajadas (1 con realidad virtual) · Raquetas de nieve: 2 horas (material y guía incluidos).'},
+ {name:'Pack Aventura · con forfait peatón',price:'65,50 €',includes:'Tirolina sentado: 1 bajada · Màgic Gliss: 3 bajadas (1 con realidad virtual) · Raquetas de nieve: 2 horas (material y guía incluidos) · Forfait peatón.'},
+ {name:'Aventura en la montaña · Grau Roig',price:'68 €',includes:'Raquetas de nieve: 2 horas · Construcción de iglús: 1 h 30 min.'},
+ {name:'Aventura nórdica A · Grau Roig',price:'86 €',includes:'Mushing: 2 km · Moto de nieve biplaza: 30 minutos.'},
+ {name:'Aventura nórdica B · Grau Roig',price:'115 €',includes:'Mushing: 2 km · Moto de nieve biplaza: 60 minutos.'},
+ {name:'Forfait Gold adulto · Grau Roig',price:'106 €',includes:'Esquí de fondo: 1 hora · Iglús: 1 hora · Tiro con arco: 1 hora · Raquetas por rutas señalizadas · Moto de nieve: 30 minutos.'},
+ {name:'Forfait Premium adulto · Grau Roig',price:'151 €',includes:'Esquí de fondo: 1 hora · Iglús: 1 hora · Tiro con arco: 1 hora · Raquetas: 1 hora · Moto de nieve: 30 minutos · Mushing: 1 km.'}
+];
 const ACTIVITY_INFO_ONLY=new Set(['Esquí nocturno']);
 function activityRequest(a){
  const dateInput=document.getElementById('activityDate');
@@ -23,7 +34,9 @@ function activityRequest(a){
  if(!peopleInput?.checkValidity()){peopleInput?.reportValidity();return}
  const date=dateInput.value;
  const people=peopleInput.value;
- const message='Hola, Ramón. ¿Me informas de la disponibilidad y los precios de la actividad '+a.name+' para el '+date+' para '+people+' persona'+(Number(people)===1?'':'s')+', por favor?';
+ const pack=document.getElementById('activityPack');
+ const activityName=a.name==='Packs de aventura'&&pack?.value?pack.value:a.name;
+ const message='Hola, Ramón. ¿Me informas de la disponibilidad y los precios de la actividad '+activityName+' para el '+date+' para '+people+' persona'+(Number(people)===1?'':'s')+', por favor?';
  // Sin teléfono verificado del anfitrión no se envía a un destinatario arbitrario.
  if(!window.REFUGE_HOST_WHATSAPP){alert('La solicitud aún no está habilitada: falta configurar el WhatsApp del anfitrión.');return}
  window.open('https://wa.me/'+window.REFUGE_HOST_WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
@@ -37,12 +50,20 @@ function activityDetail(index,filter){
  const card=document.createElement('div');card.className='card';
  const place=document.createElement('p');place.textContent='📍 '+a.place;card.append(place);
  const description=document.createElement('p');description.style.marginTop='10px';description.textContent=ACTIVITY_DETAILS[a.name]||'Descubre esta experiencia en Andorra. Consulta las condiciones, horarios y disponibilidad antes de desplazarte.';card.append(description);
- const price=document.createElement('p');price.style.marginTop='12px';const tariff=ACTIVITY_PUBLIC_PRICES[a.name];price.textContent=tariff?'Precio público Grandvalira 2026-27: '+tariff[0]:'Precio: consultar según fecha y modalidad (sin tarifa pública verificada).';card.append(price);if(tariff){const conditions=document.createElement('p');conditions.className='note';conditions.style.marginTop='7px';conditions.textContent=tariff[1]+' Precios orientativos publicados; sujetos a confirmación.';card.append(conditions)}root.append(card);
+ const price=document.createElement('p');price.style.marginTop='12px';const tariff=ACTIVITY_PUBLIC_PRICES[a.name];price.textContent=tariff?'Precio público Grandvalira 2026-27: '+tariff[0]:'Precio: consultar según fecha y modalidad (sin tarifa pública verificada).';card.append(price);if(tariff){const conditions=document.createElement('p');conditions.className='note';conditions.style.marginTop='7px';conditions.textContent=tariff[1]+' Precios orientativos publicados; sujetos a confirmación.';card.append(conditions)}
+ if(a.name==='Packs de aventura'){
+  price.textContent='Packs oficiales Grandvalira: desde 34 € por persona (según modalidad).';
+  const intro=document.createElement('p');intro.className='note';intro.textContent='Tarifas públicas publicadas para 2026-27. Reserva y precio final sujetos a confirmación. Todas las actividades de cada pack se realizan el mismo día.';card.append(intro);
+  ADVENTURE_PACKS.forEach(p=>{const section=document.createElement('div');section.style.cssText='padding:12px 0;border-top:1px solid #e0e6e9';const title=document.createElement('strong');title.textContent=p.name+' · '+p.price+' por persona';const desc=document.createElement('p');desc.style.marginTop='5px';desc.textContent=p.includes;section.append(title,desc);card.append(section)});
+  const terms=document.createElement('p');terms.className='note';terms.textContent='Canillo: menores de 12 años, venta en taquilla; requisitos de tirolina: mínimo 35 kg o 135 cm, máximo 130 kg; no se permiten botas de esquí. Grau Roig: edad mínima 6 años, menores de 14 acompañados, mínimo 2 personas (1 persona: suplemento del 50 %); conductor de moto mayor de 18 años. Seguro no incluido. Consulta condiciones específicas antes de reservar.';card.append(terms);
+ }
+ root.append(card);
  if(ACTIVITY_INFO_ONLY.has(a.name)){
   const p=document.createElement('p');p.className='muted';p.textContent='Actividad informativa: consulta los requisitos y la contratación en la web oficial.';root.append(p);
   const link=document.createElement('a');link.className='link';link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Consultar información oficial ↗';root.append(link);
  }else{
   const box=document.createElement('div');box.className='card';const heading=document.createElement('h3');heading.textContent='Solicitar reserva';box.append(heading);
+  if(a.name==='Packs de aventura'){const label=document.createElement('label');label.textContent='Selecciona el pack';label.style.cssText='display:block;margin:10px 0';const select=document.createElement('select');select.id='activityPack';select.required=true;select.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';ADVENTURE_PACKS.forEach(p=>{const option=document.createElement('option');option.value=p.name;option.textContent=p.name+' · '+p.price;select.append(option)});label.append(select);box.append(label)}
   const label1=document.createElement('label');label1.textContent='Fecha deseada';label1.style.cssText='display:block;margin:10px 0';const date=document.createElement('input');date.id='activityDate';date.type='date';date.required=true;date.min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);date.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label1.append(date);box.append(label1);
   const label2=document.createElement('label');label2.textContent='Número de personas';label2.style.cssText='display:block;margin:10px 0';const people=document.createElement('input');people.id='activityPeople';people.type='number';people.min='1';people.max='30';people.required=true;people.value='';people.placeholder='Indica cuántas personas sois';people.style.cssText='display:block;width:100%;padding:11px;border:1px solid #cbdde0;border-radius:10px;font:inherit';label2.append(people);box.append(label2);
   const btn=document.createElement('button');btn.className='link';btn.style.border='0';btn.textContent='Solicitar por WhatsApp';btn.onclick=()=>activityRequest(a);box.append(btn);
