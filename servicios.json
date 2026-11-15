@@ -403,5 +403,35 @@
     "lon": 1.5810926317808855,
     "coordinateSource": "Coordenadas facilitadas por el anfitrión",
     "coordinateStatus": "GPS facilitado por anfitrión"
+  },
+  {
+    "id": "AND-S027",
+    "name": "MoraBanc · Oficina Canillo",
+    "icon": "🏦",
+    "category": "Bancos y cajeros",
+    "town": "Canillo",
+    "address": "Av. Sant Joan de Caselles, Casa Sinfreu, local 1",
+    "phone": "+376884635",
+    "source": "https://paginesgrogues.ad/morabanc",
+    "section": "Cerca de ti",
+    "priority": 27,
+    "lat": 42.5672606,
+    "lon": 1.6010376,
+    "coordinateSource": "Pàgines Grogues Andorra Telecom",
+    "hostRating": 5
+  },
+  {
+    "id": "AND-S028",
+    "name": "MoraBanc · Cajero automático Soldeu",
+    "icon": "🏧",
+    "category": "Bancos y cajeros",
+    "town": "Soldeu",
+    "address": "Carretera General, Soldeu (Cal Ventura Bonell)",
+    "phone": "+376884884",
+    "source": "https://www.google.com/maps/search/?api=1&query=ATM+24h+MoraBanc+Soldeu",
+    "section": "Cerca de ti",
+    "priority": 28,
+    "hostRating": 4,
+    "coordinateStatus": "GPS pendiente de confirmar"
   }
 ]
