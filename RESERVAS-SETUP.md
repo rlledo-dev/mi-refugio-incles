@@ -18,9 +18,9 @@ La API solo devuelve nombre (columna O), entrada, salida, personas, establecimie
 
 El servidor valida estado Confirmada/Confirmado y fechas entre las 00:01 de entrada y el final del minuto 23:59 de salida, zona Europe/Andorra. A medianoche del día siguiente rechaza la consulta. Las fechas inexistentes también se rechazan. Las negativas tienen el mismo cuerpo `{ok:false}`. Un token largo evita enumerar reservas; no hay endpoint para listar o buscar por código.
 
-El cliente no guarda tokens ni respuestas en localStorage, sessionStorage o IndexedDB; borra el antiguo token persistido. La credencial sigue en el enlace privado solicitado (`?reserva=TOKEN`), por lo que ese enlace debe compartirse solo con su huésped. La política global de referrer impide enviarlo a los recursos externos. Se retiran los datos al ocultar/salir de la página y se revalidan al volver. Una sesión visible se revalida cada 30 segundos, y caduca con el plazo del servidor sin confiar en el reloj del teléfono.
+El cliente no guarda tokens ni respuestas en localStorage, sessionStorage o IndexedDB; borra el antiguo token persistido. La credencial sigue en el enlace privado solicitado (`?reserva=TOKEN`), por lo que ese enlace debe compartirse solo con su huésped. La política global strict-origin envía solo el origen público a los recursos externos, nunca el token ni la ruta privada; así conserva la identificación del sitio requerida por el proveedor del mapa. La consulta privada sigue usando no-referrer. Se retiran los datos al ocultar/salir de la página y se revalidan al volver. Una sesión visible se revalida cada 30 segundos, y caduca con el plazo del servidor sin confiar en el reloj del teléfono.
 
-El service worker v8 excluye POST, recursos externos y URLs con `reserva` o `token`. Solo cachea recursos de la guía; elimina sus cachés antiguas. Una navegación con token requiere conexión.
+El service worker v9 excluye POST, recursos externos y URLs con `reserva` o `token`. Solo cachea recursos de la guía; elimina sus cachés antiguas. Una navegación con token requiere conexión.
 
 ## Activar (propietario)
 
