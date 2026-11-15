@@ -22,7 +22,7 @@ for(const [i,x] of items.entries()){for(const target of ['grid','exploreGrid']){
 'Tirolina de Canillo':'Una experiencia aérea en Canillo, sujeta a condiciones meteorológicas y requisitos de participación.',
 'Snake Gliss':'Descenso en trineos conectados, una actividad de grupo que depende de las condiciones de nieve.',
 'Primera nieve':'¿Quieres abrir las pistas una hora antes y ser de los primeros en bajarlas? Empieza a esquiar a las 8:00 h, acompañado por el personal de pistas, y disfruta de la nieve recién preparada antes de la apertura general. Después te invitamos a desayunar: café con bollería o bocadillo. La actividad está sujeta al calendario, a la disponibilidad y a las condiciones de la estación.',
-'Esquí nocturno':'PAS DE LA CASA · Pista Tubs, con el telesilla La Solana. En la temporada 2025-2026, del 27 de diciembre al 8 de marzo, de 17:00 a 20:00 h, salvo cierres excepcionales. El acceso estaba incluido con forfait de día, multidía, temporada o Plus+ válido; sin forfait, se vendía un pase nocturno de pago (27,50 € la temporada pasada). No servía el forfait de peatón.\n\nSUNSET PARK PERETOL · Snowpark iluminado para freestyle y saltos en Bordes d’Envalira. Horario de referencia de la temporada pasada: de martes a domingo, de 15:00 a 21:00 h. Consulta los requisitos de acceso y forfait en Grandvalira.\n\nFechas y horarios de ambas actividades para 2026-2027 pendientes de confirmación; apertura según nieve y meteorología.',
+'Esquí nocturno':'En Grandvalira puedes seguir disfrutando de la nieve después de la apertura habitual. Estos son los horarios de referencia de 2025-2026; consulta la apertura de 2026-2027 antes de desplazarte.',
 'Packs de aventura':'Combina varias experiencias de montaña. El contenido y el precio dependen del pack elegido.',
 'Cena de montaña':'Disfruta de una cena en un entorno de montaña. Menús, transporte y disponibilidad deben confirmarse previamente.'
 };
@@ -68,6 +68,20 @@ function activityDetail(index,filter){
   const intro=document.createElement('p');intro.className='note';intro.textContent='Tarifas públicas publicadas para 2026-27. Reserva y precio final sujetos a confirmación. Todas las actividades de cada pack se realizan el mismo día.';card.append(intro);
   ADVENTURE_PACKS.forEach(p=>{const section=document.createElement('div');section.style.cssText='padding:12px 0;border-top:1px solid #e0e6e9';const title=document.createElement('strong');title.textContent=p.name+' · '+p.price+' por persona';const desc=document.createElement('p');desc.style.marginTop='5px';desc.textContent=p.includes;section.append(title,desc);card.append(section)});
   const terms=document.createElement('p');terms.className='note';terms.textContent='Canillo: menores de 12 años, venta en taquilla; requisitos de tirolina: mínimo 35 kg o 135 cm, máximo 130 kg; no se permiten botas de esquí. Grau Roig: edad mínima 6 años, menores de 14 acompañados, mínimo 2 personas (1 persona: suplemento del 50 %); conductor de moto mayor de 18 años. Seguro no incluido. Consulta condiciones específicas antes de reservar.';card.append(terms);
+ }
+ if(a.name==='Esquí nocturno'){
+  const options=[
+   {title:'🌙 Esquí nocturno · Pas de la Casa',image:'./imagenes/actividades/grandvalira-esqui-nocturno.webp',alt:'Pista de esquí nocturno de Pas de la Casa',description:'Pista Tubs, con el telesilla La Solana. En 2025-2026, del 27 de diciembre al 8 de marzo, de 17:00 a 20:00 h, salvo cierres excepcionales. Incluido con forfait de esquí válido (día, multidía, temporada o Plus+); sin él, el pase nocturno era de pago (27,50 € la temporada pasada). El forfait de peatón no servía.'},
+   {title:'🏂 Sunset Park Peretol · Snowpark nocturno',image:'./imagenes/actividades/peretol-nocturno.jpg',alt:'Snowpark Peretol iluminado de noche',description:'Snowpark iluminado en Bordes d’Envalira, con módulos de freestyle y saltos. En la temporada anterior abría de martes a domingo, de 15:00 a 21:00 h. Consulta en Grandvalira las condiciones de acceso y forfait.'}
+  ];
+  for(const opt of options){
+   const section=document.createElement('section');section.className='card';section.style.marginTop='15px';
+   const heading=document.createElement('h3');heading.textContent=opt.title;section.append(heading);
+   const photo=document.createElement('img');photo.src=opt.image;photo.alt=opt.alt;photo.loading='lazy';photo.style.cssText='display:block;width:100%;max-height:320px;object-fit:cover;border-radius:12px;margin:12px 0';section.append(photo);
+   const description=document.createElement('p');description.textContent=opt.description;section.append(description);
+   root.append(section);
+  }
+  const notice=document.createElement('p');notice.className='note';notice.textContent='Fechas y horarios 2026-2027 pendientes de confirmación. Apertura sujeta a las condiciones de nieve y meteorología.';root.append(notice);
  }
  root.append(card);
  if(ACTIVITY_INFO_ONLY.has(a.name)){
