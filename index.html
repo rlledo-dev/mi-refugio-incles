@@ -140,7 +140,7 @@ function renderRefugeWelcome(){
  for(const target of [document.querySelector('#home .content'),document.querySelector('#stay .content')]){
   if(!target)continue;
   const box=document.createElement('div');box.className='guest-welcome';
-  const title=document.createElement('strong');title.textContent='¡Bienvenido/a, '+(refugeGuest.firstName||'huésped')+'!';
+  const title=document.createElement('strong');title.textContent='¡Hola, '+(refugeGuest.firstName||'huésped')+'!';
   const info=document.createElement('span');info.textContent='Tu estancia: '+formatRefugeDate(refugeGuest.checkin)+' al '+formatRefugeDate(refugeGuest.checkout)+' · '+refugeGuest.people+' personas';
   box.append(title,info);target.prepend(box);
  }
