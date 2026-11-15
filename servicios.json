@@ -370,5 +370,21 @@
     "section": "Cerca de ti",
     "priority": 25,
     "coordinateStatus": "GPS facilitado por anfitrión"
+  },
+  {
+    "id": "AND-S026",
+    "name": "Supermercado River",
+    "icon": "🛒",
+    "category": "Supermercados",
+    "town": "Encamp",
+    "address": "Ubicación GPS facilitada por el anfitrión",
+    "phone": "",
+    "source": "Coordenadas facilitadas por el anfitrión",
+    "section": "Cerca de ti",
+    "priority": 26,
+    "lat": 42.5343620946425,
+    "lon": 1.5810926317808855,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "coordinateStatus": "GPS facilitado por anfitrión"
   }
 ]
