@@ -1,5 +1,5 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
-const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView()',start);const code=html.slice(start,end).replace(/const REFUGE_RESERVATION_API='[^']*';/,"const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
+const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView(',start);const code=html.slice(start,end).replace(/const REFUGE_RESERVATION_API='[^']*';/,"const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
 function setup(query='?reserva='+'a'.repeat(64),elements={}){
 const removed=[],timers=new Map(),calls=[],listeners={};let id=0;const nodes=[];const target={prepend:e=>nodes.push(e)};
 const doc={hidden:false,body:{style:{}},getElementById:id=>elements[id]||null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:()=>({append(){},remove(){},className:'',textContent:''})};
@@ -33,4 +33,19 @@ test('llegada y parking requieren reserva; salida requiere permiso del servidor;
  assert.match(arrival.innerHTML,/Principat Park/);assert.match(parking.innerHTML,/61/);assert.equal(card.hidden,true);assert.equal(departure.innerHTML,'');
  x.context.response.guest.departureReady=true;await x.load();assert.equal(card.hidden,false);assert.match(departure.innerHTML,/10:00/);assert.match(departure.innerHTML,/calefacción/);
  x.context.response={ok:false};await x.load();assert.equal(card.hidden,true);assert.equal(departure.innerHTML,'');assert.ok(!arrival.innerHTML.includes('4º'));assert.ok(!parking.innerHTML.includes('61'));
+});
+
+test('revalidación y caducidad no reabren el locker al estar en inicio, estancia o explorar',async()=>{
+ for(const panel of ['home','stay','explore']){
+  let reopened=0;const x=setup('?reserva='+'a'.repeat(64),{skiLockerMap:{},detail:{classList:{contains:()=>false}}});
+  x.context.skiLockerView=()=>{reopened++};x.context.response=valid();
+  await x.load();const refresh=[...x.timers.values()].find(t=>t.ms===30000);await refresh.cb();
+  assert.equal(reopened,0,panel);assert.ok(x.guest());
+  [...x.timers.values()].find(t=>t.ms===5000).cb();assert.equal(reopened,0,panel);assert.equal(x.guest(),null);
+ }
+});
+test('el locker visible se actualiza sin solicitar navegación',async()=>{
+ const navigations=[];const x=setup('?reserva='+'a'.repeat(64),{skiLockerMap:{},detail:{classList:{contains:c=>c==='active'}}});
+ x.context.skiLockerView=navigate=>navigations.push(navigate);x.context.response=valid();await x.load();await x.load();
+ assert.deepEqual(navigations,[false,false]);
 });

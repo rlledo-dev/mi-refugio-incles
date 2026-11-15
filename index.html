@@ -129,9 +129,9 @@ async function loadRefugeGuest(){
   if(!document.hidden&&remaining>0){
    clearTimeout(refugeExpiryTimer);
    refugeGuest=data.guest;renderRefugeWelcome();renderRefugeWifi();renderRefugeStay();
-   if(document.getElementById('skiLockerMap'))skiLockerView();
+   refreshVisibleSkiLocker();
    if(document.getElementById('lockerPass')?.open)renderLockerPass();
-   refugeExpiryTimer=setTimeout(()=>{clearRefugeGuest();if(document.getElementById('skiLockerMap'))skiLockerView()},Math.min(remaining,2147483647));
+   refugeExpiryTimer=setTimeout(()=>{clearRefugeGuest();refreshVisibleSkiLocker()},Math.min(remaining,2147483647));
   }else clearRefugeGuest();
  }catch(_){if(version===refugeRequestVersion)clearRefugeGuest()}
  finally{
@@ -222,7 +222,11 @@ function closeLockerPass(){
 document.getElementById('lockerPass')?.addEventListener('close',()=>{
  closeLockerPass();document.getElementById('lockerPassButton')?.focus();
 });
-function skiLockerView(){
+function refreshVisibleSkiLocker(){
+ // Un mapa puede seguir en el DOM aunque el usuario ya haya salido de la ficha.
+ if(document.getElementById('detail')?.classList.contains('active')&&document.getElementById('skiLockerMap'))skiLockerView(false);
+}
+function skiLockerView(navigate=true){
   if(skiLockerMap){skiLockerMap.remove();skiLockerMap=null}
   const locker=REFUGE_SKI_LOCKERS[refugeGuest?.lockerId]||REFUGE_SKI_LOCKERS['sport-calbo-panini'];
   const root=document.getElementById('detailContent');root.replaceChildren();
@@ -252,7 +256,7 @@ function skiLockerView(){
     const img=document.createElement('img');img.src=src;img.alt=alt;img.loading='lazy';photos.append(img)
   }
   root.append(photos);
-  show('detail');
+  if(navigate)show('detail');
   if(typeof L!=='undefined'){
     const coords=locker.coords;
     const m=L.map(map,{zoomControl:true}).setView(coords,16);skiLockerMap=m;
@@ -263,4 +267,4 @@ function skiLockerView(){
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
-function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=14').catch(()=>{}));</script></body></html>
+function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=15').catch(()=>{}));</script></body></html>
