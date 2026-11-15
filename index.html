@@ -69,6 +69,7 @@ function activityDetail(index,filter){
   ADVENTURE_PACKS.forEach(p=>{const section=document.createElement('div');section.style.cssText='padding:12px 0;border-top:1px solid #e0e6e9';const title=document.createElement('strong');title.textContent=p.name+' · '+p.price+' por persona';const desc=document.createElement('p');desc.style.marginTop='5px';desc.textContent=p.includes;section.append(title,desc);card.append(section)});
   const terms=document.createElement('p');terms.className='note';terms.textContent='Canillo: menores de 12 años, venta en taquilla; requisitos de tirolina: mínimo 35 kg o 135 cm, máximo 130 kg; no se permiten botas de esquí. Grau Roig: edad mínima 6 años, menores de 14 acompañados, mínimo 2 personas (1 persona: suplemento del 50 %); conductor de moto mayor de 18 años. Seguro no incluido. Consulta condiciones específicas antes de reservar.';card.append(terms);
  }
+ root.append(card);
  if(a.name==='Esquí nocturno'){
   const options=[
    {title:'🌙 Esquí nocturno · Pas de la Casa',image:'./imagenes/actividades/grandvalira-esqui-nocturno.webp',alt:'Pista de esquí nocturno de Pas de la Casa',description:'Pista Tubs, con el telesilla La Solana. En 2025-2026, del 27 de diciembre al 8 de marzo, de 17:00 a 20:00 h, salvo cierres excepcionales. Incluido con forfait de esquí válido (día, multidía, temporada o Plus+); sin él, el pase nocturno era de pago (27,50 € la temporada pasada). El forfait de peatón no servía.'},
@@ -83,7 +84,6 @@ function activityDetail(index,filter){
   }
   const notice=document.createElement('p');notice.className='note';notice.textContent='Fechas y horarios 2026-2027 pendientes de confirmación. Apertura sujeta a las condiciones de nieve y meteorología.';root.append(notice);
  }
- root.append(card);
  if(ACTIVITY_INFO_ONLY.has(a.name)){
   const p=document.createElement('p');p.className='muted';p.textContent=a.name==='Esquí nocturno'?'No es necesario solicitar información al alojamiento. Consulta en Grandvalira los horarios y las condiciones de acceso actualizados.':'Actividad informativa: consulta los requisitos y la contratación en la web oficial.';root.append(p);
   const link=document.createElement('a');link.className='link';link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Consultar información oficial ↗';root.append(link);
