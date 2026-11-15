@@ -179,7 +179,11 @@
     "source": "https://www.pyreneespass.com/service_tarrado-1%261205",
     "section": "Cerca de ti",
     "priority": 12,
-    "note": "Ubicación GPS pendiente de verificar"
+    "note": "Ubicación GPS pendiente de verificar",
+    "lat": 42.56696901679398,
+    "lon": 1.6009551073211556,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "coordinateStatus": "GPS facilitado por anfitrión"
   },
   {
     "id": "AND-S013",
