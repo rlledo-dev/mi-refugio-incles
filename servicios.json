@@ -225,7 +225,11 @@
     "phone": "",
     "source": "https://www.grandvalira.com/sites/default/files/document/2025-07/YDRAY-GuiaCanillo_2025-CAT-ESP_AF_compressed.pdf",
     "section": "Cerca de ti",
-    "priority": 15
+    "priority": 15,
+    "lat": 42.507847165730226,
+    "lon": 1.5381155307949907,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión",
+    "coordinateStatus": "GPS facilitado por anfitrión"
   },
   {
     "id": "AND-S016",
