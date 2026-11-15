@@ -66,3 +66,10 @@ La columna «Huésped 1 - Teléfono» se guarda como texto con `+` y código de 
 La app genera el QR WPA localmente, sin servicios externos, únicamente durante una reserva válida. Se borra junto con el resto de datos privados al caducar o denegarse el acceso. La respuesta privada no se almacena en caché. `wifi-qr.js` es QR Code Generator de Kazuhiko Arase, licencia MIT, distribuido con su aviso original.
 
 Actualizar los datos de una reserva actualiza la guía en su siguiente consulta (30 segundos o al volver a abrirla). Esto no modifica el router: configurar en Deco la misma red y contraseña antes de la llegada del huésped.
+
+
+### Llegada, aparcamiento y salida
+
+Los detalles de llegada y aparcamiento se presentan solo con una estancia válida. El mapa usa la misma ubicación del apartamento que los demás mapas de la guía. La imagen de parking está marcada como genérica provisional y se sustituye en `imagenes/estancia/parking-provisional.webp`.
+
+El servidor calcula `departureReady` en Europe/Andorra: verdadero desde las 17:00 del día anterior a la salida. La app revalida cada 30 segundos y muestra las instrucciones de salida únicamente cuando el servidor lo autoriza. No usa el reloj del dispositivo para decidirlo. Al caducar o denegarse la reserva se retiran los detalles privados. La hora de salida indicada es 10:00.

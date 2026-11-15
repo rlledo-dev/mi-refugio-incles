@@ -23,3 +23,14 @@ test('Wi-Fi: QR escapado, datos privados borrados tras denegación y caducidad',
  assert.equal(x.context.wifiQrPayload({ssid:'Mi Refugio_A;B',password:'+34999111222'}),'WIFI:T:WPA;S:Mi Refugio_A\\;B;P:+34999111222;;');
  x.context.response={ok:false};await x.load();assert.equal(box.children.length,1);assert.ok(!box.children[0].textContent.includes('+34'));
 });
+
+test('llegada y parking requieren reserva; salida requiere permiso del servidor; revocación borra todo',async()=>{
+ const node=()=>({innerHTML:'',hidden:false,replaceChildren(){this.innerHTML=''}});
+ const arrival=node(),parking=node(),departure=node(),card=node();
+ const x=setup('?reserva='+'a'.repeat(64),{refugeArrival:arrival,refugeParking:parking,refugeDeparture:departure,departureCard:card});
+ x.context.REFUGE_LOCATION=[42.58,1.66];
+ x.context.response=valid();x.context.response.guest.departureReady=false;await x.load();
+ assert.match(arrival.innerHTML,/Principat Park/);assert.match(parking.innerHTML,/61/);assert.equal(card.hidden,true);assert.equal(departure.innerHTML,'');
+ x.context.response.guest.departureReady=true;await x.load();assert.equal(card.hidden,false);assert.match(departure.innerHTML,/10:00/);assert.match(departure.innerHTML,/calefacción/);
+ x.context.response={ok:false};await x.load();assert.equal(card.hidden,true);assert.equal(departure.innerHTML,'');assert.ok(!arrival.innerHTML.includes('4º'));assert.ok(!parking.innerHTML.includes('61'));
+});

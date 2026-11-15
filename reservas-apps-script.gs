@@ -51,11 +51,14 @@ function lookupGuest_(token, now) {
   const expiresAt=Utilities.parseDate(nextDay.toISOString().slice(0,10)+' 00:00',CONFIG.timezone,'yyyy-MM-dd HH:mm').getTime();
   const serverNow=(now || new Date()).getTime();
   if(serverNow<startsAt||serverNow>=expiresAt)return {ok:false};
+  const previousDay=new Date(checkout+'T00:00:00Z');previousDay.setUTCDate(previousDay.getUTCDate()-1);
+  const departureOpensAt=Utilities.parseDate(previousDay.toISOString().slice(0,10)+' 17:00',CONFIG.timezone,'yyyy-MM-dd HH:mm').getTime();
   const people=Number(read('Número huéspedes'));
   if(!Number.isInteger(people)||people<1||people>20)return {ok:false};
   const lockerId=cols.locker?String(sheet.getRange(row,cols.locker).getValue()||CONFIG.defaultLocker).trim():CONFIG.defaultLocker;
   if(!Object.prototype.hasOwnProperty.call(CONFIG.lockerNames,lockerId))return {ok:false};
   return {ok:true,serverNow,expiresAt,guest:{
+    departureReady:serverNow>=departureOpensAt,
     wifi:bookingWifi_(sheet,row,cols),
     firstName:String(read('Huésped 1 - Nombre')||'').trim().slice(0,80),
     checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
