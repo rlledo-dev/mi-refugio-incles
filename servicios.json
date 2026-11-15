@@ -306,7 +306,7 @@
   {
     "id": "AND-S021",
     "name": "Bugaderia La Font",
-    "icon": "🧺",
+    "icon": "🫧",
     "category": "Lavanderías automáticas",
     "town": "Canillo",
     "address": "Plaça de Montaup, 5",
@@ -324,7 +324,7 @@
   {
     "id": "AND-S022",
     "name": "Rentaki · Bugaderia Autoservei",
-    "icon": "🧺",
+    "icon": "🫧",
     "category": "Lavanderías automáticas",
     "town": "Encamp",
     "address": "Av. de Joan Martí, 65",
@@ -342,7 +342,7 @@
   {
     "id": "AND-S023",
     "name": "Prime Lavanderia Autoservicio",
-    "icon": "🧺",
+    "icon": "🫧",
     "category": "Lavanderías automáticas",
     "town": "Encamp",
     "address": "Av. de François Mitterrand, 116",
@@ -359,7 +359,7 @@
   {
     "id": "AND-S024",
     "name": "Bugaderia Vidiella",
-    "icon": "🧺",
+    "icon": "🫧",
     "category": "Lavanderías automáticas",
     "town": "Soldeu",
     "address": "Soldeu · ubicación GPS facilitada por el anfitrión",
