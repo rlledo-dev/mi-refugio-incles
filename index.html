@@ -83,18 +83,19 @@ function hostStars(x){const n=Number(x.hostRating);return Number.isInteger(n)&&n
 // No incluir claves de administrador ni datos personales en este archivo público.
 const REFUGE_RESERVATION_API='';
 let refugeGuest=null;
-function refugeToken(){return new URLSearchParams(location.search).get('reserva')||sessionStorage.getItem('refuge-reservation-token')||''}
+function refugeToken(){return new URLSearchParams(location.search).get('reserva')||localStorage.getItem('refuge-reservation-token')||''}
 function formatRefugeDate(s){const a=String(s||'').split('-');return a.length===3?a[2]+'/'+a[1]+'/'+a[0]:s}
 async function loadRefugeGuest(){
   const token=refugeToken();
   if(!/^[a-f0-9]{64}$/.test(token)||!REFUGE_RESERVATION_API)return;
-  if(new URLSearchParams(location.search).has('reserva'))sessionStorage.setItem('refuge-reservation-token',token);
+  if(new URLSearchParams(location.search).has('reserva'))localStorage.setItem('refuge-reservation-token',token);
   try{
     const url=REFUGE_RESERVATION_API+(REFUGE_RESERVATION_API.includes('?')?'&':'?')+'token='+encodeURIComponent(token);
     const response=await fetch(url,{cache:'no-store',redirect:'follow'});
     if(!response.ok)throw Error('Consulta no disponible');
     const data=await response.json();
     refugeGuest=data.ok?data.guest:null;
+    if(!data.ok)localStorage.removeItem('refuge-reservation-token');
     renderRefugeWelcome();
   }catch(err){console.warn('No se pudo consultar la reserva privada');}
 }
@@ -144,4 +145,4 @@ function skiLockerView(){
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
-function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}window.addEventListener('DOMContentLoaded',loadRefugeGuest);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=5').catch(()=>{}));</script></body></html>
+function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}window.addEventListener('DOMContentLoaded',loadRefugeGuest);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6').catch(()=>{}));</script></body></html>
