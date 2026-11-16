@@ -11,6 +11,30 @@
  .wifi-value{display:block;font-size:1.1rem;overflow-wrap:anywhere;user-select:all}.wifi-qr{display:block;width:232px;max-width:100%;height:auto;margin:18px auto;background:#fff;border:12px solid #fff;border-radius:8px}.wifi-field{margin:14px 0}.wifi-field small{display:block;color:var(--muted,#536a70)}
 [hidden]{display:none!important}#refugeDeparture li{margin:8px 0}
 .tile-icon{display:block;line-height:1.15;margin-bottom:7px}.tile-title{display:block;line-height:1.2}
+
+/* Modo TV explícito: no altera la experiencia móvil ni la tablet. */
+body.tv-mode{background:#102d39;color:#173342;overflow-x:hidden}
+body.tv-mode main{max-width:none;width:100%;min-height:100vh;padding-bottom:92px;background:#f4f8f8}
+body.tv-mode #home .hero{height:225px;padding:32px 5vw;background-position:center 48%}
+body.tv-mode #home .hero h1{font-size:clamp(34px,3.5vw,58px);max-width:none;margin:9px 0}
+body.tv-mode #home .hero p{font-size:20px}
+body.tv-mode .content{padding:25px 5vw 32px}
+body.tv-mode .content h2{font-size:31px}
+body.tv-mode .content>.muted{font-size:18px}
+body.tv-mode #grid,body.tv-mode #exploreGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:20px}
+body.tv-mode .tile{min-height:clamp(145px,18vh,245px);padding:22px;border-radius:17px;font-size:23px;outline:4px solid transparent;outline-offset:3px;transition:transform .12s,outline-color .12s}
+body.tv-mode .tile small{font-size:16px;line-height:1.3}
+body.tv-mode .tile-icon{font-size:30px}
+body.tv-mode .dock{width:100%;max-width:none;bottom:0;left:0;transform:none;border-radius:0;grid-template-columns:repeat(4,1fr);padding:8px 5vw;background:#e8f0f0;box-shadow:0 -4px 20px #102d3922}
+body.tv-mode .dock button{font-size:17px;min-height:62px}
+body.tv-mode .dock b{font-size:24px}
+body.tv-mode button:focus,body.tv-mode a:focus,body.tv-mode [tabindex]:focus{outline:4px solid #e5aa35!important;outline-offset:3px}
+body.tv-mode .tile:focus{transform:scale(1.025);z-index:2}
+body.tv-mode #stay .content,body.tv-mode #detail .content{max-width:1350px;margin:auto}
+body.tv-mode .card{font-size:21px}
+body.tv-mode .link,body.tv-mode .back{font-size:20px;padding:15px 22px}
+@media(max-width:1000px){body.tv-mode #grid,body.tv-mode #exploreGrid{gap:12px}body.tv-mode .tile{padding:12px;font-size:18px}body.tv-mode .tile small{font-size:13px}}
+@media(max-height:680px){body.tv-mode #home .hero{height:155px;padding:16px 5vw}body.tv-mode #home .hero h1{font-size:33px}body.tv-mode .content{padding-top:13px}body.tv-mode .tile{min-height:145px}}
 </style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoI0rLWf8C8p4=" crossorigin=""></head><body><main><section class="panel active" id="home"><div class="hero"><small>MI REFUGIO EN INCLES</small><h1>Tu refugio<br>en la montaña.</h1><p>Todo lo que necesitas, en un solo lugar.</p></div><div class="content"><h2>¿Qué necesitas?</h2><p class="muted">Explora, descubre y disfruta de tu estancia.</p><div class="grid" id="grid"></div></div></section><section class="panel" id="explore"><div class="content"><h2>Explorar</h2><p class="muted">Guía del huésped</p><div class="grid" id="exploreGrid"></div></div></section><section class="panel" id="stay"><div class="content"><h2>Mi estancia</h2><div class="card" id="arrivalCard"><h3>🏠 Llegada y acceso</h3><div id="refugeArrival"><p>Los detalles de acceso estarán disponibles en tu enlace privado durante la estancia.</p></div></div><div class="card"><h3>🚗 Aparcamiento</h3><div id="refugeParking"><p>El alojamiento incluye una plaza de aparcamiento. Los detalles estarán disponibles en tu enlace privado durante la estancia.</p></div></div><div class="card"><h3>📶 Wi-Fi</h3><div id="refugeWifi"><p>Los datos de acceso estarán disponibles en tu enlace privado durante la estancia.</p></div></div><div class="card" id="departureCard" hidden><h3>🧹 Salida</h3><div id="refugeDeparture"></div></div></div></section><section class="panel" id="detail"><div class="content"><button class="back" onclick="show('home')">← Volver</button><div id="detailContent"></div></div></section></main><dialog class="locker-pass" id="lockerPass" aria-labelledby="lockerPassBrand"><button type="button" class="locker-pass-back" onclick="closeLockerPass()">← Regresar</button><div class="locker-pass-content"><img class="locker-pass-logo" src="./icon.svg" alt="Logo de Mi Refugio en Incles" width="152" height="152"><h1 class="locker-pass-brand" id="lockerPassBrand">Mi Refugio<br>en Incles</h1><p class="locker-pass-label">Taquilla</p><p class="locker-pass-number" id="lockerPassNumber"></p><p class="locker-pass-guest" id="lockerPassGuest"></p><div class="locker-pass-owner"><span>Propietario</span><strong>Ramón Lledó</strong></div></div></dialog><nav class="dock"><button onclick="show('home')"><b>⌂</b>Inicio</button><button onclick="show('explore')"><b>▦</b>Explorar</button><button onclick="show('stay')"><b>♧</b>Mi estancia</button><button onclick="alert('WhatsApp del anfitrión pendiente de configurar')"><b>◉</b>WhatsApp</button></nav><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="./wifi-qr.js"></script><script>
 window.REFUGE_HOST_WHATSAPP='34617400600';
 const items=[['🏡','El apartamento','Tu hogar en Incles','./apartamento.jpg','Bienvenido a Mi Refugio en Incles, Principat Parc. Un dormitorio, sofá cama, parking y trastero.'],['🚌','Traslado a pistas','L3 y L4 en directo','./autobuses.png','Consulta la parada Les Moles y los autobuses L3 y L4.','https://www.busos.ad/?stop=moles-161&route=L4','Ver autobuses'],['🎿','Ski locker','Guarda tu equipo','./Taquilla_2.png','Guardaesquís a unos 110 metros del apartamento. Las instrucciones de acceso se facilitarán a los huéspedes.','https://www.google.com/maps/dir/?api=1&destination=42.57867400406187%2C1.6480697721328446','Cómo llegar al ski locker'],['🍽️','Restaurantes','Dónde comer','photo-1517248135467-4c7edcad34c4','Descubre restaurantes en El Tarter. La selección personalizada está pendiente.','https://www.google.com/maps/search/restaurantes+El+Tarter+Andorra/','Ver mapa'],['📷','Cámaras en pistas','Grandvalira','photo-1486911278844-a81c5267e227','Consulta las cámaras y el estado de las pistas.','https://www.grandvalira.com/','Grandvalira'],['☀️','Tiempo y nieve','Previsión','photo-1455156218388-5e61b526818b','Consulta la previsión meteorológica.','https://www.meteo.ad/','Ver previsión'],['🏔️','¡No todo es esquiar!','Actividades y experiencias en Andorra','./imagenes/actividades/grandvalira-motos-nieve.webp','Información sobre forfaits y actividades.','https://www.grandvalira.com/','Ver actividades'],['📍','Cerca de ti','Servicios y lugares','photo-1470770841072-f978cf4d019e','Encuentra comercios y servicios cercanos.','https://www.google.com/maps/search/servicios+El+Tarter+Andorra/','Abrir mapa']];
@@ -287,4 +311,31 @@ function skiLockerView(navigate=true){
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
-function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=15').catch(()=>{}));</script></body></html>
+function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
+(function(){
+  var tv=new URLSearchParams(location.search).get('modo')==='tv';
+  if(!tv)return;
+  document.body.classList.add('tv-mode');
+  function focusFirst(){var active=document.querySelector('.panel.active');var target=active&&active.querySelector('.tile,button,a');if(target)target.focus({preventScroll:true});}
+  window.addEventListener('load',function(){setTimeout(focusFirst,350);});
+  document.addEventListener('keydown',function(e){
+    var key=e.key;
+    if(key==='Escape'||key==='Backspace'||key==='BrowserBack'){
+      if(document.querySelector('#home.panel.active'))return;
+      e.preventDefault();show('home');setTimeout(focusFirst,0);return;
+    }
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(key)<0)return;
+    var active=document.querySelector('.panel.active');
+    if(!active)return;
+    var tiles=Array.prototype.slice.call(active.querySelectorAll('.tile'));
+    var index=tiles.indexOf(document.activeElement);
+    if(index<0){if(tiles.length){e.preventDefault();tiles[0].focus();}return;}
+    var cols=4, next=index;
+    if(key==='ArrowLeft')next=index-1;
+    if(key==='ArrowRight')next=index+1;
+    if(key==='ArrowUp')next=index-cols;
+    if(key==='ArrowDown')next=index+cols;
+    if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
+  });
+})();
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=15').catch(()=>{}));</script></body></html>
