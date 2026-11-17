@@ -315,7 +315,34 @@ function skiLockerView(navigate=true){
     requestAnimationFrame(()=>m.invalidateSize(true));
   }
 }
-function detail(i){if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
+function apartmentView(){
+ const root=document.getElementById('detailContent');root.replaceChildren();
+ const title=document.createElement('h2');title.textContent='🏡 El apartamento';root.append(title);
+ if(!refugeGuest){
+  const intro=document.createElement('div');intro.className='card';
+  intro.innerHTML='<h3>Tu hogar en Incles</h3><p>Un dormitorio, sofá cama, aparcamiento y guardaesquís. Un espacio cómodo para disfrutar de Andorra.</p><p class="note">Las instrucciones de uso de la vivienda están disponibles para huéspedes con una reserva autorizada.</p>';
+  root.append(intro);show('detail');return;
+ }
+ const intro=document.createElement('p');intro.className='muted';intro.textContent='Guía práctica de la vivienda · primera versión';root.append(intro);
+ const sections=[
+ ['💡 Iluminación','Algunos interruptores son regulables: pulsación corta para encender o apagar y pulsación larga para ajustar la intensidad. La lámpara de pie y la iluminación de la zona TV se controlan desde el interruptor de la entrada.'],
+ ['🪟 Persianas eléctricas','El mando está detrás de la cortina derecha. Utiliza las flechas para subir o bajar las persianas. El modo automático está desactivado.'],
+ ['🌡️ Calefacción','Utiliza los radiadores eléctricos para mantener una temperatura aproximada de 20–22 °C. Al salir, apágalos o déjalos al mínimo. La calefacción central del edificio no se utiliza.'],
+ ['🛏️ Cama supletoria','Para montarla: retira los cojines, abre con cuidado la estructura metálica, despliega los dos tramos, comprueba los apoyos, extiende el colchón y coloca las sábanas. Antes de usarla, comprueba que esté estable. Para guardarla, retira la ropa de cama y pliega los tramos con cuidado.'],
+ ['🧺 Ropa de cama y baño','Las toallas están en el baño. Hay sábanas de reserva en los cajones del dormitorio y las de la cama supletoria en el armario de la entrada. Encontrarás mantas adicionales en el baúl del salón y almohadas en el del dormitorio.'],
+ ['🍽️ Electrodomésticos','Dispones de frigorífico, placa mixta, horno, tostador, cafeteras, lavavajillas y lavadora-secadora. No dejes aparatos funcionando cuando salgas.'],
+ ['🚰 Agua y seguridad','El agua del grifo es potable. En caso de emergencia, la llave de paso está debajo del fregadero, dentro del armario, en la parte inferior izquierda de la pared del fondo. Emergencias: 112.'],
+ ['📶 Wi-Fi','La red principal lleva el nombre «Mi Refugio» y el nombre del huésped; la contraseña corresponde al teléfono usado en la reserva. Los datos personalizados de conexión se consultan en la sección Wi-Fi de tu estancia. Hay una red de respaldo limitada a 10 Mb/s para cuando falle la principal.']
+ ];
+ for(const [heading,body] of sections){
+  const card=document.createElement('details');card.className='card';card.style.cssText='margin:10px 0;padding:14px';
+  const summary=document.createElement('summary');summary.textContent=heading;summary.style.cssText='cursor:pointer;font-weight:700';
+  const p=document.createElement('p');p.textContent=body;card.append(summary,p);root.append(card);
+ }
+ const note=document.createElement('p');note.className='note';note.textContent='Esta guía es una primera versión. Las fotografías y las instrucciones detalladas de plegado se incorporarán después de revisarlas.';root.append(note);
+ show('detail');
+}
+function detail(i){if(i===0){apartmentView();return}if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
 (function(){
   var tv=new URLSearchParams(location.search).get('modo')==='tv';
   if(!tv)return;
