@@ -327,7 +327,7 @@ function apartmentView(){
  const sections=[
  ['💡 Iluminación','Algunos interruptores son regulables: pulsación corta para encender o apagar y pulsación larga para ajustar la intensidad. La lámpara de pie y la iluminación de la zona TV se controlan desde el interruptor de la entrada.'],
  ['🪟 Persianas eléctricas','El mando está detrás de la cortina derecha. Utiliza las flechas para subir o bajar las persianas. El modo automático está desactivado.'],
- ['🌡️ Calefacción','Utiliza los radiadores eléctricos para mantener una temperatura aproximada de 20–22 °C. Al salir, apágalos o déjalos al mínimo. La calefacción central del edificio no se utiliza.'],
+ ['🌡️ Calefacción','El refugio dispone de calefacción eléctrica. Encontrarás un panel de control junto a la TV para ajustar la temperatura a tu gusto: 20, 21 o 22 °C, o apagarla con OFF. No utilizamos la calefacción central del edificio.'],
  ['🛏️ Cama supletoria','Para montarla: retira los cojines, abre con cuidado la estructura metálica, despliega los dos tramos, comprueba los apoyos, extiende el colchón y coloca las sábanas. Antes de usarla, comprueba que esté estable. Para guardarla, retira la ropa de cama y pliega los tramos con cuidado.'],
  ['🧺 Ropa de cama y baño','Las toallas están en el baño. Hay sábanas de reserva en los cajones del dormitorio y las de la cama supletoria en el armario de la entrada. Encontrarás mantas adicionales en el baúl del salón y almohadas en el del dormitorio.'],
  ['🍽️ Electrodomésticos','Dispones de frigorífico, placa mixta, horno, tostador, cafeteras, lavavajillas y lavadora-secadora. No dejes aparatos funcionando cuando salgas.'],
@@ -337,7 +337,14 @@ function apartmentView(){
  for(const [heading,body] of sections){
   const card=document.createElement('details');card.className='card';card.style.cssText='margin:10px 0;padding:14px';
   const summary=document.createElement('summary');summary.textContent=heading;summary.style.cssText='cursor:pointer;font-weight:700';
-  const p=document.createElement('p');p.textContent=body;card.append(summary,p);root.append(card);
+  const p=document.createElement('p');p.textContent=body;card.append(summary,p);
+  if(heading==='🌡️ Calefacción'){
+   const img=document.createElement('img');img.src='./imagenes/estancia/control-calefaccion.webp';
+   img.alt='Panel de control de la calefacción junto a la TV: OFF, 20, 21 y 22 grados';
+   img.width=960;img.height=960;img.loading='lazy';
+   img.style.cssText='display:block;width:100%;height:auto;border-radius:12px;margin-top:14px';card.append(img);
+  }
+  root.append(card);
  }
  const note=document.createElement('p');note.className='note';note.textContent='Esta guía es una primera versión. Las fotografías y las instrucciones detalladas de plegado se incorporarán después de revisarlas.';root.append(note);
  show('detail');
@@ -382,4 +389,4 @@ function detail(i){if(i===0){apartmentView();return}if(i===2){skiLockerView();re
     if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
   });
 })();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=15').catch(()=>{}));</script></body></html>
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=16').catch(()=>{}));</script></body></html>
