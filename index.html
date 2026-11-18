@@ -358,13 +358,43 @@ function renderRefugeEsim(){
   const hint=document.createElement('p');hint.className='esim-note';hint.textContent='Datos ficticios y deliberadamente inválidos. No se puede instalar ni activar esta eSIM.';box.append(hint);return;
  }
  if(!refugeGuest){status.textContent='Tu eSIM de cortesía aparecerá aquí cuando accedas con tu reserva.';box.append(status);return}
- const rawLink=typeof data?.installationUrl==='string'?data.installationUrl:'';
+ const rawLink=typeof data?.installationUrl==='string'?data.installationUrl.trim():'';
  let validLink='';
- try{const url=new URL(rawLink);if(url.protocol==='https:'&&(/(^|\.)airalo\.com$/.test(url.hostname)||/(^|\.)airalo\.io$/.test(url.hostname)))validLink=url.href}catch(_){}
- if(!validLink){status.textContent='Tu eSIM de cortesía está pendiente de asignación.';box.append(status);return}
+ try{const url=new URL(rawLink);if(url.protocol==='https:'&&(/(^|\\.)airalo\\.com$/.test(url.hostname)||/(^|\\.)airalo\\.io$/.test(url.hostname)))validLink=url.href}catch(_){}
+ const smdp=typeof data?.smdpAddress==='string'?data.smdpAddress.trim():'';
+ const activation=typeof data?.activationCode==='string'?data.activationCode.trim():'';
+ const iccid=typeof data?.iccid==='string'?data.iccid.trim():'';
+ // No se muestran datos ficticios a huéspedes: solo entregas reales y completas.
+ const demo=String(data?.status||'').toUpperCase().includes('DEMO');
+ const manualReady=!demo&&smdp.length>0&&activation.length>0&&smdp.length<=255&&activation.length<=255;
+ if(demo||(!validLink&&!manualReady)){
+  status.textContent='Tu eSIM de cortesía está pendiente de asignación.';box.append(status);return;
+ }
  status.textContent='Tu eSIM de cortesía ya está disponible.';box.append(status);
- if(data?.description&&typeof data.description==='string'){const detail=document.createElement('p');detail.textContent=data.description.slice(0,160);detail.style.marginTop='8px';box.append(detail)}
- const action=document.createElement('a');action.className='esim-action';action.href=validLink;action.target='_blank';action.rel='noopener noreferrer';action.textContent='Instalar mi eSIM gratuita ↗';action.style.marginTop='12px';box.append(action);
+ const summary=[data?.provider,data?.dataAmount,data?.duration].filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim().slice(0,80));
+ if(summary.length){const p=document.createElement('p');p.style.margin='9px 0';p.textContent=summary.join(' · ');box.append(p)}
+ if(validLink){
+  const action=document.createElement('a');action.className='esim-action';action.href=validLink;action.target='_blank';action.rel='noopener noreferrer';action.textContent='Instalar mi eSIM gratuita ↗';action.style.marginTop='12px';box.append(action);
+ }
+ if(manualReady){
+  const details=document.createElement('details');details.style.cssText='margin-top:14px;background:#fff;border:1px solid #b6d6da;border-radius:12px;padding:12px';
+  const label=document.createElement('summary');label.textContent='Ver QR y datos de instalación manual';label.style.cssText='cursor:pointer;font-weight:700;color:#176579';details.append(label);
+  const payload='LPA:1$'+smdp+'$'+activation;
+  try{
+   const qr=qrcode(0,'M');qr.addData(payload);qr.make();
+   const img=document.createElement('img');img.src=qr.createDataURL(5,16);img.alt='QR para instalar tu eSIM Airalo';img.width=210;img.height=210;img.style.cssText='display:block;max-width:100%;height:auto;margin:16px auto';details.append(img);
+  }catch(_){}
+  for(const [heading,value] of [['Dirección SM-DP+',smdp],['Código de activación',activation],['ICCID',iccid]]){
+   if(!value)continue;
+   const field=document.createElement('p');field.className='wifi-field';
+   const key=document.createElement('small');key.textContent=heading;
+   const val=document.createElement('strong');val.className='wifi-value';val.textContent=value;
+   field.append(key,val);details.append(field);
+  }
+  const note=document.createElement('p');note.className='esim-note';note.textContent='Para escanear el QR, ábrelo en otro dispositivo. También puedes introducir los datos manualmente en los ajustes de eSIM de tu teléfono.';details.append(note);
+  box.append(details);
+ }
+
 }
 function renderRefugeWifi(){
  renderRefugeEsim();
