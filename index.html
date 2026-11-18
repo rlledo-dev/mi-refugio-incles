@@ -338,20 +338,30 @@ function renderRefugeWifi(){
   const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;
   field.append(title,content);box.append(field);
  }
- const backup=refugeGuest?.wifiBackup;
- if(backup&&typeof backup.ssid==='string'&&typeof backup.username==='string'&&typeof backup.password==='string'){
-  const heading=document.createElement('h4');heading.textContent='Red Wi-Fi de respaldo';heading.style.margin='16px 0 8px';box.append(heading);
-  const note=document.createElement('p');note.className='note';note.textContent='Utiliza esta red si falla la conexión principal. Velocidad limitada a 10 Mb/s.';box.append(note);
-  for(const [label,value] of [['Red Wi-Fi',backup.ssid],['Usuario',backup.username],['Contraseña',backup.password]]){
-   const field=document.createElement('p');field.className='wifi-field';const title=document.createElement('small');title.textContent=label;const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;field.append(title,content);box.append(field);
-  }
- }
  try{
   qrcode.stringToBytes=qrcode.stringToBytesFuncs['UTF-8'];
   const qr=qrcode(0,'M');qr.addData(wifiQrPayload(wifi));qr.make();
   const img=document.createElement('img');img.className='wifi-qr';img.alt='Código QR para conectarte al Wi-Fi';img.width=232;img.height=232;img.src=qr.createDataURL(6,24);box.append(img);
   const help=document.createElement('p');help.className='note';help.textContent='Escanea este QR con la cámara de otro móvil para conectarte.';box.append(help);
  }catch(_){const p=document.createElement('p');p.textContent='Puedes conectarte introduciendo la red y la contraseña.';box.append(p)}
+ const backup=refugeGuest?.wifiBackup;
+ if(backup&&typeof backup.ssid==='string'&&typeof backup.username==='string'&&typeof backup.password==='string'){
+  const details=document.createElement('details');details.className='wifi-backup';
+  details.style.cssText='margin-top:18px;border:1px solid #bdd6da;border-radius:12px;padding:12px;background:#fff';
+  const summary=document.createElement('summary');summary.textContent='¿No funciona la Wi-Fi principal? Ver red de respaldo';
+  summary.style.cssText='cursor:pointer;color:#176579;font-weight:700;line-height:1.5';
+  details.append(summary);
+  const note=document.createElement('p');note.className='note';note.style.marginTop='12px';
+  note.textContent='Utiliza esta red solo si falla la conexión principal. Velocidad limitada a 10 Mb/s.';details.append(note);
+  for(const [label,value] of [['Red Wi-Fi',backup.ssid],['Usuario',backup.username],['Contraseña',backup.password]]){
+   const field=document.createElement('p');field.className='wifi-field';
+   const title=document.createElement('small');title.textContent=label;
+   const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;
+   field.append(title,content);details.append(field);
+  }
+  box.append(details);
+ }
+
 }
 function renderRefugeWelcome(){
  document.querySelectorAll('.guest-welcome').forEach(n=>n.remove());
