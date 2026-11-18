@@ -2,8 +2,8 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView(',start);const code=html.slice(start,end).replace(/const REFUGE_RESERVATION_API='[^']*';/,"const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
 function setup(query='?reserva='+'a'.repeat(64),elements={}){
 const removed=[],timers=new Map(),calls=[],listeners={};let id=0;const nodes=[];const target={prepend:e=>nodes.push(e)};
-const doc={hidden:false,body:{style:{}},getElementById:id=>elements[id]||null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:()=>({append(){},remove(){},style:{},className:'',textContent:''})};
-const context={TextEncoder,URLSearchParams,AbortController,performance:{now:()=>100},location:{search:query},localStorage:{removeItem:k=>removed.push(k),getItem:()=>{throw Error('No debe recuperar un token guardado')}},document:doc,window:{addEventListener:(n,cb)=>listeners[n]=cb},setTimeout:(cb,ms)=>{timers.set(++id,{cb,ms});return id},clearTimeout:id=>timers.delete(id),fetch:async(url,init)=>{calls.push({url,init});return {ok:true,json:async()=>context.response}},response:{ok:false},skiLockerView:()=>{}};
+const doc={hidden:false,body:{style:{}},getElementById:id=>elements[id]||null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:tag=>({tag,children:[],append(...items){this.children.push(...items)},remove(){},style:{},className:'',textContent:''})};
+const context={URL,TextEncoder,URLSearchParams,AbortController,performance:{now:()=>100},location:{search:query},localStorage:{removeItem:k=>removed.push(k),getItem:()=>{throw Error('No debe recuperar un token guardado')}},document:doc,window:{addEventListener:(n,cb)=>listeners[n]=cb},setTimeout:(cb,ms)=>{timers.set(++id,{cb,ms});return id},clearTimeout:id=>timers.delete(id),fetch:async(url,init)=>{calls.push({url,init});return {ok:true,json:async()=>context.response}},response:{ok:false},skiLockerView:()=>{}};
 vm.createContext(context);vm.runInContext(code,context);return {context,timers,calls,removed,listeners,guest:()=>vm.runInContext('refugeGuest',context),load:()=>context.loadRefugeGuest()};}
 const valid=()=>({ok:true,serverNow:10000,expiresAt:15000,guest:{firstName:'Prueba',checkin:'2026-11-15',checkout:'2026-11-15',people:3,lockerId:'sport-calbo-panini',lockerName:'Sport Calbó Panini',lockerNumber:'737'}});
 test('token solo en POST no-store, sin cookies, URL ni almacenamiento',async()=>{const x=setup();x.context.response=valid();await x.load();assert.equal(x.guest().lockerNumber,'737');assert.ok(x.removed.includes('refuge-reservation-token'));const {url,init}=x.calls[0];assert.ok(!url.includes('token'));assert.equal(init.method,'POST');assert.equal(init.cache,'no-store');assert.equal(init.credentials,'omit');assert.equal(init.referrerPolicy,'no-referrer');assert.deepEqual(JSON.parse(init.body),{token:'a'.repeat(64)})});
@@ -57,4 +57,29 @@ test('respaldo Wi-Fi: credenciales solo mientras la reserva es válida y borrada
  x.context.response.guest.wifi={ssid:'Mi Refugio_Prueba',password:'+34999111222',security:'WPA'};
  await x.load();assert.equal(box.children.at(-1).className,'wifi-backup');
  x.context.response={ok:false};await x.load();assert.equal(box.children.length,1);assert.notEqual(box.children[0].className,'wifi-backup');
+});
+
+
+test('eSIM: QR, campos manuales y enlace; denegación borra todos los datos',async()=>{
+ const box={children:[],replaceChildren(){this.children=[]},append(...items){this.children.push(...items)}};
+ const x=setup('?reserva='+'a'.repeat(64),{refugeEsim:box});x.context.response=valid();
+ const data={status:'Asignada',provider:'Airalo',dataAmount:'1 GB',duration:'7 días',installationUrl:'https://www.airalo.com/esim/install/fixture',smdpAddress:'smdp.fixture.net',activationCode:'A1B2C3D4E5F6G7H8',iccid:'8900000000000000000'};
+ x.context.response.guest.esim=data;
+ vm.runInContext(fs.readFileSync('wifi-qr.js','utf8'),x.context);
+ let payload='';const realQr=x.context.qrcode;x.context.qrcode=(...args)=>{const qr=realQr(...args),add=qr.addData;qr.addData=value=>{payload=value;add.call(qr,value)};return qr};
+ await x.load();assert.match(box.children[0].textContent,/ya está disponible/);
+ assert.equal(box.children.find(c=>c.tag==='a').href,data.installationUrl);
+ const details=box.children.find(c=>c.tag==='details');assert.ok(details);assert.equal(payload,'LPA:1$'+data.smdpAddress+'$'+data.activationCode);
+ assert.match(details.children.find(c=>c.tag==='img').src,/^data:image\/gif;base64,/);
+ assert.ok(details.children.some(c=>c.children?.some(v=>v.textContent===data.iccid)));
+ x.context.response={ok:false};await x.load();assert.equal(box.children.length,1);assert.ok(!JSON.stringify(box).includes(data.activationCode));
+});
+test('eSIM: pendiente, manual sin enlace, demo bloqueada y ausencia de token',async()=>{
+ const box=()=>({children:[],replaceChildren(){this.children=[]},append(...items){this.children.push(...items)}});
+ const data={status:'Asignada',provider:'Airalo',dataAmount:'1 GB',duration:'7 días',installationUrl:'',smdpAddress:'smdp.fixture.net',activationCode:'A1B2C3D4E5F6G7H8',iccid:''};
+ for(const esim of [undefined,{...data,status:'DEMO - LISTA PARA ENTREGA'},{...data,status:'Pendiente'},{...data,smdpAddress:'demo.invalid'}]){
+ const b=box(),x=setup('?reserva='+'a'.repeat(64),{refugeEsim:b});x.context.response=valid();x.context.response.guest.esim=esim;await x.load();assert.equal(b.children.length,1);assert.match(b.children[0].textContent,/pendiente de asignación/);
+ }
+ const b=box(),x=setup('?reserva='+'a'.repeat(64),{refugeEsim:b});x.context.response=valid();x.context.response.guest.esim=data;await x.load();assert.ok(b.children.some(c=>c.tag==='details'));assert.ok(!b.children.some(c=>c.tag==='a'));
+ const demo=box(),d=setup('?demoEsim=1',{refugeEsim:demo});await d.load();assert.equal(d.calls.length,0);assert.equal(demo.children.find(c=>c.tag==='button').disabled,true);assert.ok(!demo.children.some(c=>c.tag==='a'||c.tag==='img'));
 });

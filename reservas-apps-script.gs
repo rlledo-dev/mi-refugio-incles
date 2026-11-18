@@ -57,14 +57,16 @@ function lookupGuest_(token, now) {
   if(!Number.isInteger(people)||people<1||people>20)return {ok:false};
   const lockerId=cols.locker?String(sheet.getRange(row,cols.locker).getValue()||CONFIG.defaultLocker).trim():CONFIG.defaultLocker;
   if(!Object.prototype.hasOwnProperty.call(CONFIG.lockerNames,lockerId))return {ok:false};
-  return {ok:true,serverNow,expiresAt,guest:{
+  const guest={
     departureReady:serverNow>=departureOpensAt,
     wifi:bookingWifi_(sheet,row,cols),
     wifiBackup:bookingBackupWifi_(),
     firstName:String(read('Huésped 1 - Nombre')||'').trim().slice(0,80),
     checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
     lockerNumber:String(read('Ski Locker - número')||'').trim().slice(0,40)
-  }};
+  };
+  refugeAddPrivateExtras_(sheet,row,guest);
+  return {ok:true,serverNow,expiresAt,guest};
 }
 // Se calcula después de validar token, estado y fechas. Nunca se devuelve el teléfono por separado.
 function bookingWifi_(sheet,row,cols){
