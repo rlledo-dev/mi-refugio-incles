@@ -12,7 +12,9 @@
       },
       "properties": {
         "name": "Atelier Burgués",
-        "description": "Mediterrànea y argentina. Cocinada al horno Josper. Menú mediodía entre semana."
+        "description": "Mediterrànea y argentina. Cocinada al horno Josper. Menú mediodía entre semana.",
+        "category": "Restaurante",
+        "subcategory": "Mediterránea / argentina"
       }
     },
     {
@@ -26,7 +28,9 @@
       },
       "properties": {
         "name": "MiraKbé!",
-        "description": "Tipo: Tapas, menú Must: huevo poché con trufa; cheesecake"
+        "description": "Tipo: Tapas, menú Must: huevo poché con trufa; cheesecake",
+        "category": "Restaurante",
+        "subcategory": "Tapas / mediterránea"
       }
     },
     {
@@ -40,7 +44,8 @@
       },
       "properties": {
         "name": "MuaKaBo",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -54,7 +59,9 @@
       },
       "properties": {
         "name": "Izai",
-        "description": "Tapas de autor"
+        "description": "Tapas de autor",
+        "category": "Restaurante",
+        "subcategory": "Tapas de autor"
       }
     },
     {
@@ -68,7 +75,8 @@
       },
       "properties": {
         "name": "Kanvium",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -82,7 +90,9 @@
       },
       "properties": {
         "name": "Bare Nostrum",
-        "description": "Tipo: tapas y menú"
+        "description": "Tipo: tapas y menú",
+        "category": "Restaurante",
+        "subcategory": "Tapas / mediterránea"
       }
     },
     {
@@ -96,7 +106,9 @@
       },
       "properties": {
         "name": "La Taula dels Amics",
-        "description": "Tipo: tapas, pizza, burguer, empanada"
+        "description": "Tipo: tapas, pizza, burguer, empanada",
+        "category": "Restaurante",
+        "subcategory": "Tapas / pizza / hamburguesas"
       }
     },
     {
@@ -110,7 +122,9 @@
       },
       "properties": {
         "name": "The Lobby Bar by Hesperia",
-        "description": "Se encuentra en el hall del hotel Hesperia."
+        "description": "Se encuentra en el hall del hotel Hesperia.",
+        "category": "Restaurante",
+        "subcategory": "Bar de hotel"
       }
     },
     {
@@ -124,7 +138,9 @@
       },
       "properties": {
         "name": "Hotel Os de Civís",
-        "description": "Tipo: tradicional Must: Escudella; arroz con leche"
+        "description": "Tipo: tradicional Must: Escudella; arroz con leche",
+        "category": "Restaurante",
+        "subcategory": "Tradicional andorrana"
       }
     },
     {
@@ -138,7 +154,9 @@
       },
       "properties": {
         "name": "La Minjadora del Sinquede",
-        "description": "100% Gluten Free Muchas opciones vegetarianas"
+        "description": "100% Gluten Free Muchas opciones vegetarianas",
+        "category": "Restaurante",
+        "subcategory": "Sin gluten / vegetariana"
       }
     },
     {
@@ -152,7 +170,9 @@
       },
       "properties": {
         "name": "Instants - Hotel Plaza",
-        "description": "Tipo: Mediterráneo, tapas Must: Briox de trompetas de la muerte"
+        "description": "Tipo: Mediterráneo, tapas Must: Briox de trompetas de la muerte",
+        "category": "Restaurante",
+        "subcategory": "Tapas / mediterránea"
       }
     },
     {
@@ -166,7 +186,9 @@
       },
       "properties": {
         "name": "Tres Estanys",
-        "description": "Tipo: mediterranea, vistas Must: Carrot Cake"
+        "description": "Tipo: mediterranea, vistas Must: Carrot Cake",
+        "category": "Restaurante",
+        "subcategory": "Mediterránea"
       }
     },
     {
@@ -180,7 +202,9 @@
       },
       "properties": {
         "name": "Jaleo",
-        "description": "Tipo: mediterráneo, tapas"
+        "description": "Tipo: mediterráneo, tapas",
+        "category": "Restaurante",
+        "subcategory": "Tapas / mediterránea"
       }
     },
     {
@@ -194,7 +218,9 @@
       },
       "properties": {
         "name": "BO & GOLA",
-        "description": "Tipo: mediterranea, tapas, menú Must: brownie, panacotta"
+        "description": "Tipo: mediterranea, tapas, menú Must: brownie, panacotta",
+        "category": "Restaurante",
+        "subcategory": "Tapas / mediterránea"
       }
     },
     {
@@ -208,7 +234,9 @@
       },
       "properties": {
         "name": "Centric Atiram Hotel",
-        "description": "2nda planta"
+        "description": "2nda planta",
+        "category": "Restaurante",
+        "subcategory": "Bar / cafetería"
       }
     },
     {
@@ -222,7 +250,9 @@
       },
       "properties": {
         "name": "Hotel Restaurant de l'Isard",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Restaurante de hotel"
       }
     },
     {
@@ -236,7 +266,8 @@
       },
       "properties": {
         "name": "Coure",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -250,7 +281,9 @@
       },
       "properties": {
         "name": "Restaurante Luis XV - Hotel Spa Diana Parc Andorra",
-        "description": "Restaurante Luis XV"
+        "description": "Restaurante Luis XV",
+        "category": "Restaurante",
+        "subcategory": "Gastronómica"
       }
     },
     {
@@ -264,7 +297,8 @@
       },
       "properties": {
         "name": "Alta Taberna Aires Gourmet",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -278,7 +312,9 @@
       },
       "properties": {
         "name": "Mon Bohemi",
-        "description": "Tipo: Nachos, pizza, burgers, etc. Decoración muy especial. Hay que verlo!"
+        "description": "Tipo: Nachos, pizza, burgers, etc. Decoración muy especial. Hay que verlo!",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesas / pizza"
       }
     },
     {
@@ -292,7 +328,9 @@
       },
       "properties": {
         "name": "Hotel Coma Bella",
-        "description": "Restaurante con menú y carta."
+        "description": "Restaurante con menú y carta.",
+        "category": "Restaurante",
+        "subcategory": "Restaurante de hotel"
       }
     },
     {
@@ -306,7 +344,9 @@
       },
       "properties": {
         "name": "Kathmandu",
-        "description": "Tipo: mediterranea, pizzas, pasta, carne. Menú vegetariano"
+        "description": "Tipo: mediterranea, pizzas, pasta, carne. Menú vegetariano",
+        "category": "Restaurante",
+        "subcategory": "Mediterránea / italiana"
       }
     },
     {
@@ -320,7 +360,9 @@
       },
       "properties": {
         "name": "L'Angurrienta",
-        "description": "Comida para llevar"
+        "description": "Comida para llevar",
+        "category": "Restaurante",
+        "subcategory": "Comida para llevar"
       }
     },
     {
@@ -334,7 +376,8 @@
       },
       "properties": {
         "name": "La Taverna d'en Reymond",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -348,7 +391,9 @@
       },
       "properties": {
         "name": "La Sardana",
-        "description": "Tapas españolas, sobre todo andaluzas y extremeñas"
+        "description": "Tapas españolas, sobre todo andaluzas y extremeñas",
+        "category": "Restaurante",
+        "subcategory": "Tapas españolas"
       }
     },
     {
@@ -362,7 +407,9 @@
       },
       "properties": {
         "name": "L'Enoteca",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Vinoteca"
       }
     },
     {
@@ -376,7 +423,9 @@
       },
       "properties": {
         "name": "La Neu",
-        "description": "Braseria"
+        "description": "Braseria",
+        "category": "Restaurante",
+        "subcategory": "Brasería"
       }
     },
     {
@@ -390,7 +439,9 @@
       },
       "properties": {
         "name": "Borda de l'Hereu 1693",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -404,7 +455,9 @@
       },
       "properties": {
         "name": "Borda Xixerella",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -418,7 +471,9 @@
       },
       "properties": {
         "name": "Borda les Pubilles",
-        "description": "Tipo: borda tradicional, menú Must: Trinxat, Tarta tatin"
+        "description": "Tipo: borda tradicional, menú Must: Trinxat, Tarta tatin",
+        "category": "Restaurante",
+        "subcategory": "Tradicional andorrana"
       }
     },
     {
@@ -432,7 +487,9 @@
       },
       "properties": {
         "name": "La Borda de Conangle",
-        "description": "Naturland, cota 2000m"
+        "description": "Naturland, cota 2000m",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -446,7 +503,9 @@
       },
       "properties": {
         "name": "La Cort de Popaire",
-        "description": "Tipo: mediterránea, fusión japonesa Must: Croquetas, trinxat"
+        "description": "Tipo: mediterránea, fusión japonesa Must: Croquetas, trinxat",
+        "category": "Restaurante",
+        "subcategory": "Mediterránea"
       }
     },
     {
@@ -460,7 +519,9 @@
       },
       "properties": {
         "name": "L'Era d'en Jaume",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -474,7 +535,9 @@
       },
       "properties": {
         "name": "Borda Can Andreu",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -488,7 +551,9 @@
       },
       "properties": {
         "name": "SARI- La Borda de la Coma",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -502,7 +567,9 @@
       },
       "properties": {
         "name": "La borda xica",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Borda tradicional"
       }
     },
     {
@@ -516,7 +583,8 @@
       },
       "properties": {
         "name": "Ca'n Pep",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -530,7 +598,8 @@
       },
       "properties": {
         "name": "La Romànica Andorra",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -544,7 +613,9 @@
       },
       "properties": {
         "name": "Xtreme Pizza - Andorra",
-        "description": "Opciones sin gluten, sin lactosa, veggies y veganas"
+        "description": "Opciones sin gluten, sin lactosa, veggies y veganas",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -558,7 +629,9 @@
       },
       "properties": {
         "name": "Xtreme Pizza - Canillo",
-        "description": "Tipo: pizza delivery, take away"
+        "description": "Tipo: pizza delivery, take away",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -572,7 +645,9 @@
       },
       "properties": {
         "name": "L'Escenari de pizzes",
-        "description": "Tipus: Pizzería, empanadas Must: Empanadas"
+        "description": "Tipus: Pizzería, empanadas Must: Empanadas",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -586,7 +661,9 @@
       },
       "properties": {
         "name": "Quarantuno Pizzeria",
-        "description": "Must: pizza My Ruby con burrata"
+        "description": "Must: pizza My Ruby con burrata",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -600,7 +677,9 @@
       },
       "properties": {
         "name": "Sapori d' Italia",
-        "description": "Tipo: Pizzeria, italiano Must: Coulant"
+        "description": "Tipo: Pizzeria, italiano Must: Coulant",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -614,7 +693,9 @@
       },
       "properties": {
         "name": "Pizzeria Uruguaya",
-        "description": "Tipo: Pizzeria, pulpería"
+        "description": "Tipo: Pizzeria, pulpería",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -628,7 +709,9 @@
       },
       "properties": {
         "name": "Bella Ciao",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -642,7 +725,9 @@
       },
       "properties": {
         "name": "Pizzeria Mozza",
-        "description": "MUST: Calzone de pistacho"
+        "description": "MUST: Calzone de pistacho",
+        "category": "Restaurante",
+        "subcategory": "Pizzería"
       }
     },
     {
@@ -656,7 +741,9 @@
       },
       "properties": {
         "name": "Don Giovanni",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Italiana"
       }
     },
     {
@@ -670,7 +757,9 @@
       },
       "properties": {
         "name": "Smash Hiro",
-        "description": "smash burgers"
+        "description": "smash burgers",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -684,7 +773,9 @@
       },
       "properties": {
         "name": "Blót Andorra",
-        "description": "Estilo vikingo. Brunch, burgers, milanesas.."
+        "description": "Estilo vikingo. Brunch, burgers, milanesas..",
+        "category": "Restaurante",
+        "subcategory": "Brunch / hamburguesas"
       }
     },
     {
@@ -698,7 +789,9 @@
       },
       "properties": {
         "name": "Midtown",
-        "description": "New york vibes smash burgers donuts caseros"
+        "description": "New york vibes smash burgers donuts caseros",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -712,7 +805,9 @@
       },
       "properties": {
         "name": "Blót - Canilllo",
-        "description": "Estilo vikingo. Tipo: brunch, hamburguesas, milanesas, MUST: Brownie; Birramisú"
+        "description": "Estilo vikingo. Tipo: brunch, hamburguesas, milanesas, MUST: Brownie; Birramisú",
+        "category": "Restaurante",
+        "subcategory": "Brunch / hamburguesas"
       }
     },
     {
@@ -726,7 +821,9 @@
       },
       "properties": {
         "name": "Burger Brothers - Canillo",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -740,7 +837,9 @@
       },
       "properties": {
         "name": "Burger Brothers - andorra",
-        "description": "Tipo: Hamburguesería Menús muy bien de precio"
+        "description": "Tipo: Hamburguesería Menús muy bien de precio",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -754,7 +853,9 @@
       },
       "properties": {
         "name": "Burger Brothers Encamp",
-        "description": "Tipo: Hamburguesería"
+        "description": "Tipo: Hamburguesería",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -768,7 +869,9 @@
       },
       "properties": {
         "name": "Oh Burger Lounge",
-        "description": "Tipo: Hamburguesas, Pizza, mediterrànea"
+        "description": "Tipo: Hamburguesas, Pizza, mediterrànea",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesas / pizza"
       }
     },
     {
@@ -782,7 +885,9 @@
       },
       "properties": {
         "name": "Fugazzeta Arinsal",
-        "description": "Comida argentina, pizzas, burgers, etc. Todo casero."
+        "description": "Comida argentina, pizzas, burgers, etc. Todo casero.",
+        "category": "Restaurante",
+        "subcategory": "Argentina / pizzas"
       }
     },
     {
@@ -796,7 +901,9 @@
       },
       "properties": {
         "name": "Monkeys Burger",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Hamburguesería"
       }
     },
     {
@@ -810,7 +917,9 @@
       },
       "properties": {
         "name": "Vertical Ordino - GlutenFree",
-        "description": "Tipo: creps, pokes, streetfood, etc GLUTEN FREE, Must: Burguer Trinxi; Tiramisú"
+        "description": "Tipo: creps, pokes, streetfood, etc GLUTEN FREE, Must: Burguer Trinxi; Tiramisú",
+        "category": "Restaurante",
+        "subcategory": "Street food sin gluten"
       }
     },
     {
@@ -824,7 +933,9 @@
       },
       "properties": {
         "name": "La Moreneta Food and Beer",
-        "description": "Tienes que pedir alguna de sus empanadas!"
+        "description": "Tienes que pedir alguna de sus empanadas!",
+        "category": "Restaurante",
+        "subcategory": "Empanadas / cervecería"
       }
     },
     {
@@ -838,7 +949,9 @@
       },
       "properties": {
         "name": "Vertical - Gluten Free",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Street food sin gluten"
       }
     },
     {
@@ -852,7 +965,9 @@
       },
       "properties": {
         "name": "Ginza 41 Sushi & Robata",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Japonesa / sushi"
       }
     },
     {
@@ -866,7 +981,9 @@
       },
       "properties": {
         "name": "Japomex",
-        "description": "Tipo: Internacional, fusión japonés-mexicano Must: Nachos"
+        "description": "Tipo: Internacional, fusión japonés-mexicano Must: Nachos",
+        "category": "Restaurante",
+        "subcategory": "Fusión japonesa / mexicana"
       }
     },
     {
@@ -880,7 +997,9 @@
       },
       "properties": {
         "name": "Izakaya",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Japonesa / sushi"
       }
     },
     {
@@ -894,7 +1013,9 @@
       },
       "properties": {
         "name": "L'Era de la Cort",
-        "description": "Tipo: Asiàtica, sushi"
+        "description": "Tipo: Asiàtica, sushi",
+        "category": "Restaurante",
+        "subcategory": "Asiática / sushi"
       }
     },
     {
@@ -908,7 +1029,9 @@
       },
       "properties": {
         "name": "Daruma by El Tall a Taula",
-        "description": "Tipo: asiàtica, sushi"
+        "description": "Tipo: asiàtica, sushi",
+        "category": "Restaurante",
+        "subcategory": "Asiática / sushi"
       }
     },
     {
@@ -922,7 +1045,9 @@
       },
       "properties": {
         "name": "Ramen restaurant",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Japonesa / ramen"
       }
     },
     {
@@ -936,7 +1061,9 @@
       },
       "properties": {
         "name": "Ginza 41",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Japonesa / sushi"
       }
     },
     {
@@ -950,7 +1077,9 @@
       },
       "properties": {
         "name": "911 Restaurant Andorra",
-        "description": "Fusión japo-mediterranea"
+        "description": "Fusión japo-mediterranea",
+        "category": "Restaurante",
+        "subcategory": "Fusión japonesa / mediterránea"
       }
     },
     {
@@ -964,7 +1093,9 @@
       },
       "properties": {
         "name": "Tequilando Box \"Mexican Street Food\"",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Mexicana"
       }
     },
     {
@@ -978,7 +1109,9 @@
       },
       "properties": {
         "name": "Cielito Lindo",
-        "description": "Mexican MUST: totopos con atún, costillas"
+        "description": "Mexican MUST: totopos con atún, costillas",
+        "category": "Restaurante",
+        "subcategory": "Mexicana"
       }
     },
     {
@@ -992,7 +1125,9 @@
       },
       "properties": {
         "name": "La Adelita",
-        "description": "Tipo: Internacional, mexicano"
+        "description": "Tipo: Internacional, mexicano",
+        "category": "Restaurante",
+        "subcategory": "Mexicana"
       }
     },
     {
@@ -1006,7 +1141,9 @@
       },
       "properties": {
         "name": "California Grill",
-        "description": "Tipo: Internacional, Mexicano Must: alitas; burrito; tarta tatin"
+        "description": "Tipo: Internacional, Mexicano Must: alitas; burrito; tarta tatin",
+        "category": "Restaurante",
+        "subcategory": "Mexicana"
       }
     },
     {
@@ -1020,7 +1157,9 @@
       },
       "properties": {
         "name": "Frankfurt Lòria - Francesinhas",
-        "description": "Tipo: Francesinhas, platos combinados, pizza"
+        "description": "Tipo: Francesinhas, platos combinados, pizza",
+        "category": "Restaurante",
+        "subcategory": "Portuguesa"
       }
     },
     {
@@ -1034,7 +1173,9 @@
       },
       "properties": {
         "name": "Racó Peruà",
-        "description": "Tipo: Internacional, Peruano Must: Tres Leches"
+        "description": "Tipo: Internacional, Peruano Must: Tres Leches",
+        "category": "Restaurante",
+        "subcategory": "Peruana"
       }
     },
     {
@@ -1048,7 +1189,9 @@
       },
       "properties": {
         "name": "Mandala - Indio",
-        "description": "Tipo: Internacional, Indio, menú cerrado"
+        "description": "Tipo: Internacional, Indio, menú cerrado",
+        "category": "Restaurante",
+        "subcategory": "India"
       }
     },
     {
@@ -1062,7 +1205,9 @@
       },
       "properties": {
         "name": "Fideus",
-        "description": "Tipus: Asiàtica"
+        "description": "Tipus: Asiàtica",
+        "category": "Restaurante",
+        "subcategory": "Asiática"
       }
     },
     {
@@ -1076,7 +1221,9 @@
       },
       "properties": {
         "name": "Delicies Turques",
-        "description": "Tipus: internacional, turca Must: Baklava"
+        "description": "Tipus: internacional, turca Must: Baklava",
+        "category": "Restaurante",
+        "subcategory": "Turca"
       }
     },
     {
@@ -1090,7 +1237,9 @@
       },
       "properties": {
         "name": "Fiesta Manila - Filipino",
-        "description": "Tipo: Internacional, Filipino Must: Curry"
+        "description": "Tipo: Internacional, Filipino Must: Curry",
+        "category": "Restaurante",
+        "subcategory": "Filipina"
       }
     },
     {
@@ -1104,7 +1253,9 @@
       },
       "properties": {
         "name": "Kao - Alta cocina china",
-        "description": "Tipo: internacional, china Must: Fideos con huevo poché y trufa; Pato Pekín"
+        "description": "Tipo: internacional, china Must: Fideos con huevo poché y trufa; Pato Pekín",
+        "category": "Restaurante",
+        "subcategory": "China"
       }
     },
     {
@@ -1118,7 +1269,9 @@
       },
       "properties": {
         "name": "Siam Shiki - Thai/Japo",
-        "description": "Tipo: Thailandés, japonés"
+        "description": "Tipo: Thailandés, japonés",
+        "category": "Restaurante",
+        "subcategory": "Tailandesa / japonesa"
       }
     },
     {
@@ -1132,7 +1285,9 @@
       },
       "properties": {
         "name": "Vietnam Gourmet",
-        "description": "Tipo: internacional, vietnamita Must: Ché"
+        "description": "Tipo: internacional, vietnamita Must: Ché",
+        "category": "Restaurante",
+        "subcategory": "Vietnamita"
       }
     },
     {
@@ -1146,7 +1301,9 @@
       },
       "properties": {
         "name": "Sentro '20",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Internacional"
       }
     },
     {
@@ -1160,7 +1317,9 @@
       },
       "properties": {
         "name": "Gaucha Andorra",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Argentina"
       }
     },
     {
@@ -1174,7 +1333,9 @@
       },
       "properties": {
         "name": "Sottovoce - Hotel Plaza Andorra",
-        "description": "Italiano gourmet"
+        "description": "Italiano gourmet",
+        "category": "Restaurante",
+        "subcategory": "Italiana"
       }
     },
     {
@@ -1188,7 +1349,9 @@
       },
       "properties": {
         "name": "Babek restaurant",
-        "description": "oriente medio fusion mediterranea"
+        "description": "oriente medio fusion mediterranea",
+        "category": "Restaurante",
+        "subcategory": "Oriente Medio / mediterránea"
       }
     },
     {
@@ -1202,7 +1365,9 @@
       },
       "properties": {
         "name": "Cuina Manxuria Imperial",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "China"
       }
     },
     {
@@ -1216,7 +1381,9 @@
       },
       "properties": {
         "name": "Bronze Age Fondue",
-        "description": "Hot Pot China"
+        "description": "Hot Pot China",
+        "category": "Restaurante",
+        "subcategory": "China"
       }
     },
     {
@@ -1230,7 +1397,9 @@
       },
       "properties": {
         "name": "La Llum d'Oli",
-        "description": "Tapeo con muchas opciones chilenas, paraguayas y argentinas"
+        "description": "Tapeo con muchas opciones chilenas, paraguayas y argentinas",
+        "category": "Restaurante",
+        "subcategory": "Latinoamericana"
       }
     },
     {
@@ -1244,7 +1413,9 @@
       },
       "properties": {
         "name": "Xinku",
-        "description": "cocina china"
+        "description": "cocina china",
+        "category": "Restaurante",
+        "subcategory": "China"
       }
     },
     {
@@ -1258,7 +1429,9 @@
       },
       "properties": {
         "name": "Autèntic Llatí",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Latinoamericana"
       }
     },
     {
@@ -1272,7 +1445,9 @@
       },
       "properties": {
         "name": "Món Asiàtic",
-        "description": "La sopa de wanton es mi favorita"
+        "description": "La sopa de wanton es mi favorita",
+        "category": "Restaurante",
+        "subcategory": "Asiática"
       }
     },
     {
@@ -1286,7 +1461,9 @@
       },
       "properties": {
         "name": "Argana - Cocina marroquí",
-        "description": "Marroquí"
+        "description": "Marroquí",
+        "category": "Restaurante",
+        "subcategory": "Marroquí"
       }
     },
     {
@@ -1300,7 +1477,9 @@
       },
       "properties": {
         "name": "Hong Kong - Cocina vietnamita",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Vietnamita"
       }
     },
     {
@@ -1314,7 +1493,9 @@
       },
       "properties": {
         "name": "Cambalache - Cocina de Buenos Aires",
-        "description": "Must: las mollejas"
+        "description": "Must: las mollejas",
+        "category": "Restaurante",
+        "subcategory": "Argentina"
       }
     },
     {
@@ -1328,7 +1509,9 @@
       },
       "properties": {
         "name": "PokeBon Brunch Club",
-        "description": "Cafetería en la que todo lo que casi tod lo hacen con forma de panda"
+        "description": "Cafetería en la que todo lo que casi tod lo hacen con forma de panda",
+        "category": "Restaurante",
+        "subcategory": "Poke / brunch"
       }
     },
     {
@@ -1342,7 +1525,9 @@
       },
       "properties": {
         "name": "Restaurante La Fonclette",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Fondue / queso"
       }
     },
     {
@@ -1356,7 +1541,9 @@
       },
       "properties": {
         "name": "Restaurante La Fonclette",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Fondue / queso"
       }
     },
     {
@@ -1370,7 +1557,9 @@
       },
       "properties": {
         "name": "Arrosseria Chef Amadeo Andorra",
-        "description": "Los mejores arroces"
+        "description": "Los mejores arroces",
+        "category": "Restaurante",
+        "subcategory": "Arrocería"
       }
     },
     {
@@ -1384,7 +1573,9 @@
       },
       "properties": {
         "name": "Kram GastroGrilling OysterBar & Restaurant",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Parrilla / marisco"
       }
     },
     {
@@ -1398,7 +1589,9 @@
       },
       "properties": {
         "name": "L'ARROSSERIA",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Arrocería"
       }
     },
     {
@@ -1412,7 +1605,9 @@
       },
       "properties": {
         "name": "Surf Arinsal - Argentino",
-        "description": "Tipo: argentino, brasa, burguuers, empanadas"
+        "description": "Tipo: argentino, brasa, burguuers, empanadas",
+        "category": "Restaurante",
+        "subcategory": "Argentina"
       }
     },
     {
@@ -1426,7 +1621,9 @@
       },
       "properties": {
         "name": "El Traguet I Mes",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Parrilla / brasa"
       }
     },
     {
@@ -1440,7 +1637,9 @@
       },
       "properties": {
         "name": "TATU",
-        "description": "Buena carne a buen precio"
+        "description": "Buena carne a buen precio",
+        "category": "Restaurante",
+        "subcategory": "Brasería"
       }
     },
     {
@@ -1454,7 +1653,8 @@
       },
       "properties": {
         "name": "El Foc - Naturland 1600",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -1468,7 +1668,9 @@
       },
       "properties": {
         "name": "Malandra",
-        "description": "Tipo: borda, mediterràneo, argentino Must: Toma burrata; Coulant de dulce de leche"
+        "description": "Tipo: borda, mediterràneo, argentino Must: Toma burrata; Coulant de dulce de leche",
+        "category": "Restaurante",
+        "subcategory": "Mediterránea / argentina"
       }
     },
     {
@@ -1482,7 +1684,9 @@
       },
       "properties": {
         "name": "La Huella Vegana",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Vegetariana / vegana"
       }
     },
     {
@@ -1496,7 +1700,9 @@
       },
       "properties": {
         "name": "Veggie's World",
-        "description": "Tipo: vegetariano, take away"
+        "description": "Tipo: vegetariano, take away",
+        "category": "Restaurante",
+        "subcategory": "Vegetariana / vegana"
       }
     },
     {
@@ -1510,7 +1716,9 @@
       },
       "properties": {
         "name": "Noranta Tres",
-        "description": "Vegetariano"
+        "description": "Vegetariano",
+        "category": "Restaurante",
+        "subcategory": "Vegetariana / vegana"
       }
     },
     {
@@ -1524,7 +1732,8 @@
       },
       "properties": {
         "name": "El Racó de l'Anna",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -1538,7 +1747,9 @@
       },
       "properties": {
         "name": "TWO SHOTS - Specialty Coffe",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería de especialidad"
       }
     },
     {
@@ -1552,7 +1763,9 @@
       },
       "properties": {
         "name": "Kofi - Speciality coffee",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería de especialidad"
       }
     },
     {
@@ -1566,7 +1779,9 @@
       },
       "properties": {
         "name": "Grupetta",
-        "description": "Cafetería, brunch, restaurante. Must: tartas, café de finca, matcha latte..."
+        "description": "Cafetería, brunch, restaurante. Must: tartas, café de finca, matcha latte...",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / brunch"
       }
     },
     {
@@ -1580,7 +1795,9 @@
       },
       "properties": {
         "name": "Family Room",
-        "description": "Tipo: cafetería, pastelería Must: Alfajores"
+        "description": "Tipo: cafetería, pastelería Must: Alfajores",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / pastelería"
       }
     },
     {
@@ -1594,7 +1811,9 @@
       },
       "properties": {
         "name": "MYCORNER",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / brunch"
       }
     },
     {
@@ -1608,7 +1827,9 @@
       },
       "properties": {
         "name": "All Day",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / brunch"
       }
     },
     {
@@ -1622,7 +1843,9 @@
       },
       "properties": {
         "name": "Zenith Brunch & Coffee",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / brunch"
       }
     },
     {
@@ -1636,7 +1859,9 @@
       },
       "properties": {
         "name": "0% Gluten Andorra - Gluten Free",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Sin gluten"
       }
     },
     {
@@ -1650,7 +1875,9 @@
       },
       "properties": {
         "name": "MYCORNER CENTRAL",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería / brunch"
       }
     },
     {
@@ -1664,7 +1891,9 @@
       },
       "properties": {
         "name": "RIVERSIDE - Gluten Free",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Sin gluten"
       }
     },
     {
@@ -1678,7 +1907,9 @@
       },
       "properties": {
         "name": "Xurrupand - CHURROS",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Churrería"
       }
     },
     {
@@ -1692,7 +1923,9 @@
       },
       "properties": {
         "name": "Onyva Coffee Andorra",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Cafetería de especialidad"
       }
     },
     {
@@ -1706,7 +1939,9 @@
       },
       "properties": {
         "name": "Espícula Andorra",
-        "description": "Pan, pastas. Para llevar. Los mejores croissants!"
+        "description": "Pan, pastas. Para llevar. Los mejores croissants!",
+        "category": "Restaurante",
+        "subcategory": "Panadería / pastelería"
       }
     },
     {
@@ -1720,7 +1955,9 @@
       },
       "properties": {
         "name": "LA GELATERIA ITALIANA",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Heladería"
       }
     },
     {
@@ -1734,7 +1971,9 @@
       },
       "properties": {
         "name": "Atelier by Aitor Estela",
-        "description": "Tipo: Cocktail bar"
+        "description": "Tipo: Cocktail bar",
+        "category": "Restaurante",
+        "subcategory": "Coctelería"
       }
     },
     {
@@ -1748,7 +1987,9 @@
       },
       "properties": {
         "name": "Bacco wine bar andorra",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Vinoteca"
       }
     },
     {
@@ -1762,7 +2003,8 @@
       },
       "properties": {
         "name": "LOLA",
-        "description": ""
+        "description": "",
+        "category": "Restaurante"
       }
     },
     {
@@ -1776,7 +2018,9 @@
       },
       "properties": {
         "name": "Buffet Novotel Andorra",
-        "description": "Buffet gastronómico"
+        "description": "Buffet gastronómico",
+        "category": "Restaurante",
+        "subcategory": "Bufé"
       }
     },
     {
@@ -1790,7 +2034,9 @@
       },
       "properties": {
         "name": "Ibaya",
-        "description": "Estrella Michelin"
+        "description": "Estrella Michelin",
+        "category": "Restaurante",
+        "subcategory": "Gastronómica"
       }
     },
     {
@@ -1804,7 +2050,9 @@
       },
       "properties": {
         "name": "Restaurant Celler d'En Toni",
-        "description": "Bib Gurmand en la Guia michelin"
+        "description": "Bib Gurmand en la Guia michelin",
+        "category": "Restaurante",
+        "subcategory": "Cocina de autor"
       }
     },
     {
@@ -1818,7 +2066,9 @@
       },
       "properties": {
         "name": "Bruna",
-        "description": "Cocina dirigida por chef con estrella michelin"
+        "description": "Cocina dirigida por chef con estrella michelin",
+        "category": "Restaurante",
+        "subcategory": "Gastronómica"
       }
     },
     {
@@ -1832,7 +2082,9 @@
       },
       "properties": {
         "name": "DIAMANT Espai Gastronòmic",
-        "description": "Nandu Jubany"
+        "description": "Nandu Jubany",
+        "category": "Restaurante",
+        "subcategory": "Gastronómica"
       }
     },
     {
@@ -1846,7 +2098,9 @@
       },
       "properties": {
         "name": "Hotel MIM",
-        "description": "Nandu Jubany"
+        "description": "Nandu Jubany",
+        "category": "Restaurante",
+        "subcategory": "Restaurante de hotel"
       }
     },
     {
@@ -1860,7 +2114,9 @@
       },
       "properties": {
         "name": "Grau Roig Andorra Boutique Hotel & Spa",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Restaurante de hotel"
       }
     },
     {
@@ -1874,7 +2130,9 @@
       },
       "properties": {
         "name": "Restaurant Sol i Neu Club Hermitage",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Restaurante de hotel"
       }
     },
     {
@@ -1888,7 +2146,9 @@
       },
       "properties": {
         "name": "Restaurant Odetti Bistro Escaldes",
-        "description": ""
+        "description": "",
+        "category": "Restaurante",
+        "subcategory": "Bistró"
       }
     },
     {
@@ -1902,7 +2162,9 @@
       },
       "properties": {
         "name": "Red Bar UNNIC Andorra",
-        "description": "Nikkei - solo mayores de 18 años"
+        "description": "Nikkei - solo mayores de 18 años",
+        "category": "Restaurante",
+        "subcategory": "Nikkei"
       }
     },
     {
@@ -1916,7 +2178,9 @@
       },
       "properties": {
         "name": "UNNIC Andorra",
-        "description": "El restaurante del centro de ocio UNNIC - en la última planta"
+        "description": "El restaurante del centro de ocio UNNIC - en la última planta",
+        "category": "Restaurante",
+        "subcategory": "Restaurante / ocio"
       }
     },
     {
@@ -1930,7 +2194,9 @@
       },
       "properties": {
         "name": "Bandidos Gastroclub",
-        "description": "Buena comida, cocteles, música y espectáculos"
+        "description": "Buena comida, cocteles, música y espectáculos",
+        "category": "Restaurante",
+        "subcategory": "Gastrobar / espectáculos"
       }
     },
     {
@@ -1946,7 +2212,11 @@
         "name": "Fora Pizza",
         "description": "Pizzería con pizzas artesanales y platos de pasta, situada a pie de pistas.",
         "category": "Restaurante",
-        "subcategory": "Pizzería / Italiana"
+        "subcategory": "Pizzería / Italiana",
+        "locality": "El Tarter",
+        "address": "Ctra. del Tarter, 8, El Tarter, Canillo, Andorra",
+        "website": "https://fora.pizza",
+        "phone": "+376 373 999"
       }
     }
   ]

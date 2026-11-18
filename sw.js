@@ -1,5 +1,5 @@
-const CACHE='mi-refugio-v23';
-const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./restaurantes.geojson','./servicios.json'];
+const CACHE='mi-refugio-v24';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./restaurantes.geojson?v=3','./servicios.json'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([
  caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('mi-refugio-')&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()
