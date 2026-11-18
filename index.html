@@ -338,6 +338,14 @@ function renderRefugeWifi(){
   const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;
   field.append(title,content);box.append(field);
  }
+ const backup=refugeGuest?.wifiBackup;
+ if(backup&&typeof backup.ssid==='string'&&typeof backup.username==='string'&&typeof backup.password==='string'){
+  const heading=document.createElement('h4');heading.textContent='Red Wi-Fi de respaldo';heading.style.margin='16px 0 8px';box.append(heading);
+  const note=document.createElement('p');note.className='note';note.textContent='Utiliza esta red si falla la conexión principal. Velocidad limitada a 10 Mb/s.';box.append(note);
+  for(const [label,value] of [['Red Wi-Fi',backup.ssid],['Usuario',backup.username],['Contraseña',backup.password]]){
+   const field=document.createElement('p');field.className='wifi-field';const title=document.createElement('small');title.textContent=label;const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;field.append(title,content);box.append(field);
+  }
+ }
  try{
   qrcode.stringToBytes=qrcode.stringToBytesFuncs['UTF-8'];
   const qr=qrcode(0,'M');qr.addData(wifiQrPayload(wifi));qr.make();
@@ -444,7 +452,7 @@ function apartmentView(){
  ['🫧 Lavadora','Estos son los programas más prácticos para tu estancia:\n\nEco 40–60: para ropa de algodón con suciedad normal. Prioriza el ahorro de energía; dura aproximadamente 3 h 30 min con carga completa (hasta 8 kg). El tiempo puede variar según la carga.\n\nAlgodón (Cottons): recomendado para sábanas y toallas. Ajusta la temperatura según la etiqueta de las prendas. Hasta 8 kg de lavado.\n\n20 minutos / 3 kg: para poca ropa, ligeramente sucia o usada una sola vez. Lava en 20 minutos, con un máximo de 3 kg.\n\nEncontrarás un tendedero plegable entre la cajonera y la pared del dormitorio. Las pinzas están en el armario a la derecha del horno, junto con las cápsulas de detergente en gel para la lavadora.'],
  ['🍽️ Lavaplatos','1. Retira los restos grandes de comida y coloca la vajilla dejando libres los brazos giratorios.\n\n2. Pon una pastilla en el compartimento de detergente de la cara interior de la puerta y ciérralo. Encontrarás las pastillas en uno de los cajones a la derecha del lavaplatos.\n\n3. Cierra la puerta y pulsa el botón de encendido. Selecciona el programa con P+ o P− y pulsa Inicio/Pausa, abajo a la derecha, para comenzar.\n\nProgramas recomendados:\n\nP5 · Quick&Shine, 60 °C · 58 minutos: para la vajilla de cada día con suciedad normal. Incluye secado.\n\nP1 · Eco, 50 °C · 3 h 40 min: para vajilla con suciedad normal, priorizando el ahorro de agua y energía. Incluye secado.\n\nP4 · Intensivo, 70 °C · 2 h 50 min: para ollas, sartenes y vajilla muy sucia que sean aptas para lavavajillas. Incluye secado.\n\nLos tiempos son orientativos y pueden variar según las condiciones de uso y las funciones seleccionadas.'],
  ['🚰 Agua y seguridad','El agua del grifo es potable; puedes beberla con toda tranquilidad. Encontrarás la llave de paso general del agua debajo del fregadero, dentro del armario, en la parte inferior izquierda de la pared del fondo.\n\nEn la cocina hay un detector de humo. Si se activa por una falsa alarma, puedes silenciarlo pulsando el botón del propio detector. La alarma también me avisa al móvil.\n\nLa placa de cocina funciona con gas y electricidad. Encontrarás una bombona de butano conectada y otra de reserva en el armario. También puedes utilizar la zona eléctrica.\n\nEmergencias: 112.'],
- ['📶 Wi-Fi','La red principal lleva el nombre «Mi Refugio» y tu apellido; la contraseña corresponde al teléfono usado en la reserva. Consulta los datos personalizados de conexión en la sección Wi-Fi de Mi estancia.\n\nSi falla la red principal, puedes conectarte a la red de respaldo (velocidad limitada a 10 Mb/s):\nRed Wi-Fi: a46-BKup\nUsuario: a46\nContraseña: 73incles2.']
+ ['📶 Wi-Fi','La red principal lleva el nombre «Mi Refugio» y tu apellido; la contraseña corresponde al teléfono usado en la reserva. Consulta los datos personalizados de conexión en la sección Wi-Fi de Mi estancia.\n\nSi falla la red principal, consulta los datos de la red de respaldo en Mi estancia.']
  ];
  for(const [heading,body] of sections){
   const card=document.createElement('details');card.className='card apartment-instruction';card.style.cssText='margin:10px 0;padding:14px';
