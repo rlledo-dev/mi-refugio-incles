@@ -351,7 +351,16 @@ function renderRefugeEsim(){
   const button=document.createElement('button');button.type='button';button.className='esim-action';button.disabled=true;button.textContent='Instalar mi eSIM gratuita (demo)';button.style.marginTop='12px';box.append(button);
   const details=document.createElement('details');details.style.cssText='margin-top:14px;background:#fff;border:1px solid #b6d6da;border-radius:12px;padding:12px';
   const summary=document.createElement('summary');summary.textContent='Ver datos de instalación manual (demo)';summary.style.cssText='cursor:pointer;font-weight:700;color:#176579';details.append(summary);
-  for(const [label,value] of [['ICCID','DEMO-ICCID-0000000000000000000'],['Dirección SM-DP+','demo.invalid'],['Código de activación','DEMO-CODIGO-NO-VALIDO'],['Código QR','No disponible en esta simulación']]){
+  try{
+   const qr=qrcode(0,'M');
+   qr.addData('LPA:1$demo.invalid$DEMO-CODIGO-NO-VALIDO');
+   qr.make();
+   const img=document.createElement('img');img.src=qr.createDataURL(6,24);
+   img.alt='QR ficticio de instalación eSIM, sin validez';img.width=232;img.height=232;
+   img.style.cssText='display:block;max-width:100%;height:auto;margin:16px auto;background:white;border:8px solid white;border-radius:10px';
+   details.append(img);
+  }catch(_){const note=document.createElement('p');note.className='esim-note';note.textContent='No se ha podido generar el QR de demostración.';details.append(note)}
+  for(const [label,value] of [['ICCID','DEMO-ICCID-0000000000000000000'],['Dirección SM-DP+','demo.invalid'],['Código de activación','DEMO-CODIGO-NO-VALIDO']]){
    const field=document.createElement('p');field.className='wifi-field';const title=document.createElement('small');title.textContent=label;const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;field.append(title,content);details.append(field);
   }
   box.append(details);
