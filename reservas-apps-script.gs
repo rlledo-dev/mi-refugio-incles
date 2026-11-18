@@ -60,6 +60,7 @@ function lookupGuest_(token, now) {
   return {ok:true,serverNow,expiresAt,guest:{
     departureReady:serverNow>=departureOpensAt,
     wifi:bookingWifi_(sheet,row,cols),
+    wifiBackup:bookingBackupWifi_(),
     firstName:String(read('Huésped 1 - Nombre')||'').trim().slice(0,80),
     checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
     lockerNumber:String(read('Ski Locker - número')||'').trim().slice(0,40)
@@ -75,6 +76,17 @@ function bookingWifi_(sheet,row,cols){
   const bytes=encodeURIComponent(ssid).replace(/%[A-F\d]{2}/gi,'x').length;
   if(!surname||bytes>32||/[\x00-\x1f\x7f]/.test(surname)||!/^\+[1-9]\d{7,14}$/.test(password))return null;
   return {ssid,password,security:'WPA'};
+}
+// Credenciales de respaldo guardadas en propiedades privadas, nunca en el repositorio.
+// Solo se consulta después de validar token, estado y fechas.
+function bookingBackupWifi_(){
+  const p=PropertiesService.getScriptProperties().getProperties();
+  const ssid=String(p.WIFI_BACKUP_SSID||'').trim();
+  const username=String(p.WIFI_BACKUP_USERNAME||'').trim();
+  const password=String(p.WIFI_BACKUP_PASSWORD||'');
+  const bytes=encodeURIComponent(ssid).replace(/%[A-F\d]{2}/gi,'x').length;
+  if(!ssid||bytes>32||!username||username.length>80||!password||password.length>128||/[\x00-\x1f\x7f]/.test(ssid+username+password))return null;
+  return {ssid,username,password};
 }
 function normaliseDate_(value) {
   if(value instanceof Date && Number.isFinite(value.getTime()))return Utilities.formatDate(value,CONFIG.timezone,'yyyy-MM-dd');

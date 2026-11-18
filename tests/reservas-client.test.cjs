@@ -2,7 +2,7 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 const html=fs.readFileSync('index.html','utf8');const start=html.indexOf('// La URL /exec es pública');const end=html.indexOf('function skiLockerView(',start);const code=html.slice(start,end).replace(/const REFUGE_RESERVATION_API='[^']*';/,"const REFUGE_RESERVATION_API='https://script.google.com/macros/s/FICTICIO/exec';");
 function setup(query='?reserva='+'a'.repeat(64),elements={}){
 const removed=[],timers=new Map(),calls=[],listeners={};let id=0;const nodes=[];const target={prepend:e=>nodes.push(e)};
-const doc={hidden:false,body:{style:{}},getElementById:id=>elements[id]||null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:()=>({append(){},remove(){},className:'',textContent:''})};
+const doc={hidden:false,body:{style:{}},getElementById:id=>elements[id]||null,addEventListener:(n,cb)=>listeners[n]=cb,querySelector:s=>s.includes(' .content')?target:null,querySelectorAll:s=>s==='.guest-welcome'?nodes.splice(0):[],createElement:()=>({append(){},remove(){},style:{},className:'',textContent:''})};
 const context={TextEncoder,URLSearchParams,AbortController,performance:{now:()=>100},location:{search:query},localStorage:{removeItem:k=>removed.push(k),getItem:()=>{throw Error('No debe recuperar un token guardado')}},document:doc,window:{addEventListener:(n,cb)=>listeners[n]=cb},setTimeout:(cb,ms)=>{timers.set(++id,{cb,ms});return id},clearTimeout:id=>timers.delete(id),fetch:async(url,init)=>{calls.push({url,init});return {ok:true,json:async()=>context.response}},response:{ok:false},skiLockerView:()=>{}};
 vm.createContext(context);vm.runInContext(code,context);return {context,timers,calls,removed,listeners,guest:()=>vm.runInContext('refugeGuest',context),load:()=>context.loadRefugeGuest()};}
 const valid=()=>({ok:true,serverNow:10000,expiresAt:15000,guest:{firstName:'Prueba',checkin:'2026-11-15',checkout:'2026-11-15',people:3,lockerId:'sport-calbo-panini',lockerName:'Sport Calbó Panini',lockerNumber:'737'}});
@@ -48,4 +48,13 @@ test('el locker visible se actualiza sin solicitar navegación',async()=>{
  const navigations=[];const x=setup('?reserva='+'a'.repeat(64),{skiLockerMap:{},detail:{classList:{contains:c=>c==='active'}}});
  x.context.skiLockerView=navigate=>navigations.push(navigate);x.context.response=valid();await x.load();await x.load();
  assert.deepEqual(navigations,[false,false]);
+});
+
+test('respaldo Wi-Fi: credenciales solo mientras la reserva es válida y borradas al denegarse',async()=>{
+ const box={children:[],hidden:true,replaceChildren(){this.children=[]},append(e){this.children.push(e)}};
+ const x=setup('?reserva='+'a'.repeat(64),{refugeWifi:box});
+ x.context.response=valid();x.context.response.guest.wifiBackup={ssid:'Red ficticia',username:'Usuario ficticio',password:'Clave ficticia'};
+ x.context.response.guest.wifi={ssid:'Mi Refugio_Prueba',password:'+34999111222',security:'WPA'};
+ await x.load();assert.equal(box.children.at(-1).className,'wifi-backup');
+ x.context.response={ok:false};await x.load();assert.equal(box.children.length,1);assert.notEqual(box.children[0].className,'wifi-backup');
 });

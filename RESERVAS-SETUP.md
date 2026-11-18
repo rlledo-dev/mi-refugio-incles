@@ -73,3 +73,8 @@ Actualizar los datos de una reserva actualiza la guía en su siguiente consulta 
 Los detalles de llegada y aparcamiento se presentan solo con una estancia válida. El mapa usa la misma ubicación del apartamento que los demás mapas de la guía. La imagen de parking está marcada como genérica provisional y se sustituye en `imagenes/estancia/parking-provisional.webp`.
 
 El servidor calcula `departureReady` en Europe/Andorra: verdadero desde las 17:00 del día anterior a la salida. La app revalida cada 30 segundos y muestra las instrucciones de salida únicamente cuando el servidor lo autoriza. No usa el reloj del dispositivo para decidirlo. Al caducar o denegarse la reserva se retiran los detalles privados. La hora de salida indicada es 10:00.
+
+
+### Wi-Fi de respaldo (v1.2.1)
+
+Configurar `WIFI_BACKUP_SSID`, `WIFI_BACKUP_USERNAME` y `WIFI_BACKUP_PASSWORD` en las propiedades privadas del proyecto Apps Script. No incluir valores en GitHub. El servidor solo devuelve `wifiBackup` después de validar una estancia vigente. El apartado El apartamento → Wi-Fi muestra las credenciales al huésped autorizado y las borra cuando se revoca/caduca el acceso. El botón de ese apartado abre directamente el Wi-Fi personalizado y su QR en Mi estancia.
