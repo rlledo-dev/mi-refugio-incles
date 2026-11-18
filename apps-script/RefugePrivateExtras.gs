@@ -11,9 +11,13 @@ function refugeAddPrivateExtras_(sheet, rowNumber, guest) {
     if (index < 0 || headers.lastIndexOf(name) !== index) return '';
     return String(sheet.getRange(rowNumber, index + 1).getDisplayValues()[0][0] || '').trim();
   };
-  // CODETEST nunca entrega una eSIM, incluso si alguien cambia su estado.
-  if (read('Código reserva') === 'CODETEST') return guest;
   const status = read('eSIM - Estado');
+  // CODETEST puede mostrar la misma demostración que la vista pública.
+  // Solo se devuelve una marca de demo; ningún secreto ni enlace activable.
+  if (read('Código reserva') === 'CODETEST' && /demo|fictici|prueba|simulaci/i.test(status)) {
+    guest.esim = {status:'DEMO'};
+    return guest;
+  }
   if (!/^(asignada|asignado|lista para entrega|entregada|activa)$/i.test(status)) return guest;
   const record = {
     status,

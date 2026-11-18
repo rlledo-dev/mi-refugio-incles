@@ -21,7 +21,7 @@ test('eSIM: tokens denegados, duplicados, reservas canceladas o fuera de fecha n
  }
 });
 test('eSIM: sin asignación, demo y CODETEST conservan reserva pero no entregan códigos',()=>{
- for(const mutate of [r=>r[9]='Pendiente',r=>r[9]='',r=>r[9]='DEMO - LISTA PARA ENTREGA',r=>r[0]='CODETEST',r=>r[15]='demo.invalid',r=>r[16]='DEMO-CODIGO-NO-VALIDO']){
+ for(const mutate of [r=>r[9]='Pendiente',r=>r[9]='',r=>r[9]='DEMO - LISTA PARA ENTREGA',r=>r[15]='demo.invalid',r=>r[16]='DEMO-CODIGO-NO-VALIDO']){
  const x=setup();mutate(x.rows[1]);const r=x.lookup('a'.repeat(64));assert.equal(r.ok,true);assert.equal(r.guest.esim,undefined);
  }
 });
@@ -30,3 +30,5 @@ test('eSIM: valida enlace HTTPS Airalo, host SM-DP+, activación e ICCID sin tru
  for(const change of [{installationUrl:'https://airalo.com.evil.net/install'},{installationUrl:'https://airalo.com@evil.net/'},{installationUrl:'http://airalo.com/install'},{installationUrl:'javascript:alert(1)'},{smdpAddress:'demo.invalid'},{smdpAddress:'x$evil.net'},{activationCode:'code$injected'},{activationCode:'x'.repeat(256)},{iccid:'8900.123'},{status:'Revocada'},{duration:'simulación'}])assert.equal(x.ctx.refugeValidatedEsim_({...sample(),...change}),null);
  const manual={...sample(),installationUrl:''};assert.ok(x.ctx.refugeValidatedEsim_(manual));assert.ok(x.ctx.refugeValidatedEsim_({...sample(),smdpAddress:'',activationCode:''}));assert.equal(x.ctx.refugeValidatedEsim_({...manual,activationCode:''}),null);
 });
+
+test('CODETEST autorizado muestra demo; una eSIM asignada válida usa el flujo normal',()=>{const x=setup();x.rows[1][0]='CODETEST';x.rows[1][9]='DEMO - LISTA PARA ENTREGA';assert.deepEqual(x.lookup('a'.repeat(64)).guest.esim,{status:'DEMO'});x.rows[1][9]='Asignada';assert.ok(x.lookup('a'.repeat(64)).guest.esim.activationCode)});

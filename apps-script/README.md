@@ -27,7 +27,7 @@ Se puede entregar mediante enlace oficial o mediante SM-DP+ + código de activac
 
 Estados admitidos: `Asignada`, `Asignado`, `Lista para entrega`, `Entregada` o `Activa`. Los estados restantes, datos incompletos o inválidos muestran «Tu eSIM de cortesía está pendiente de asignación». Dejar `Pendiente` mientras se prepara o revisa una entrega. La compra adicional sigue enlazando a Airalo.
 
-CODETEST nunca entrega una eSIM. No modificar sus fechas ni sus tokens. Las marcas DEMO, ficticia, prueba o simulación se bloquean también en otros campos. La vista `?demoEsim=1` continúa siendo ficticia, con botón deshabilitado y sin QR activable.
+CODETEST muestra la demostración dentro del enlace privado cuando su estado de eSIM contiene DEMO, ficticia, prueba o simulación. El servidor devuelve solo una marca de demo y la web muestra códigos deliberadamente inválidos, QR ficticio y botón deshabilitado. Si en el futuro se asigna una eSIM auténtica, sigue el flujo normal de validación. No modificar sus fechas ni sus tokens. Las marcas DEMO, ficticia, prueba o simulación se bloquean también en otros campos. La vista `?demoEsim=1` continúa siendo ficticia, con botón deshabilitado y sin QR activable.
 
 La validación comprueba formato y asignación por el propietario; no consulta a Airalo si la eSIM se ha comprado, ya se ha instalado o sigue vigente. Hay que copiar los datos auténticos de Airalo y verificar que pertenecen a la reserva adecuada. No se compra ni activa nada automáticamente.
 
@@ -49,3 +49,6 @@ Comprobaciones: `node --test tests/*.test.cjs`. Las credenciales usadas por los 
 - 26 pruebas automáticas pasan, incluidas dos reservas sintéticas aisladas, datos manuales, generación de QR y retirada de credenciales al revocar/caducar.
 - No se ha comprado, asignado ni activado una eSIM real. La aceptación de una primera eSIM auténtica por el teléfono queda pendiente de disponer de ella. Los tests con credenciales sintéticas se ejecutan fuera de la hoja real.
 - En la revisión inicial solo CODETEST tenía un token; las filas reales no se modifican. Para entregar servicios a un huésped será necesario su enlace privado, mediante el flujo existente del propietario.
+
+## Actualización v1.2.4
+CODETEST ya muestra la eSIM de demostración también desde su token. No se han modificado sus fechas, tokens ni la fila. Se conserva el bloqueo de demos para reservas reales.
