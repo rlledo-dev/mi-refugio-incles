@@ -360,7 +360,7 @@ function renderRefugeEsim(){
  if(!refugeGuest){status.textContent='Tu eSIM de cortesía aparecerá aquí cuando accedas con tu reserva.';box.append(status);return}
  const rawLink=typeof data?.installationUrl==='string'?data.installationUrl.trim():'';
  let validLink='';
- try{const url=new URL(rawLink);if(url.protocol==='https:'&&(/(^|\\.)airalo\\.com$/.test(url.hostname)||/(^|\\.)airalo\\.io$/.test(url.hostname)))validLink=url.href}catch(_){}
+ try{const url=new URL(rawLink);if(url.protocol==='https:'&&(/(^|\.)airalo\.com$/.test(url.hostname)||/(^|\.)airalo\.io$/.test(url.hostname)))validLink=url.href}catch(_){}
  const smdp=typeof data?.smdpAddress==='string'?data.smdpAddress.trim():'';
  const activation=typeof data?.activationCode==='string'?data.activationCode.trim():'';
  const iccid=typeof data?.iccid==='string'?data.iccid.trim():'';
