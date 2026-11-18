@@ -345,10 +345,17 @@ function renderRefugeEsim(){
  const status=document.createElement('p');status.className='esim-state';
  // Vista previa sin credenciales reales: solo se activa con ?demoEsim=1 y sin token de reserva.
  if(!refugeGuest&&new URLSearchParams(location.search).get('demoEsim')==='1'&&!refugeToken()){
-  const banner=document.createElement('p');banner.className='esim-state';banner.textContent='VISTA PREVIA · eSIM FICTICIA · NO ACTIVADA';box.append(banner);
-  const p=document.createElement('p');p.textContent='Airalo · Andorra · 1 GB · 7 días (datos de ejemplo)';p.style.margin='8px 0 12px';box.append(p);
-  const button=document.createElement('button');button.type='button';button.className='esim-action';button.disabled=true;button.textContent='Instalar mi eSIM gratuita (demo)';box.append(button);
-  const hint=document.createElement('p');hint.className='esim-note';hint.textContent='Ejemplo visual. No existe ninguna eSIM ni enlace de instalación asociado.';box.append(hint);return;
+  const banner=document.createElement('p');banner.className='esim-state';banner.textContent='DEMO · eSIM DE PRUEBA SIN ACTIVACIÓN';box.append(banner);
+  const p=document.createElement('p');p.textContent='Airalo · Andorra · 1 GB · 7 días';p.style.margin='8px 0 6px';box.append(p);
+  const validity=document.createElement('p');validity.className='esim-note';validity.textContent='Ejemplo: la duración empieza al conectarse a una red compatible; depende del paquete contratado.';box.append(validity);
+  const button=document.createElement('button');button.type='button';button.className='esim-action';button.disabled=true;button.textContent='Instalar mi eSIM gratuita (demo)';button.style.marginTop='12px';box.append(button);
+  const details=document.createElement('details');details.style.cssText='margin-top:14px;background:#fff;border:1px solid #b6d6da;border-radius:12px;padding:12px';
+  const summary=document.createElement('summary');summary.textContent='Ver datos de instalación manual (demo)';summary.style.cssText='cursor:pointer;font-weight:700;color:#176579';details.append(summary);
+  for(const [label,value] of [['ICCID','DEMO-ICCID-0000000000000000000'],['Dirección SM-DP+','demo.invalid'],['Código de activación','DEMO-CODIGO-NO-VALIDO'],['Código QR','No disponible en esta simulación']]){
+   const field=document.createElement('p');field.className='wifi-field';const title=document.createElement('small');title.textContent=label;const content=document.createElement('strong');content.className='wifi-value';content.textContent=value;field.append(title,content);details.append(field);
+  }
+  box.append(details);
+  const hint=document.createElement('p');hint.className='esim-note';hint.textContent='Datos ficticios y deliberadamente inválidos. No se puede instalar ni activar esta eSIM.';box.append(hint);return;
  }
  if(!refugeGuest){status.textContent='Tu eSIM de cortesía aparecerá aquí cuando accedas con tu reserva.';box.append(status);return}
  const rawLink=typeof data?.installationUrl==='string'?data.installationUrl:'';
