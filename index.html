@@ -343,6 +343,13 @@ function renderRefugeEsim(){
  box.replaceChildren();
  const data=refugeGuest?.esim;
  const status=document.createElement('p');status.className='esim-state';
+ // Vista previa sin credenciales reales: solo se activa con ?demoEsim=1 y sin token de reserva.
+ if(!refugeGuest&&new URLSearchParams(location.search).get('demoEsim')==='1'&&!refugeToken()){
+  const banner=document.createElement('p');banner.className='esim-state';banner.textContent='VISTA PREVIA · eSIM FICTICIA · NO ACTIVADA';box.append(banner);
+  const p=document.createElement('p');p.textContent='Airalo · Andorra · 1 GB · 7 días (datos de ejemplo)';p.style.margin='8px 0 12px';box.append(p);
+  const button=document.createElement('button');button.type='button';button.className='esim-action';button.disabled=true;button.textContent='Instalar mi eSIM gratuita (demo)';box.append(button);
+  const hint=document.createElement('p');hint.className='esim-note';hint.textContent='Ejemplo visual. No existe ninguna eSIM ni enlace de instalación asociado.';box.append(hint);return;
+ }
  if(!refugeGuest){status.textContent='Tu eSIM de cortesía aparecerá aquí cuando accedas con tu reserva.';box.append(status);return}
  const rawLink=typeof data?.installationUrl==='string'?data.installationUrl:'';
  let validLink='';
