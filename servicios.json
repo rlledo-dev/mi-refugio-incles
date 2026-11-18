@@ -451,7 +451,7 @@
   {
     "id": "AND-S030",
     "icon": "🐾",
-    "category": "Veterinarios",
+    "category": "Mascotas",
     "section": "Cerca de ti",
     "priority": 30,
     "name": "AniCura Món Veterinari",
@@ -463,12 +463,13 @@
     "lat": 42.5128439,
     "lon": 1.5355698,
     "coordinateSource": "Pàgines Grogues Andorra Telecom",
-    "hostRating": 5
+    "hostRating": 5,
+    "subcategory": "Hospital veterinario"
   },
   {
     "id": "AND-S031",
     "icon": "🐾",
-    "category": "Veterinarios",
+    "category": "Mascotas",
     "section": "Cerca de ti",
     "priority": 31,
     "name": "El Griu Hospital Veterinari",
@@ -479,6 +480,22 @@
     "website": "https://www.elgriu.vet/",
     "lat": 42.5325531,
     "lon": 1.5747304,
-    "coordinateSource": "Andorra.com · Cómo llegar"
+    "coordinateSource": "Andorra.com · Cómo llegar",
+    "subcategory": "Hospital veterinario"
+  },
+  {
+    "id": "AND-S032",
+    "name": "Laura · Paseadora y cuidadora de mascotas",
+    "category": "Mascotas",
+    "icon": "🐾",
+    "town": "Escaldes-Engordany",
+    "phone": "+376669947",
+    "lat": 42.50895,
+    "lon": 1.53953,
+    "approximateLocation": true,
+    "coordinateSource": "Plaça Coprínceps · OpenStreetMap",
+    "source": "Datos facilitados por el anfitrión",
+    "section": "Cerca de ti",
+    "priority": 32
   }
 ]
