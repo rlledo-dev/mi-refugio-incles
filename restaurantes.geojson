@@ -679,7 +679,8 @@
         "name": "Sapori d' Italia",
         "description": "Tipo: Pizzeria, italiano Must: Coulant",
         "category": "Restaurante",
-        "subcategory": "Pizzería"
+        "subcategory": "Pizzería",
+        "hostRating": 5
       }
     },
     {

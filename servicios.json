@@ -447,5 +447,38 @@
     "priority": 29,
     "hostRating": 4,
     "coordinateStatus": "GPS pendiente de confirmar"
+  },
+  {
+    "id": "AND-S030",
+    "icon": "🐾",
+    "category": "Veterinarios",
+    "section": "Cerca de ti",
+    "priority": 30,
+    "name": "AniCura Món Veterinari",
+    "town": "Escaldes-Engordany",
+    "address": "Vial Josep Viladomat, 36",
+    "phone": "+376863331",
+    "source": "https://www.anicura.es/clinicas/monveterinari-hospital-veterinari/contacto/",
+    "website": "https://www.anicura.es/clinicas/monveterinari-hospital-veterinari/",
+    "lat": 42.5128439,
+    "lon": 1.5355698,
+    "coordinateSource": "Pàgines Grogues Andorra Telecom",
+    "hostRating": 5
+  },
+  {
+    "id": "AND-S031",
+    "icon": "🐾",
+    "category": "Veterinarios",
+    "section": "Cerca de ti",
+    "priority": 31,
+    "name": "El Griu Hospital Veterinari",
+    "town": "Encamp",
+    "address": "Av. de Joan Martí, 94",
+    "phone": "+376802323",
+    "source": "https://andorra.com/es/tiendas-andorra/compras/el-griu-hospital-veterinari",
+    "website": "https://www.elgriu.vet/",
+    "lat": 42.5325531,
+    "lon": 1.5747304,
+    "coordinateSource": "Andorra.com · Cómo llegar"
   }
 ]
