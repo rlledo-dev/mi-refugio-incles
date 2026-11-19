@@ -413,17 +413,15 @@
     "icon": "🏧",
     "category": "Bancos y cajeros",
     "town": "Canillo",
-    "address": "Av. Sant Joan de Caselles, Casa Sinfreu, local 1",
+    "address": "Av. Sant Joan de Caselles, 22 · Casa Sinfreu, local 1",
     "phone": "+376884635",
-    "source": "https://paginesgrogues.ad/morabanc",
+    "source": "https://guia.ad/es/poble/canillo",
     "section": "Cerca de ti",
     "priority": 27,
-    "lat": 42.5672606,
-    "lon": 1.6010376,
-    "coordinateSource": "Pàgines Grogues Andorra Telecom · ficha MoraBanc Canillo",
     "hostRating": 5,
-    "note": "Cajero confirmado por MoraBanc, junto a la farmacia Abarset.",
-    "website": "https://www.morabanc.ad/es/empresas/cuentas-y-tarjetas-empresas/tarjeta-incard"
+    "note": "Oficina y cajero MoraBanc en Av. Sant Joan de Caselles, 22. Consultar ubicación por dirección; GPS exacto pendiente de confirmar.",
+    "website": "https://www.morabanc.ad/es/empresas/cuentas-y-tarjetas-empresas/tarjeta-incard",
+    "coordinateStatus": "GPS exacto pendiente de verificar; coordenadas anteriores correspondían a la farmacia Abarset"
   },
   {
     "id": "AND-S028",
