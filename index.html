@@ -241,7 +241,7 @@ function hostStars(x){const n=Number(x.hostRating);return Number.isInteger(n)&&n
   if(service.id!=='AND-S032'||!service.phone)return '';
   return 'https://wa.me/'+service.phone.replace(/[^0-9]/g,'');
 }
-async function servicesView(){if(servicesMap){servicesMap.remove();servicesMap=null}const root=document.getElementById('detailContent');root.replaceChildren();const h=document.createElement('h2');h.textContent='📍 Cerca de ti';const note=document.createElement('p');note.className='muted';note.textContent='Servicios útiles desde Incles · consulta horarios antes de ir';root.append(h,note);let data=[];try{const response=await fetch('./servicios.json?v=24',{cache:'no-store'});if(!response.ok)throw Error('No disponible');data=await response.json()}catch(e){root.append('No se han podido cargar los servicios.');show('detail');return}const search=document.createElement('input');
+async function servicesView(){if(servicesMap){servicesMap.remove();servicesMap=null}const root=document.getElementById('detailContent');root.replaceChildren();const h=document.createElement('h2');h.textContent='📍 Cerca de ti';const note=document.createElement('p');note.className='muted';note.textContent='Servicios útiles desde Incles · consulta horarios antes de ir';root.append(h,note);let data=[];try{const response=await fetch('./servicios.json?v=25',{cache:'no-store'});if(!response.ok)throw Error('No disponible');data=await response.json()}catch(e){root.append('No se han podido cargar los servicios.');show('detail');return}const search=document.createElement('input');
 search.type='search';
 search.className='restaurant-search';
 search.placeholder='Buscar por nombre, categoría o localidad…';
