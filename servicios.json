@@ -409,8 +409,8 @@
   },
   {
     "id": "AND-S027",
-    "name": "MoraBanc · Oficina Canillo",
-    "icon": "🏦",
+    "name": "MoraBanc · Cajero y oficina Canillo",
+    "icon": "🏧",
     "category": "Bancos y cajeros",
     "town": "Canillo",
     "address": "Av. Sant Joan de Caselles, Casa Sinfreu, local 1",
@@ -420,8 +420,10 @@
     "priority": 27,
     "lat": 42.5672606,
     "lon": 1.6010376,
-    "coordinateSource": "Pàgines Grogues Andorra Telecom",
-    "hostRating": 5
+    "coordinateSource": "Pàgines Grogues Andorra Telecom · ficha MoraBanc Canillo",
+    "hostRating": 5,
+    "note": "Cajero confirmado por MoraBanc, junto a la farmacia Abarset.",
+    "website": "https://www.morabanc.ad/es/empresas/cuentas-y-tarjetas-empresas/tarjeta-incard"
   },
   {
     "id": "AND-S028",
@@ -439,17 +441,22 @@
   },
   {
     "id": "AND-S029",
-    "name": "Crèdit Andorrà · Cajero automático El Tarter",
+    "name": "Cajero automático · Telecabina El Tarter",
     "icon": "🏧",
     "category": "Bancos y cajeros",
     "town": "El Tarter",
-    "address": "Junto al Hotel Llop Gris, El Tarter",
+    "address": "Interior del edificio del telecabina El Tarter (no Hotel Llop Gris)",
     "phone": "",
-    "source": "Ubicación indicada por el anfitrión",
+    "source": "https://abarset.bitanube.com/ca/faqs",
     "section": "Cerca de ti",
     "priority": 29,
     "hostRating": 4,
-    "coordinateStatus": "GPS pendiente de confirmar"
+    "coordinateStatus": "Ubicación aproximada del edificio, cajero interior",
+    "lat": 42.5801488,
+    "lon": 1.6511742,
+    "coordinateSource": "Pàgines Grogues · edificio telecabina (GPS aproximado del edificio, no del cajero)",
+    "approximateLocation": true,
+    "note": "Cajero en el interior del edificio del telecabina. Accesible en horario de estación, habitualmente 9:00–17:00. El antiguo cajero Crèdit Andorrà del Hotel Llop Gris fue dado de baja en 2020."
   },
   {
     "id": "AND-S030",
