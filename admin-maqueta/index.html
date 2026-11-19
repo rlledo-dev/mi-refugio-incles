@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#285f4e"><title>Mi Refugio en Incles · Administración (demo)</title>
+<style>
+:root{--ink:#23322f;--muted:#697a73;--pine:#285f4e;--sand:#f7f4ee;--line:#e4e9e4}
+*{box-sizing:border-box}body{margin:0;background:var(--sand);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.shell{max-width:1180px;margin:auto;padding:22px}.hero{background:linear-gradient(125deg,#163b30,#427c60);border-radius:22px;padding:30px 32px;color:white}
+.hero small{letter-spacing:.14em;text-transform:uppercase;opacity:.8}.hero h1{font-size:clamp(26px,4vw,40px);font-weight:600;line-height:1.15;margin:12px 0}.hero p{margin:0;opacity:.9}
+.notice{border:1px solid #e9d6ae;background:#fff5e3;color:#72511e;border-radius:12px;padding:13px 15px;margin:18px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}.stat,.panel{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 20px #324e3a10}.stat{padding:16px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:29px;margin-top:4px}
+.grid{display:grid;grid-template-columns:minmax(280px,.95fr) minmax(330px,1.4fr);gap:17px}.panel{overflow:hidden}.panel header{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px}.panel h2{font-size:17px;margin:0}
+.pill{font-size:11px;background:#e8f2ea;color:#3f684e;padding:4px 9px;border-radius:30px}.amber{background:#fff0d7;color:#855a13}
+.search{padding:14px 19px}.search input{width:100%;border:1px solid var(--line);border-radius:9px;padding:13px;font:inherit}
+.guest{width:100%;text-align:left;background:white;border:0;border-bottom:1px solid var(--line);padding:15px 18px;cursor:pointer;font:inherit;color:var(--ink)}
+.guest.active{background:#eaf4eb;border-left:4px solid var(--pine);padding-left:14px}.guest-line{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:650}.muted{color:var(--muted);font-size:13px}.details{padding:23px}.details h3{font-size:23px;margin:0 0 5px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0}
+button.action{border:1px solid #d6e1db;background:white;border-radius:10px;padding:11px 14px;font:inherit;cursor:pointer;color:var(--ink)}button.primary{background:var(--pine);color:#fff;border-color:var(--pine)}
+section.part{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.part h4{font-size:15px;margin:0 0 11px}
+.service{display:flex;justify-content:space-between;gap:12px;background:#f7f8f5;border-radius:10px;padding:12px;margin-top:9px}.entry{border-left:3px solid #ccddd3;padding:3px 0 3px 12px;margin-bottom:13px}.entry p{margin:4px 0;color:var(--muted);font-size:13px}
+footer{text-align:center;color:var(--muted);font-size:12px;margin:24px 0}
+@media(max-width:780px){.shell{padding:11px}.hero{padding:23px}.stats{grid-template-columns:repeat(2,1fr);gap:9px}.stat strong{font-size:24px}.grid{grid-template-columns:1fr}.details{padding:18px}}
+</style></head>
+<body><main class="shell"><div class="hero"><small>Mi Refugio en Incles · Demo</small><h1>Panel de administración</h1><p>Reservas, conversaciones y contrataciones en un mismo lugar.</p></div>
+<div class="notice"><strong>MAQUETA PÚBLICA, CON DATOS FICTICIOS.</strong> No tiene acceso a reservas reales, Google Sheets, tokens, contraseñas ni servicios externos. El inicio de sesión y el doble factor todavía no están implementados.</div>
+<div class="stats"><div class="stat"><small>Reservas de ejemplo</small><strong>3</strong></div><div class="stat"><small>Ofertas pendientes</small><strong>2</strong></div><div class="stat"><small>Servicios confirmados</small><strong>1</strong></div><div class="stat"><small>Importe ofrecido (demo)</small><strong>1.094 €</strong></div></div>
+<div class="grid"><div class="panel"><header><h2>Reservas</h2><span class="pill">Temporada 2026/27</span></header><div class="search"><input id="search" type="search" placeholder="Buscar huésped o código…" aria-label="Buscar reserva"></div><div id="list"></div></div>
+<div class="panel"><header><h2>Ficha del huésped</h2><span class="pill amber">Ejemplo</span></header><div class="details" id="details"></div></div></div>
+<footer>Prototipo independiente. No modifica la web de los huéspedes ni la tienda El Cuquet.</footer></main>
+<script>
+"use strict";
+const rows=[
+{id:"DEMO-001",name:"Huésped de ejemplo A",dates:"22–27 diciembre 2026",people:2,state:"Pendiente de respuesta",offers:[["Forfaits + alquiler","714 €","Propuesta preparada"]],notes:[["18 nov · 12:30","Presupuesto preparado."],["19 nov · 09:15","Pendiente de enviar al huésped."]]},
+{id:"DEMO-002",name:"Huésped de ejemplo B",dates:"3–9 enero 2027",people:3,state:"Oferta enviada",offers:[["Actividad de nieve","380 €","Esperando confirmación"]],notes:[["17 nov · 17:00","Consulta sobre actividades familiares."],["18 nov · 11:00","Oferta enviada; pendiente de respuesta."]]},
+{id:"DEMO-003",name:"Huésped de ejemplo C",dates:"23–29 enero 2027",people:4,state:"Contratado",offers:[["Alquiler de equipos","240 €","Confirmado"]],notes:[["16 nov · 09:00","Solicitud recibida."],["18 nov · 18:00","Servicio confirmado (ejemplo)."]]}
+];
+let selected=rows[0].id;const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function list(){let q=document.querySelector("#search").value.toLowerCase();let all=rows.filter(r=>(r.name+" "+r.id).toLowerCase().includes(q));document.querySelector("#list").innerHTML=all.map(r=>'<button class="guest '+(selected===r.id?'active':'')+'" data-id="'+r.id+'"><span class="guest-line">'+esc(r.name)+'<span class="pill '+(r.state==="Contratado"?"":"amber")+'">'+esc(r.state)+'</span></span><span class="muted">'+esc(r.dates)+' · '+r.people+' personas · '+r.id+'</span></button>').join("")||'<p class="muted" style="padding:20px">No se encontraron reservas.</p>';document.querySelectorAll(".guest").forEach(b=>b.onclick=()=>{selected=b.dataset.id;list();details()})}
+function details(){let r=rows.find(x=>x.id===selected);document.querySelector("#details").innerHTML='<h3>'+esc(r.name)+'</h3><div class="muted">'+r.id+' · '+esc(r.dates)+' · '+r.people+' personas</div><div class="actions"><button class="action primary" id="guest">Ver como huésped ↗</button><button class="action" id="add">+ Añadir seguimiento</button></div><section class="part"><h4>Servicios y contrataciones</h4>'+r.offers.map(o=>'<div class="service"><div><strong>'+esc(o[0])+'</strong><div class="muted">'+esc(o[2])+'</div></div><strong>'+esc(o[1])+'</strong></div>').join("")+'</section><section class="part"><h4>Historial de conversaciones</h4>'+r.notes.map(n=>'<div class="entry"><strong>'+esc(n[0])+'</strong><p>'+esc(n[1])+'</p></div>').join("")+'</section><section class="part"><h4>Seguridad prevista</h4><p class="muted">Acceso de administrador con autenticación y segundo factor (Authenticator), comprobados por servidor. Pendiente de implementar.</p></section>';
+document.querySelector("#guest").onclick=()=>alert("Vista del huésped desactivada en la demo: no hay tokens reales.");document.querySelector("#add").onclick=()=>alert("La edición llegará al conectar la base de datos de prueba.")}
+document.querySelector("#search").oninput=list;list();details();
+</script></body></html>
