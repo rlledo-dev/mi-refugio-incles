@@ -497,5 +497,41 @@
     "source": "Datos facilitados por el anfitrión",
     "section": "Cerca de ti",
     "priority": 32
+  },
+  {
+    "id": "AND-S033",
+    "name": "CAP de Canillo",
+    "icon": "🏥",
+    "category": "Hospitales",
+    "town": "Canillo",
+    "address": "Plaça del Prat del Riu, sobre el aparcamiento (nueva ubicación)",
+    "lat": 42.56549,
+    "lon": 1.59794,
+    "phone": "+376851050",
+    "website": "https://www.canillo.ad/centre-datencio-primaria-de-canillo",
+    "source": "https://www.canillo.ad/centre-datencio-primaria-de-canillo",
+    "coordinateSource": "OpenStreetMap · centro de Plaça Prat del Riu (posición aproximada del acceso)",
+    "section": "Cerca de ti",
+    "priority": 17,
+    "subcategory": "Atención primaria y enfermería",
+    "description": "Lunes a viernes 7:30–20:30; fines de semana cerrado. Llama antes de acudir para inyecciones o curas."
+  },
+  {
+    "id": "AND-S034",
+    "name": "CAP de Encamp",
+    "icon": "🏥",
+    "category": "Hospitales",
+    "town": "Encamp",
+    "address": "Carrer Prat del Bau",
+    "lat": 42.53604,
+    "lon": 1.58145,
+    "phone": "+376831711",
+    "website": "https://saas.ad/centres-salut-atencio-primaria",
+    "source": "https://www.comuencamp.ad/encamp/directori-dequipaments/centre-d-atencio-primaria-d-encamp",
+    "coordinateSource": "OpenStreetMap · edificio del CAP",
+    "section": "Cerca de ti",
+    "priority": 18,
+    "subcategory": "Atención primaria y enfermería",
+    "description": "Lunes a viernes 7:30–20:30; sábados, domingos y festivos 9:00–12:00 y 18:00–19:00. Llama antes de acudir para inyecciones o curas."
   }
 ]
