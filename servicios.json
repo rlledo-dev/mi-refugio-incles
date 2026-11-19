@@ -435,7 +435,12 @@
     "section": "Cerca de ti",
     "priority": 28,
     "hostRating": 4,
-    "coordinateStatus": "GPS pendiente de confirmar"
+    "coordinateStatus": "GPS aproximado: referencia de la Farmàcia Piolets contigua, indicado por el anfitrión; ubicación exacta del cajero sin verificar",
+    "lat": 42.57691682829172,
+    "lon": 1.6673583468914088,
+    "approximateLocation": true,
+    "coordinateSource": "Coordenadas facilitadas por el anfitrión para Farmàcia Piolets, contigua al cajero",
+    "note": "Cajero junto a Farmàcia Piolets. Marcador aproximado; ubicación exacta del acceso pendiente de confirmar."
   },
   {
     "id": "AND-S029",
