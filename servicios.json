@@ -533,5 +533,23 @@
     "priority": 18,
     "subcategory": "Atención primaria y enfermería",
     "description": "Lunes a viernes 7:30–20:30; sábados, domingos y festivos 9:00–12:00 y 18:00–19:00. Llama antes de acudir para inyecciones o curas."
+  },
+  {
+    "id": "AND-S035",
+    "name": "BP Sant Marc · Precio habitualmente competitivo",
+    "icon": "⛽",
+    "category": "Gasolineras",
+    "town": "Canillo · salida hacia Encamp / España",
+    "address": "CG-2, zona Racons, dirección Encamp (a la izquierda)",
+    "lat": 42.5592674,
+    "lon": 1.5895897,
+    "phone": "+376852520",
+    "source": "https://gasofa.ad/es/bp-sant-marc/",
+    "website": "https://gasofa.ad/es/bp-sant-marc/",
+    "coordinateSource": "Directorio geográfico ad.near-place.com · BP CG-2 Racons",
+    "section": "Cerca de ti",
+    "priority": 9,
+    "hostRating": 5,
+    "note": "Una de las gasolineras que suele ofrecer precios más económicos de Andorra. No siempre es la más barata: compara precios actualizados antes de repostar."
   }
 ]
