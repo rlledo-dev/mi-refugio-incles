@@ -344,7 +344,8 @@ function renderRefugeExtras(){
  const card=document.getElementById('extrasCard'),box=document.getElementById('refugeExtras');if(!card||!box)return;
  box.replaceChildren();
  const list=Array.isArray(refugeGuest?.extras)?refugeGuest.extras:[];
- const visible=list.filter(x=>x&&typeof x==='object'&&String(x.status||'').toLowerCase()!=='cancelado'&&typeof x.title==='string'&&typeof x.dates==='string'&&typeof x.participants==='string');
+ const seenExtras=new Set();
+ const visible=list.filter(x=>{if(!x||typeof x!=='object'||String(x.status||'').toLowerCase()==='cancelado'||typeof x.title!=='string'||typeof x.dates!=='string'||typeof x.participants!=='string')return false;const key=JSON.stringify([x.title,x.price,x.items]);if(seenExtras.has(key))return false;seenExtras.add(key);return true});
  card.hidden=!visible.length;
  const fold=card.closest('.stay-fold');if(fold){fold.hidden=!visible.length;if(!visible.length)fold.open=false}
  for(const x of visible){
@@ -692,7 +693,7 @@ function detail(i){if(i===0){apartmentView();return}if(i===2){skiLockerView();re
     if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
   });
 })();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=34').catch(()=>{}));</script><style>
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=35').catch(()=>{}));</script><style>
 /* Iconografía alpina: SVG escalables, sin emojis dependientes del sistema. */
 .refuge-graphic-icon{display:inline-block;width:1.3em;height:1.3em;vertical-align:-.22em;flex:none;color:inherit}
 .tile-icon .refuge-graphic-icon{width:36px;height:36px;vertical-align:middle;color:#fff;filter:drop-shadow(0 1px 2px #071d3170)}
