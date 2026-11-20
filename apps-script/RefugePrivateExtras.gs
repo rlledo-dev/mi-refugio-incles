@@ -12,6 +12,9 @@ function refugeAddPrivateExtras_(sheet, rowNumber, guest) {
     return String(sheet.getRange(rowNumber, index + 1).getDisplayValues()[0][0] || '').trim();
   };
   const status = read('eSIM - Estado');
+  // Las ofertas se resuelven exclusivamente desde la misma fila que ya ha
+  // autorizado el token. Un JSON ausente o incorrecto nunca bloquea la reserva.
+  guest.extras = refugeValidatedOffers_(read('Extras - Ofertas JSON'));
   // CODETEST puede mostrar la misma demostración que la vista pública.
   // Solo se devuelve una marca de demo; ningún secreto ni enlace activable.
   if (read('Código reserva') === 'CODETEST' && /demo|fictici|prueba|simulaci/i.test(status)) {
@@ -32,6 +35,36 @@ function refugeAddPrivateExtras_(sheet, rowNumber, guest) {
   const esim = refugeValidatedEsim_(record);
   if (esim) guest.esim = esim;
   return guest;
+}
+
+function refugeValidatedOffers_(raw) {
+  if (!raw) return [];
+  let source;
+  try { source = JSON.parse(raw); } catch (_) { return []; }
+  if (!Array.isArray(source) || source.length > 20) return [];
+  const clean = [];
+  const text = (value, max) => {
+    if (typeof value !== 'string') return '';
+    const result = value.trim();
+    return result && result.length <= max && !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(result) ? result : '';
+  };
+  for (const item of source) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) continue;
+    const status = text(item.status, 40).toLowerCase();
+    if (!['ofertado','pendiente de confirmación','pendiente de confirmacion','confirmado','cancelado'].includes(status)) continue;
+    const title = text(item.title, 120), dates = text(item.dates, 120), participants = text(item.participants || item.quantity, 160);
+    if (!title || !dates || !participants) continue;
+    const result = {title, dates, participants, status};
+    const notes = text(item.notes, 600);
+    if (notes) result.notes = notes;
+    if (typeof item.price === 'number' && isFinite(item.price) && item.price >= 0 && item.price <= 100000) result.price = item.price;
+    if (Array.isArray(item.items) && item.items.length <= 12) {
+      const items = item.items.map(value => text(value, 240)).filter(Boolean);
+      if (items.length) result.items = items;
+    }
+    clean.push(result);
+  }
+  return clean;
 }
 
 /** Valida formato y aprobación del propietario; no contacta ni activa Airalo. */

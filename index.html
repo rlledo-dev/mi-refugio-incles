@@ -298,6 +298,7 @@ function validateRefugeGuest(data){
  return data?.ok===true&&g&&typeof g.firstName==='string'&&g.firstName.length<=80&&
  /^\d{4}-\d{2}-\d{2}$/.test(g.checkin)&&/^\d{4}-\d{2}-\d{2}$/.test(g.checkout)&&
  Number.isInteger(g.people)&&g.people>=1&&g.people<=20&&
+ (g.bookingCode==null||(typeof g.bookingCode==='string'&&g.bookingCode.length>0&&g.bookingCode.length<=80))&&
  Object.prototype.hasOwnProperty.call(REFUGE_SKI_LOCKERS,g.lockerId)&&
  typeof g.lockerName==='string'&&g.lockerName.length<=100&&typeof g.lockerNumber==='string'&&g.lockerNumber.length<=40&&
  (g.departureReady==null||typeof g.departureReady==='boolean')&&
@@ -334,7 +335,33 @@ async function loadRefugeGuest(){
  }
 }
 
-function renderRefugeExtras(){const card=document.getElementById('extrasCard'),box=document.getElementById('refugeExtras');if(!card||!box)return;box.replaceChildren();const list=Array.isArray(refugeGuest?.extras)?refugeGuest.extras:[];const visible=list.filter(x=>x&&typeof x==='object'&&x.status!=='cancelado'&&typeof x.title==='string');card.hidden=!visible.length;for(const x of visible){const row=document.createElement('div');row.style.cssText='padding:12px 0;border-bottom:1px solid #e3e9eb';const title=document.createElement('strong');title.textContent=x.title.slice(0,120);const state=document.createElement('p');state.style.cssText='margin:5px 0;color:#a3610a;font-size:13px;font-weight:700';state.textContent=x.status==='confirmado'?'Confirmado':'Oferta pendiente de confirmar';row.append(title,state);for(const value of [x.dates,x.quantity,x.notes])if(typeof value==='string'&&value.trim()){const p=document.createElement('p');p.style.margin='5px 0';p.textContent=value.slice(0,400);row.append(p)}if(typeof x.price==='number'&&Number.isFinite(x.price)){const p=document.createElement('p');p.textContent='Precio ofertado: '+x.price.toLocaleString('es-ES',{style:'currency',currency:'EUR'});row.append(p)}box.append(row)}}
+function refugeOfferRequest(offer){
+ if(!window.REFUGE_HOST_WHATSAPP||!refugeGuest)return;
+ const message='Hola, me interesa solicitar la confirmación de esta opción para la reserva '+refugeGuest.bookingCode+':\n\n'+offer.title+'\nFechas: '+offer.dates+'\n\n¿Podéis confirmarme disponibilidad, precio final y condiciones?';
+ window.open('https://wa.me/'+window.REFUGE_HOST_WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
+}
+function renderRefugeExtras(){
+ const card=document.getElementById('extrasCard'),box=document.getElementById('refugeExtras');if(!card||!box)return;
+ box.replaceChildren();
+ const list=Array.isArray(refugeGuest?.extras)?refugeGuest.extras:[];
+ const visible=list.filter(x=>x&&typeof x==='object'&&String(x.status||'').toLowerCase()!=='cancelado'&&typeof x.title==='string'&&typeof x.dates==='string'&&typeof x.participants==='string');
+ card.hidden=!visible.length;
+ const fold=card.closest('.stay-fold');if(fold){fold.hidden=!visible.length;if(!visible.length)fold.open=false}
+ for(const x of visible){
+  const row=document.createElement('section');row.style.cssText='padding:14px 0;border-bottom:1px solid #e3e9eb';
+  const title=document.createElement('h4');title.style.cssText='margin:0 0 7px;font-size:16px';title.textContent=x.title.slice(0,120);
+  const confirmed=String(x.status).toLowerCase()==='confirmado';
+  const state=document.createElement('p');state.style.cssText='display:inline-block;margin:0 0 8px;padding:4px 8px;border-radius:999px;background:'+(confirmed?'#dff3e8':'#fff0d9')+';color:'+(confirmed?'#17633a':'#8b5200')+';font-size:12px;font-weight:700';state.textContent=confirmed?'Contratación confirmada':'Ofertado · pendiente de confirmación';
+  row.append(title,state);
+  const details=[['Fechas',x.dates],['Participantes',x.participants]];
+  for(const [label,value] of details){const p=document.createElement('p');p.style.margin='6px 0';const strong=document.createElement('strong');strong.textContent=label+': ';p.append(strong,document.createTextNode(value.slice(0,200)));row.append(p)}
+  if(Array.isArray(x.items)&&x.items.length){const ul=document.createElement('ul');ul.style.cssText='margin:8px 0;padding-left:20px';for(const value of x.items){if(typeof value!=='string')continue;const li=document.createElement('li');li.textContent=value.slice(0,240);ul.append(li)}if(ul.children.length)row.append(ul)}
+  if(typeof x.price==='number'&&Number.isFinite(x.price)){const p=document.createElement('p');p.style.margin='6px 0';p.textContent='Precio ofertado: '+x.price.toLocaleString('es-ES',{style:'currency',currency:'EUR'});row.append(p)}
+  if(typeof x.notes==='string'&&x.notes.trim()){const p=document.createElement('p');p.className='note';p.style.margin='8px 0';p.textContent=x.notes.slice(0,600);row.append(p)}
+  if(!confirmed&&window.REFUGE_HOST_WHATSAPP){const btn=document.createElement('button');btn.type='button';btn.className='link';btn.style.cssText='border:0;margin-top:8px';btn.textContent='Me interesa esta opción';btn.addEventListener('click',()=>refugeOfferRequest(x));row.append(btn)}
+  box.append(row);
+ }
+}
 function renderRefugeStay(){
  const arrival=document.getElementById('refugeArrival'),parking=document.getElementById('refugeParking'),departure=document.getElementById('refugeDeparture'),card=document.getElementById('departureCard');
  if(!arrival||!parking||!departure||!card)return;

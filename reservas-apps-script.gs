@@ -65,6 +65,7 @@ function lookupGuest_(token, now) {
     checkin,checkout,people,lockerId,lockerName:CONFIG.lockerNames[lockerId],
     lockerNumber:String(read('Ski Locker - número')||'').trim().slice(0,40)
   };
+  guest.bookingCode=String(read('Código reserva')||'').trim().slice(0,80);
   refugeAddPrivateExtras_(sheet,row,guest);
   return {ok:true,serverNow,expiresAt,guest};
 }
