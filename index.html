@@ -343,7 +343,12 @@ function refugeOfferRequest(offer){
 function renderRefugeExtras(){
  const card=document.getElementById('extrasCard'),box=document.getElementById('refugeExtras');if(!card||!box)return;
  box.replaceChildren();
- const list=Array.isArray(refugeGuest?.extras)?refugeGuest.extras:[];
+ const isCodeTest=refugeGuest?.bookingCode==='CODETEST';
+ const demoGrandvalira=isCodeTest?[
+  {title:'Grandvalira · Presupuesto de muestra · Isabel Beltran',status:'demo',dates:'No especificadas',participants:'No especificados',items:['Código de demostración: GV-DEMO-001','Referencia del presupuesto original: H2GZ8D (solo referencia; no es una contratación)'],price:489.67,notes:'DEMO · Presupuesto de muestra, sin reserva ni contratación de servicios.'},
+  {title:'Grandvalira · Presupuesto de muestra · Man Hei',status:'demo',dates:'No especificadas',participants:'No especificados',items:['Código de demostración: GV-DEMO-002','Referencia del presupuesto original: 2GH1IE (solo referencia; no es una contratación)'],price:606.29,notes:'DEMO · Presupuesto de muestra, sin reserva ni contratación de servicios.'}
+ ]:[];
+ const list=[...(Array.isArray(refugeGuest?.extras)?refugeGuest.extras:[]),...demoGrandvalira];
  const visible=list.filter(x=>x&&typeof x==='object'&&String(x.status||'').toLowerCase()!=='cancelado'&&typeof x.title==='string'&&typeof x.dates==='string'&&typeof x.participants==='string');
  card.hidden=!visible.length;
  const fold=card.closest('.stay-fold');if(fold){fold.hidden=!visible.length;if(!visible.length)fold.open=false}
@@ -351,14 +356,14 @@ function renderRefugeExtras(){
   const row=document.createElement('section');row.style.cssText='padding:14px 0;border-bottom:1px solid #e3e9eb';
   const title=document.createElement('h4');title.style.cssText='margin:0 0 7px;font-size:16px';title.textContent=x.title.slice(0,120);
   const confirmed=String(x.status).toLowerCase()==='confirmado';
-  const state=document.createElement('p');state.style.cssText='display:inline-block;margin:0 0 8px;padding:4px 8px;border-radius:999px;background:'+(confirmed?'#dff3e8':'#fff0d9')+';color:'+(confirmed?'#17633a':'#8b5200')+';font-size:12px;font-weight:700';state.textContent=confirmed?'Contratación confirmada':'Ofertado · pendiente de confirmación';
+  const state=document.createElement('p');state.style.cssText='display:inline-block;margin:0 0 8px;padding:4px 8px;border-radius:999px;background:'+(confirmed?'#dff3e8':'#fff0d9')+';color:'+(confirmed?'#17633a':'#8b5200')+';font-size:12px;font-weight:700';state.textContent=String(x.status).toLowerCase()==='demo'?'DEMO · Sin contratar':confirmed?'Contratación confirmada':'Ofertado · pendiente de confirmación';
   row.append(title,state);
   const details=[['Fechas',x.dates],['Participantes',x.participants]];
   for(const [label,value] of details){const p=document.createElement('p');p.style.margin='6px 0';const strong=document.createElement('strong');strong.textContent=label+': ';p.append(strong,document.createTextNode(value.slice(0,200)));row.append(p)}
   if(Array.isArray(x.items)&&x.items.length){const ul=document.createElement('ul');ul.style.cssText='margin:8px 0;padding-left:20px';for(const value of x.items){if(typeof value!=='string')continue;const li=document.createElement('li');li.textContent=value.slice(0,240);ul.append(li)}if(ul.children.length)row.append(ul)}
   if(typeof x.price==='number'&&Number.isFinite(x.price)){const p=document.createElement('p');p.style.margin='6px 0';p.textContent='Precio ofertado: '+x.price.toLocaleString('es-ES',{style:'currency',currency:'EUR'});row.append(p)}
   if(typeof x.notes==='string'&&x.notes.trim()){const p=document.createElement('p');p.className='note';p.style.margin='8px 0';p.textContent=x.notes.slice(0,600);row.append(p)}
-  if(!confirmed&&window.REFUGE_HOST_WHATSAPP){const btn=document.createElement('button');btn.type='button';btn.className='link';btn.style.cssText='border:0;margin-top:8px';btn.textContent='Me interesa esta opción';btn.addEventListener('click',()=>refugeOfferRequest(x));row.append(btn)}
+  if(!confirmed&&String(x.status).toLowerCase()!=='demo'&&window.REFUGE_HOST_WHATSAPP){const btn=document.createElement('button');btn.type='button';btn.className='link';btn.style.cssText='border:0;margin-top:8px';btn.textContent='Me interesa esta opción';btn.addEventListener('click',()=>refugeOfferRequest(x));row.append(btn)}
   box.append(row);
  }
 }
