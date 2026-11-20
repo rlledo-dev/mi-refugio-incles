@@ -1,4 +1,4 @@
-const CACHE='mi-refugio-v39';
+const CACHE='mi-refugio-v40';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./restaurantes.geojson?v=4','./servicios.json?v=22'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([
