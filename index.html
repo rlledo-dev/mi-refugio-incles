@@ -337,7 +337,7 @@ async function loadRefugeGuest(){
 
 function refugeOfferRequest(offer){
  if(!window.REFUGE_HOST_WHATSAPP||!refugeGuest)return;
- const message='Hola, me interesa solicitar la confirmación de esta opción para la reserva '+refugeGuest.bookingCode+':\n\n'+offer.title+'\nFechas: '+offer.dates+'\n\n¿Podéis confirmarme disponibilidad, precio final y condiciones?';
+ const message='Hola, quiero solicitar la contratación de este presupuesto de Grandvalira para la reserva '+refugeGuest.bookingCode+':\n\n'+offer.title+'\n'+(Array.isArray(offer.items)?offer.items.join('\n')+'\n':'')+'Importe ofertado: '+(typeof offer.price==='number'?offer.price.toLocaleString('es-ES',{style:'currency',currency:'EUR'}):'Por confirmar')+'\nFechas: '+offer.dates+'\n\n¿Podéis confirmarme disponibilidad y condiciones antes de contratar?';
  window.open('https://wa.me/'+window.REFUGE_HOST_WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
 }
 function renderRefugeExtras(){
@@ -359,7 +359,7 @@ function renderRefugeExtras(){
   if(Array.isArray(x.items)&&x.items.length){const ul=document.createElement('ul');ul.style.cssText='margin:8px 0;padding-left:20px';for(const value of x.items){if(typeof value!=='string')continue;const li=document.createElement('li');li.textContent=value.slice(0,240);ul.append(li)}if(ul.children.length)row.append(ul)}
   if(typeof x.price==='number'&&Number.isFinite(x.price)){const p=document.createElement('p');p.style.margin='6px 0';p.textContent='Precio ofertado: '+x.price.toLocaleString('es-ES',{style:'currency',currency:'EUR'});row.append(p)}
   if(typeof x.notes==='string'&&x.notes.trim()){const p=document.createElement('p');p.className='note';p.style.margin='8px 0';p.textContent=x.notes.slice(0,600);row.append(p)}
-  if(!confirmed&&!isDemo&&window.REFUGE_HOST_WHATSAPP){const btn=document.createElement('button');btn.type='button';btn.className='link';btn.style.cssText='border:0;margin-top:8px';btn.textContent='Me interesa esta opción';btn.addEventListener('click',()=>refugeOfferRequest(x));row.append(btn)}
+  if(!confirmed&&window.REFUGE_HOST_WHATSAPP){const btn=document.createElement('button');btn.type='button';btn.className='link';btn.style.cssText='border:0;margin-top:8px';btn.textContent='Solicitar contratación por WhatsApp';btn.addEventListener('click',()=>refugeOfferRequest(x));row.append(btn)}
   box.append(row);
  }
 }
