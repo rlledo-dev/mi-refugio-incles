@@ -317,6 +317,15 @@ let refugeGuest=null,refugeExpiryTimer,refugeRefreshTimer,refugeRequest=null,ref
 // No se guarda ni la respuesta ni la credencial en almacenamiento del dispositivo.
 try{localStorage.removeItem('refuge-reservation-token')}catch(_){}
 function refugeToken(){return new URLSearchParams(location.search).get('reserva')||''}
+// Instantánea privada cifrada en el dispositivo. La clave deriva del enlace secreto de la reserva.
+// No protege frente a quien posea ese enlace o tenga acceso al dispositivo desbloqueado.
+const REFUGE_OFFLINE_DB='refuge-private-v1';
+function refugeOfflineDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(REFUGE_OFFLINE_DB,1);req.onupgradeneeded=()=>req.result.createObjectStore('bookings');req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function refugeOfflineKey(token){const raw=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('refuge-offline-v1:'+token));return crypto.subtle.importKey('raw',raw,{name:'AES-GCM'},false,['encrypt','decrypt'])}
+async function refugeOfflineStore(token,data){if(!validateRefugeGuest(data)||!crypto?.subtle||!('indexedDB'in window))return;const key=await refugeOfflineKey(token),iv=crypto.getRandomValues(new Uint8Array(12));const payload=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(data)));const db=await refugeOfflineDb();try{await new Promise((resolve,reject)=>{const tx=db.transaction('bookings','readwrite');tx.objectStore('bookings').put({iv:Array.from(iv),payload:Array.from(new Uint8Array(payload)),expiresAt:data.expiresAt},token);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}finally{db.close()}}
+async function refugeOfflineDelete(token){if(!('indexedDB'in window))return;const db=await refugeOfflineDb();try{await new Promise((resolve,reject)=>{const tx=db.transaction('bookings','readwrite');tx.objectStore('bookings').delete(token);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}finally{db.close()}}
+async function refugeOfflineLoad(token){if(!crypto?.subtle||!('indexedDB'in window))return null;const db=await refugeOfflineDb();let entry;try{entry=await new Promise((resolve,reject)=>{const tx=db.transaction('bookings','readonly');const req=tx.objectStore('bookings').get(token);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}finally{db.close()}if(!entry)return null;if(!Number.isFinite(entry.expiresAt)||Date.now()>=entry.expiresAt){await refugeOfflineDelete(token);return null}try{const key=await refugeOfflineKey(token);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(entry.iv)},key,new Uint8Array(entry.payload));const data=JSON.parse(new TextDecoder().decode(plain));return validateRefugeGuest(data)&&Date.now()<data.expiresAt?data:null}catch(_){await refugeOfflineDelete(token);return null}}
+function refugeApplyOffline(data){clearTimeout(refugeExpiryTimer);refugeGuest=data.guest;renderRefugeWelcome();renderRefugeWifi();renderRefugeStay();renderRefugeExtras();refreshVisibleSkiLocker();setRefugeConnectionStatus('Sin conexión: mostrando la última copia guardada de tu reserva. Puede contener datos desactualizados.');refugeExpiryTimer=setTimeout(()=>{clearRefugeGuest();refreshVisibleSkiLocker()},Math.min(data.expiresAt-Date.now(),2147483647))}
 function formatRefugeDate(s){const a=String(s||'').split('-');return a.length===3?a[2]+'/'+a[1]+'/'+a[0]:s}
 function setRefugeConnectionStatus(message){
  document.querySelectorAll('.refuge-connection-status').forEach(n=>n.remove());
@@ -366,12 +375,12 @@ async function loadRefugeGuest(){
   const remaining=validateRefugeGuest(data)?data.expiresAt-data.serverNow-(performance.now()-started):0;
   if(!document.hidden&&remaining>0){
    clearTimeout(refugeExpiryTimer);
-   refugeGuest=data.guest;setRefugeConnectionStatus('');renderRefugeWelcome();renderRefugeWifi();renderRefugeStay();renderRefugeExtras();
+   refugeGuest=data.guest;setRefugeConnectionStatus('');refugeOfflineStore(token,data).catch(()=>{});renderRefugeWelcome();renderRefugeWifi();renderRefugeStay();renderRefugeExtras();
    refreshVisibleSkiLocker();
    if(document.getElementById('lockerPass')?.open)renderLockerPass();
    refugeExpiryTimer=setTimeout(()=>{clearRefugeGuest();refreshVisibleSkiLocker()},Math.min(remaining,2147483647));
-  }else {clearRefugeGuest();setRefugeConnectionStatus('No hemos podido cargar la reserva. Reconectando con el servidor… Se reintentará automáticamente.');}
- }catch(_){if(version===refugeRequestVersion){clearRefugeGuest();setRefugeConnectionStatus('Conexión temporalmente no disponible. Reconectando con el servidor… Se reintentará automáticamente.');}}
+  }else {refugeOfflineDelete(token).catch(()=>{});clearRefugeGuest();setRefugeConnectionStatus('No hemos podido cargar la reserva. Reconectando con el servidor… Se reintentará automáticamente.');}
+ }catch(_){if(version===refugeRequestVersion){const cached=await refugeOfflineLoad(token).catch(()=>null);if(version!==refugeRequestVersion)return;if(cached&&!document.hidden)refugeApplyOffline(cached);else{clearRefugeGuest();setRefugeConnectionStatus('Conexión temporalmente no disponible. Reconectando con el servidor… Se reintentará automáticamente.');}}}
  finally{
   clearTimeout(timeout);
   if(version===refugeRequestVersion&&!document.hidden)refugeRefreshTimer=setTimeout(loadRefugeGuest,30000);
