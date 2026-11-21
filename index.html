@@ -748,7 +748,18 @@ function detail(i){if(i===0){apartmentView();return}if(i===2){skiLockerView();re
     if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
   });
 })();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=45').catch(()=>{}));</script><style>
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=48').catch(()=>{}));
+// El contenido general funciona offline; los datos de reserva requieren validación online.
+(function(){
+ function showOffline(){
+  let n=document.getElementById('refugeOfflineNotice');
+  if(!n){n=document.createElement('div');n.id='refugeOfflineNotice';n.setAttribute('role','status');n.style.cssText='position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(540px,100%);z-index:2000;padding:10px 16px;background:#fff1d6;color:#583c00;text-align:center;font:600 13px system-ui;box-shadow:0 2px 8px #0002';document.body.appendChild(n)}
+  n.textContent='Sin conexión: guía general disponible. Los datos privados de la reserva necesitan Internet.';
+  n.hidden=navigator.onLine;
+ }
+ window.addEventListener('online',showOffline);window.addEventListener('offline',showOffline);
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showOffline);else showOffline();
+})();</script><style>
 /* Iconografía alpina: SVG escalables, sin emojis dependientes del sistema. */
 .refuge-graphic-icon{display:inline-block;width:1.3em;height:1.3em;vertical-align:-.22em;flex:none;color:inherit}
 .tile-icon .refuge-graphic-icon{width:36px;height:36px;vertical-align:middle;color:#fff;filter:drop-shadow(0 1px 2px #071d3170)}
