@@ -10,7 +10,7 @@
 .ski-hero-photo{width:100%;border-radius:14px;display:block;object-fit:cover;max-height:280px;margin:12px 0}
 .ski-photos{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.ski-photos img{width:100%;height:150px;object-fit:cover;border-radius:12px}
 .ski-private{background:#eaf4f4;border:1px solid #b6d6da;border-radius:14px;padding:16px;margin:14px 0}.ski-private strong{font-size:19px}.ski-private .ski-number{font-size:28px;font-weight:800;letter-spacing:1px;margin-top:7px}
-.guest-welcome{margin:14px 20px 0;background:#eaf4f4;border-radius:14px;padding:15px 17px;color:#173342}.guest-welcome strong{display:block;font-size:18px;margin-bottom:5px}
+.guest-welcome{margin:14px 20px 0;background:#eaf4f4;border-radius:14px;padding:15px 17px;color:#173342}.guest-welcome strong{display:block;font-size:18px;margin-bottom:5px}.refuge-countdown{margin:0 0 16px;padding:18px 20px;border-radius:16px;background:#eaf4f4;color:#173342;font-size:clamp(24px,6vw,36px);font-weight:800;text-align:center;letter-spacing:.02em}
 
 .ski-assignment{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:7px}.ski-assignment .ski-number{margin:0;font-size:clamp(22px,6vw,28px)}.ski-pass-button{flex:0 0 auto;max-width:112px;min-height:44px;border:0;border-radius:11px;padding:11px;background:#176579;color:white;font:600 12px/1.3 system-ui;cursor:pointer}.ski-pass-button:focus-visible,.locker-pass-back:focus-visible{outline:3px solid #d4573b;outline-offset:3px}
 .locker-pass{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;margin:0;border:0;padding:max(18px,env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));background:linear-gradient(165deg,#eaf4f4,#fff 55%);color:#102d39;overflow:auto}.locker-pass[open]{display:flex;flex-direction:column}.locker-pass::backdrop{background:#102d39}.locker-pass-back{align-self:flex-start;flex-shrink:0;border:1px solid #b6d6da;border-radius:12px;padding:12px 18px;background:white;color:#176579;font:600 15px system-ui;cursor:pointer}.locker-pass-content{width:100%;max-width:600px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 0;gap:10px}.locker-pass-logo{width:clamp(94px,23vw,152px);height:auto;display:block}.locker-pass-brand{font-size:clamp(26px,7vw,40px);font-weight:800;line-height:1.08;letter-spacing:-.6px;margin:7px 0 14px;max-width:400px}.locker-pass-label{font-size:16px;letter-spacing:2px;text-transform:uppercase;margin:0}.locker-pass-number{font-size:clamp(60px,19vw,104px);font-weight:850;line-height:1.05;overflow-wrap:anywhere;max-width:100%;margin:0 0 16px}.locker-pass-guest{font-size:clamp(24px,7vw,36px);font-weight:700;line-height:1.2;overflow-wrap:anywhere;max-width:100%;margin:0}.locker-pass-owner{border-top:1px solid #b6d6da;margin-top:19px;padding-top:19px;width:min(100%,360px);font-size:20px;line-height:1.4}.locker-pass-owner span{display:block;font-size:13px;color:#576d77;margin-bottom:3px}.locker-pass-owner strong{font-size:24px}
@@ -486,6 +486,7 @@ function renderRefugeEsim(){
   const hint=document.createElement('p');hint.className='esim-note';hint.textContent='Datos ficticios y deliberadamente inválidos. No se puede instalar ni activar esta eSIM.';box.append(hint);return;
  }
  if(!refugeGuest){status.textContent='Tu eSIM de cortesía aparecerá aquí cuando accedas con tu reserva.';box.append(status);return}
+ if(refugeGuest.unlocks?.esim?.available===false){status.textContent='Tu eSIM de cortesía estará disponible a partir del '+formatRefugeDate(refugeGuest.unlocks.esim.date)+'.';box.append(status);return}
  const rawLink=typeof data?.installationUrl==='string'?data.installationUrl.trim():'';
  let validLink='';
  try{const url=new URL(rawLink);if(url.protocol==='https:'&&(/(^|\.)airalo\.com$/.test(url.hostname)||/(^|\.)airalo\.io$/.test(url.hostname)))validLink=url.href}catch(_){}
@@ -529,7 +530,7 @@ function renderRefugeWifi(){
  const box=document.getElementById('refugeWifi');if(!box)return;
  box.replaceChildren();
  const wifi=refugeGuest?.wifi;
- if(!wifi){const p=document.createElement('p');p.textContent=refugeGuest?'Estamos preparando los datos de Wi-Fi de tu estancia. Consulta al anfitrión.':'Los datos de acceso estarán disponibles en tu enlace privado durante la estancia.';box.append(p);return}
+ if(!wifi){const p=document.createElement('p');p.textContent=refugeGuest?.unlocks?.wifi?.available===false?'Tu WiFi estará disponible el '+formatRefugeDate(refugeGuest.unlocks.wifi.date)+'.':refugeGuest?'Estamos preparando los datos de Wi-Fi de tu estancia. Consulta al anfitrión.':'Los datos de acceso estarán disponibles en tu enlace privado durante la estancia.';box.append(p);return}
  for(const [label,value] of [['Red Wi-Fi',wifi.ssid],['Contraseña',wifi.password]]){
   const field=document.createElement('p');field.className='wifi-field';
   const title=document.createElement('small');title.textContent=label;
@@ -562,14 +563,23 @@ function renderRefugeWifi(){
 
 }
 function renderRefugeWelcome(){
- document.querySelectorAll('.guest-welcome').forEach(n=>n.remove());
+ document.querySelectorAll('.guest-welcome,.refuge-countdown').forEach(n=>n.remove());
  if(!refugeGuest)return;
- for(const target of [document.querySelector('#home .content'),document.querySelector('#stay .content')]){
+ const days=refugeGuest.daysUntilArrival;
+ const home=document.querySelector('#home .content');
+ if(home&&Number.isInteger(days)&&days>=0){
+  const countdown=document.createElement('div');countdown.className='refuge-countdown';
+  countdown.textContent=days>0?'FALTAN '+days+' DÍAS':'¡Bienvenidos a Mi Refugio!';
+  home.prepend(countdown);
+ }
+ for(const target of [home,document.querySelector('#stay .content')]){
   if(!target)continue;
   const box=document.createElement('div');box.className='guest-welcome';
   const title=document.createElement('strong');title.textContent='¡Hola, '+(refugeGuest.firstName||'huésped')+'!';
   const info=document.createElement('span');info.textContent='Tu estancia: '+formatRefugeDate(refugeGuest.checkin)+' al '+formatRefugeDate(refugeGuest.checkout)+' · '+refugeGuest.people+' personas';
-  box.append(title,info);target.prepend(box);
+  box.append(title,info);
+  if(target===home&&home.querySelector('.refuge-countdown'))home.querySelector('.refuge-countdown').after(box);
+  else target.prepend(box);
  }
 }
 window.addEventListener('pagehide',()=>{++refugeRequestVersion;refugeRequest?.abort();clearTimeout(refugeRefreshTimer);clearRefugeGuest();setRefugeConnectionStatus('')});
@@ -617,7 +627,7 @@ function skiLockerView(navigate=true){
     numberRow.append(number,button);box.append(lead,name,numberRow);root.append(box);
   }else{
     const box=document.createElement('div');box.className='card';
-    box.textContent='El día de tu llegada te asignaremos la mejor taquilla que tengamos disponible en Sport Calbó Panini.';
+    box.textContent=refugeGuest?.unlocks?.locker?.available===false?'Tu número de taquilla estará disponible el '+formatRefugeDate(refugeGuest.unlocks.locker.date)+'.':'Estamos preparando la asignación de tu taquilla en Sport Calbó Panini.';
     root.append(box);
   }
   const photo=document.createElement('img');photo.className='ski-hero-photo';photo.src=locker.photo;photo.alt='Fachada de '+locker.name+' en invierno';photo.loading='lazy';root.append(photo);
@@ -736,7 +746,7 @@ function detail(i){if(i===0){apartmentView();return}if(i===2){skiLockerView();re
     if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
   });
 })();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=44').catch(()=>{}));</script><style>
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=45').catch(()=>{}));</script><style>
 /* Iconografía alpina: SVG escalables, sin emojis dependientes del sistema. */
 .refuge-graphic-icon{display:inline-block;width:1.3em;height:1.3em;vertical-align:-.22em;flex:none;color:inherit}
 .tile-icon .refuge-graphic-icon{width:36px;height:36px;vertical-align:middle;color:#fff;filter:drop-shadow(0 1px 2px #071d3170)}
