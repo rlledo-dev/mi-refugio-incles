@@ -4,7 +4,6 @@ import json
 import re
 import urllib.request
 from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -44,8 +43,6 @@ def main():
     km = match_pair(text, r"Kilómetros esquiables")
     if not stamp or not runs or not lifts or not km:
         raise ValueError("Formato del parte desconocido: se conserva el archivo anterior y NO se publica información inventada")
-    dt = datetime.strptime(" ".join(stamp.groups()), "%d/%m/%Y %H:%M").replace(tzinfo=timezone.utc)
-    # UTC es solo para guardar el instante aproximado; la hora de origen es local Andorra.
     from zoneinfo import ZoneInfo
     dt = datetime.strptime(" ".join(stamp.groups()), "%d/%m/%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Andorra"))
     depth_match = re.search(r"Espesores de nieve\s*\(cm\)\s*(\d+)\s*-\s*(\d+)", text, re.I)
@@ -58,7 +55,7 @@ def main():
         "source": URL,
         "source_last_updated": dt.isoformat(),
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
-        "live": False,
+        "live": True,
         "station": "Grandvalira",
         "summary": {
             "runs": runs, "lifts": lifts,
