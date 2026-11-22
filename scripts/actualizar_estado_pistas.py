@@ -48,9 +48,14 @@ def main():
     depth_match = re.search(r"Espesores de nieve\s*\(cm\)\s*(\d+)\s*-\s*(\d+)", text, re.I)
     links = match_pair(text, r"Enlaces")
     sectors = []
+    # Los bloques de sectores aparecen después de «Enlaces entre sectores».
+    # Solo extraemos estados expresamente indicados por Grandvalira.
+    sector_block = text.split("Enlaces entre sectores", 1)[-1].split("Versión descargable", 1)[0]
     for name in ("Encamp", "Canillo", "El Tarter", "Soldeu", "Peretol", "Grau Roig", "Pas de la Casa"):
-        # No deducimos estado del sector sin un bloque identificable.
-        sectors.append({"name": name, "status": "unknown"})
+        match = re.search(r"(?<![\\w-])" + re.escape(name) + r"\\s+(Parcialmente abierto|Previsión de apertura|En mantenimiento|Abierto|Cerrado)\\b", sector_block, re.I)
+        states = {"abierto": "open", "cerrado": "closed", "parcialmente abierto": "partial", "previsión de apertura": "forecast", "en mantenimiento": "maintenance"}
+        status = states.get(match.group(1).lower(), "unknown") if match else "unknown"
+        sectors.append({"name": name, "status": status})
     payload = {
         "source": URL,
         "source_last_updated": dt.isoformat(),
@@ -66,7 +71,19 @@ def main():
         "sectors": sectors,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # No reescribir el JSON si el parte no ha cambiado: evita commits cada 30 minutos.
+    if OUTPUT.exists():
+        try:
+            previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+            previous.pop("retrieved_at", None)
+            comparison = dict(payload)
+            comparison.pop("retrieved_at", None)
+            if previous == comparison:
+                print("Parte sin cambios; no se crea commit")
+                return
+        except (OSError, ValueError):
+            pass
+    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
     print("Parte obtenido:", payload["source_last_updated"], "(la fuente puede estar desactualizada)")
 
 if __name__ == "__main__":
