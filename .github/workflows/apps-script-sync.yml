@@ -55,7 +55,7 @@ jobs:
           python - <<'PY'
           import pathlib
           local={p.name for p in pathlib.Path('apps-script').iterdir() if p.suffix in ('.gs','.html','.json')}
-          remote={p.name for p in pathlib.Path('/tmp/refuge-remote').iterdir() if p.suffix in ('.gs','.html','.json') and p.name!='.clasp.json'}
+          remote={p.name for p in pathlib.Path('/tmp/refuge-remote/apps-script').iterdir() if p.suffix in ('.gs','.html','.json') and p.name!='.clasp.json'}
           missing=remote-local
           if missing:
               raise SystemExit('Se detiene la sincronización: faltan archivos remotos en GitHub: '+', '.join(sorted(missing)))
