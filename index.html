@@ -717,7 +717,28 @@ function apartmentView(){
  const note=document.createElement('p');note.className='note';note.textContent='Esta guía es una primera versión. Las fotografías y las instrucciones detalladas de plegado se incorporarán después de revisarlas.';root.append(note);
  show('detail');
 }
-function detail(i){if(i===8){window.location.href='./estado-pistas.html';return}if(i===0){apartmentView();return}if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
+function pistesView(){
+ const root=document.getElementById('detailContent');
+ root.replaceChildren();
+ const frame=document.createElement('iframe');
+ frame.title='Estado de pistas de Grandvalira';
+ frame.src='./estado-pistas.html?integrado=1';
+ frame.loading='eager';
+ frame.setAttribute('scrolling','no');
+ frame.style.cssText='display:block;width:100%;height:950px;min-height:450px;border:0;background:#f2f5f8;border-radius:16px;overflow:hidden';
+ root.append(frame);
+ const resize=event=>{
+  if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
+  if(event.data&&event.data.type==='refugio-pistas-height'){
+   const h=Number(event.data.height);
+   if(Number.isFinite(h)&&h>100&&h<12000)frame.style.height=Math.ceil(h+12)+'px';
+  }
+ };
+ window.addEventListener('message',resize);
+ frame.addEventListener('load',()=>{if(!frame.isConnected)window.removeEventListener('message',resize)});
+ show('detail');
+}
+function detail(i){if(i===8){pistesView();return}if(i===0){apartmentView();return}if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
 (function(){
   var tv=new URLSearchParams(location.search).get('modo')==='tv';
   if(!tv)return;
