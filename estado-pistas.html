@@ -17,6 +17,7 @@ function render(data){
  $('content').hidden=false;
  const summary=data.summary||{},runs=summary.runs||{},lifts=summary.lifts||{},km=summary.skiable_km||{},depth=summary.snow_depth_cm||{};
  $('stats').replaceChildren(stat('Pistas abiertas',number(runs.open)+' / '+number(runs.total)),stat('Remontes abiertos',number(lifts.open)+' / '+number(lifts.total)),stat('Kilómetros esquiables',number(km.open)+' / '+number(km.total)),stat('Espesor de nieve',number(depth.min)+'–'+number(depth.max)+' cm'));
+ $('stats').hidden=!fresh;
  $('updated').textContent='Fecha indicada por la fuente: '+dateLabel(data.source_last_updated)+(fresh?' · Información reciente':' · NO es un parte en directo');
  const sectors=Array.isArray(data.sectors)?data.sectors:[];const priority=['El Tarter','Soldeu'];
  sectors.sort((a,b)=>{const ai=priority.indexOf(a.name),bi=priority.indexOf(b.name);return (ai<0?100:ai)-(bi<0?100:bi)});
