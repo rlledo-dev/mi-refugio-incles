@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102d39"><title>Estado de pistas · Mi Refugio en Incles</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#173342}*{box-sizing:border-box}body{margin:0;background:#e8eff0}main{max-width:760px;min-height:100dvh;margin:auto;background:white;padding:24px 20px 65px}h1{font-size:clamp(25px,6vw,34px);margin:18px 0 8px}h2{font-size:21px}.muted{color:#647983}.card{border-radius:16px;background:#f1f6f7;padding:18px;margin:16px 0}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.stat{background:white;padding:15px;border-radius:12px}.stat strong{font-size:23px;display:block}.sectors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sector{padding:13px;border-radius:12px;background:#fff;border:1px solid #dae5e7}.sector.primary{border-color:#147487;background:#eaf5f5}.warning{background:#fff4e3;color:#754500;padding:13px;border-radius:12px}.link{display:inline-block;color:#126177;font-weight:650;margin:10px 14px 0 0}.back{color:#126177;text-decoration:none;font-weight:650}button{border:0;background:#176579;color:white;padding:11px 16px;border-radius:10px;font:inherit;cursor:pointer}small{display:block;color:#657b84;margin-top:8px}@media(max-width:360px){.sectors{grid-template-columns:1fr}}
+</style></head><body><main><a class="back" href="./index.html">‹ Volver a Mi Refugio</a><h1>🎿 Estado de pistas</h1><p class="muted">Grandvalira · El Tarter y Soldeu primero</p><div id="status" class="warning" role="status">Consultando los datos disponibles…</div><div id="content" hidden><div class="card"><h2>Resumen</h2><div class="stats" id="stats"></div><small id="updated"></small></div><div class="card"><h2>Sectores</h2><div class="sectors" id="sectors"></div></div></div><button id="refresh" type="button">Actualizar</button><p><a class="link" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar parte oficial de Grandvalira ↗</a></p></main>
+<script>
+const MAX_AGE_MS=20*60*1000;
+const $=id=>document.getElementById(id);
+function number(v){return Number.isFinite(Number(v))?String(v):"—"}
+function dateLabel(s){const t=Date.parse(s);return Number.isFinite(t)?new Intl.DateTimeFormat('es-ES',{dateStyle:'medium',timeStyle:'short',timeZone:'Europe/Andorra'}).format(t):'Sin fecha verificable'}
+function stat(label,value){const d=document.createElement('div');d.className='stat';const strong=document.createElement('strong');strong.textContent=value;const span=document.createElement('span');span.textContent=label;d.append(strong,span);return d}
+function render(data){
+ const time=Date.parse(data.source_last_updated||'');
+ const fresh=data.live===true&&Number.isFinite(time)&&time<=Date.now()+120000&&Date.now()-time<=MAX_AGE_MS;
+ $('status').textContent=fresh?'Datos recientes de Grandvalira. Comprueba el parte oficial antes de esquiar.':'Datos no verificados en directo o desactualizados. Consulta el parte oficial para conocer las condiciones actuales.';
+ $('status').className=fresh?'card':'warning';
+ $('content').hidden=false;
+ const summary=data.summary||{},runs=summary.runs||{},lifts=summary.lifts||{},km=summary.skiable_km||{},depth=summary.snow_depth_cm||{};
+ $('stats').replaceChildren(stat('Pistas abiertas',number(runs.open)+' / '+number(runs.total)),stat('Remontes abiertos',number(lifts.open)+' / '+number(lifts.total)),stat('Kilómetros esquiables',number(km.open)+' / '+number(km.total)),stat('Espesor de nieve',number(depth.min)+'–'+number(depth.max)+' cm'));
+ $('updated').textContent='Fecha indicada por la fuente: '+dateLabel(data.source_last_updated)+(fresh?' · Información reciente':' · NO es un parte en directo');
+ const sectors=Array.isArray(data.sectors)?data.sectors:[];const priority=['El Tarter','Soldeu'];
+ sectors.sort((a,b)=>{const ai=priority.indexOf(a.name),bi=priority.indexOf(b.name);return (ai<0?100:ai)-(bi<0?100:bi)});
+ const nodes=sectors.map(s=>{const d=document.createElement('div');d.className='sector'+(priority.includes(s.name)?' primary':'');const name=document.createElement('strong');name.textContent=s.name||'Sector';const state=document.createElement('p');state.textContent=fresh?({open:'Abierto',closed:'Cerrado',partial:'Parcial'}[s.status]||'Sin confirmar'):'Estado sin verificar';d.append(name,state);return d});$('sectors').replaceChildren(...nodes);
+}
+async function load(){try{const r=await fetch('./datos/estado-pistas.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Datos no disponibles');render(await r.json())}catch(e){$('content').hidden=true;$('status').className='warning';$('status').textContent='No se puede consultar el estado de pistas. Usa el parte oficial de Grandvalira.'}}
+$('refresh').addEventListener('click',load);load();
+</script></body></html>
