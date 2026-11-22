@@ -1,0 +1,65 @@
+name: Preparar sincronización Google Apps Script
+on:
+  workflow_dispatch:
+  push:
+    branches: [config/apps-script-sync]
+    paths:
+      - 'apps-script/**'
+      - '.clasp.json'
+      - '.github/workflows/apps-script-sync.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar configuración sin tocar Google
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          config=json.loads(Path('.clasp.json').read_text())
+          assert config['scriptId']=='1P8qPx4KUt9xOTohepH-RGAHcI46Ct58MuCVTzdP_0blf3uPsw1-TKeK2'
+          assert config['rootDir']=='apps-script'
+          files=list(Path('apps-script').glob('*.gs')) if Path('apps-script').exists() else []
+          print('Configuración correcta; archivos GS presentes:',len(files))
+          print('No se modifica Google Apps Script.')
+          PY
+  sync:
+    needs: validate
+    if: ${{ github.event_name == 'workflow_dispatch' && vars.APPS_SCRIPT_SYNC_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    environment: apps-script-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar backend completo y autenticación
+        env:
+          CLASP_CREDENTIALS: ${{ secrets.CLASP_CREDENTIALS }}
+        run: |
+          test -n "$CLASP_CREDENTIALS" || { echo 'Falta CLASP_CREDENTIALS'; exit 1; }
+          test -f apps-script/appsscript.json || { echo 'Falta manifiesto; no se permite sobrescribir proyecto remoto'; exit 1; }
+          test -n "$(find apps-script -maxdepth 1 -name '*.gs' -print -quit)" || { echo 'Falta código servidor'; exit 1; }
+          printf '%s' "$CLASP_CREDENTIALS" > "$HOME/.clasprc.json"
+          chmod 600 "$HOME/.clasprc.json"
+      - name: Instalar clasp
+        run: npm install --global @google/clasp
+      - name: Comparar proyecto remoto antes de subir
+        run: |
+          mkdir -p /tmp/refuge-remote
+          cp .clasp.json /tmp/refuge-remote/.clasp.json
+          (cd /tmp/refuge-remote && clasp pull)
+          python - <<'PY'
+          import pathlib
+          local={p.name for p in pathlib.Path('apps-script').iterdir() if p.suffix in ('.gs','.html','.json')}
+          remote={p.name for p in pathlib.Path('/tmp/refuge-remote').iterdir() if p.suffix in ('.gs','.html','.json') and p.name!='.clasp.json'}
+          missing=remote-local
+          if missing:
+              raise SystemExit('Se detiene la sincronización: faltan archivos remotos en GitHub: '+', '.join(sorted(missing)))
+          print('Archivos remotos cubiertos por el repositorio.')
+          PY
+      - name: Sincronizar código (no publicar implementación)
+        run: clasp push
