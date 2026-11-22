@@ -52,7 +52,7 @@ def main():
     # Solo extraemos estados expresamente indicados por Grandvalira.
     sector_block = text.split("Enlaces entre sectores", 1)[-1].split("Versión descargable", 1)[0]
     for name in ("Encamp", "Canillo", "El Tarter", "Soldeu", "Peretol", "Grau Roig", "Pas de la Casa"):
-        match = re.search(r"(?<![\w-])" + re.escape(name) + r"\s+(Parcialmente abierto|Previsión de apertura|En mantenimiento|Abierto|Cerrado)\b", sector_block, re.I)
+        match = re.search(r"(?<![\\w-])" + re.escape(name) + r"\\s+(Parcialmente abierto|Previsión de apertura|En mantenimiento|Abierto|Cerrado)\\b", sector_block, re.I)
         states = {"abierto": "open", "cerrado": "closed", "parcialmente abierto": "partial", "previsión de apertura": "forecast", "en mantenimiento": "maintenance"}
         status = states.get(match.group(1).lower(), "unknown") if match else "unknown"
         sectors.append({"name": name, "status": status})
