@@ -1,0 +1,7 @@
+# Credenciales locales de Google Apps Script
+.clasprc.json
+.clasp-credentials.json
+**/.clasprc.json
+.env
+.env.*
+node_modules/
