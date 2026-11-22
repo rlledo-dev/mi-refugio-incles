@@ -1,8 +1,8 @@
 {
   "source": "https://www.grandvalira.com/es/estacion/estado-pistas",
-  "source_last_updated": "2026-08-10T11:50:00+02:00",
-  "retrieved_as": "public_web_snapshot_not_live",
-  "live": false,
+  "source_last_updated": "2026-11-18T16:11:00+01:00",
+  "retrieved_at": "2026-11-22T16:10:56.761188+00:00",
+  "live": true,
   "station": "Grandvalira",
   "summary": {
     "runs": {
@@ -10,8 +10,8 @@
       "total": 142
     },
     "lifts": {
-      "open": 2,
-      "total": 3
+      "open": 0,
+      "total": 73
     },
     "skiable_km": {
       "open": 0,
@@ -20,36 +20,40 @@
     "snow_depth_cm": {
       "min": 0,
       "max": 0
+    },
+    "links": {
+      "open": 0,
+      "total": 14
     }
   },
   "sectors": [
     {
       "name": "Encamp",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "Canillo",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "El Tarter",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "Soldeu",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "Peretol",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "Grau Roig",
-      "status": "closed"
+      "status": "unknown"
     },
     {
       "name": "Pas de la Casa",
-      "status": "closed"
+      "status": "unknown"
     }
   ]
 }
