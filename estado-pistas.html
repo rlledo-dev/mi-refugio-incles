@@ -26,6 +26,20 @@ html.integrado .box{box-shadow:none}
 .demo-route .bus{font-size:19px;text-anchor:middle;dominant-baseline:middle}
 .demo-way.bus{color:#315b81}
 @media(max-width:390px){.demo-way{grid-template-columns:minmax(0,1fr) 46%;gap:5px}.demo-way .demo-label{font-size:11px}}
+
+/* Enlaces compactos: los nombres en extremos y dos trazados visuales, sin etiquetas repetidas. */
+.demo-pair{padding:13px 3px 15px}
+.demo-names{margin-bottom:3px;font-size:14px}
+.demo-way{display:block;padding:1px 0}
+.demo-way .demo-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.demo-route-wrap{display:block;width:100%;position:relative}
+.demo-route{width:100%;height:38px;overflow:hidden}
+.demo-route .ski{stroke-width:2.8}
+.demo-way.closed .demo-route .ski{stroke-dasharray:10 8}
+.demo-route .direction{stroke:none}
+.demo-bus-caption{display:block;text-align:center;font-size:10px;margin-top:-2px;margin-bottom:3px}
+.demo-way.bus{margin-bottom:3px}
+@media(max-width:590px){.demo-pair{padding:10px 1px 12px}.demo-names{font-size:13px}.demo-route{height:34px}}
 </style></head><body><main><div class="top"><a class="back" href="./index.html">‹ Mi Refugio en Incles</a><button class="refresh" id="refresh" type="button">↻ Actualizar</button></div>
 <section class="box"><div class="banner"><div class="status-dot" id="stationDot">?</div><div><h1 id="stationTitle">Estado de Grandvalira</h1><p id="stationSubtitle">Consultando el parte oficial…</p></div></div><div class="stats" id="stats"><div class="stat"><span class="icon">⛷</span><div><strong>—</strong><small>Pistas abiertas</small></div></div><div class="stat"><span class="icon">🚡</span><div><strong>—</strong><small>Remontes abiertos</small></div></div><div class="stat"><span class="icon">↗</span><div><strong>—</strong><small>Esquiables</small></div></div><div class="stat"><span class="icon">❄</span><div><strong>—</strong><small>Espesor de nieve</small></div></div></div></section>
 <div id="notice" class="notice" role="status">Esperando datos verificables de Grandvalira.</div><section class="box"><h2>Por sectores</h2><div class="sector-list" id="sectors"></div></section><section class="box"><div class="links"><h2>🚡 Enlaces entre sectores</h2><div id="connections" class="empty">Sin detalle disponible de los enlaces.</div><button id="more" class="more" type="button" hidden>Ver todos los enlaces ›</button></div></section><div class="meta" id="updated"></div><a class="official" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar el parte oficial de Grandvalira ↗</a></main>
@@ -58,27 +72,29 @@ function update(d){
  box.append(el('div','demo-alert','DEMO VISUAL · Estados inventados. No utilizar para esquiar.'));
  function routeSvg(state,reverse){
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  svg.setAttribute('viewBox','0 0 180 38');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
-  svg.setAttribute('aria-label',state==='bus'?'Carretera con autobús, conexión simulada':state==='closed'?'Huellas de esquís interrumpidas, cerrado simulado':'Huellas de esquís continuas, abierto simulado');
+  svg.setAttribute('viewBox','0 0 320 38');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
+  svg.setAttribute('aria-label',state==='bus'?'Carretera y autobús, dirección indicada por la flecha':state==='closed'?'Dos líneas rojas rectas discontinuas, cruz negra y flecha':'Dos huellas sinuosas verdes con flecha');
   const node=(tag,attrs,text)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;svg.append(n);return n};
+  // El sentido se dibuja en la geometría, no se invierte el icono del autobús.
+  const arrow=reverse?'M 4 19 L 23 8 L 23 30 Z':'M 316 19 L 297 8 L 297 30 Z';
   if(state==='bus'){
-   node('path',{class:'road-edge',d:'M 8 8 L 172 8 M 8 30 L 172 30'});
-   node('path',{class:'road-mid',d:'M 8 19 L 172 19'});
-   node('text',{class:'bus',x:90,y:19},'🚌');
+   node('path',{class:'road-edge',d:'M 10 8 L 310 8 M 10 30 L 310 30'});
+   node('path',{class:'road-mid',d:'M 10 19 L 310 19'});
+   node('rect',{x:145,y:8,width:31,height:22,rx:4,fill:'#eaf2f8'});
+   node('text',{class:'bus',x:160,y:19},'🚌');
+  }else if(state==='closed'){
+   node('path',{class:'ski',d:'M 10 12 L 310 12 M 10 26 L 310 26'});
+   node('path',{class:'cross',d:'M 151 7 L 169 31 M 169 7 L 151 31'});
   }else{
-   const tracks=state==='closed'?['M 8 12 L 172 12','M 8 26 L 172 26']:['M 8 12 C 31 0, 49 24, 72 12 S 112 0, 134 12 S 158 23, 172 12','M 8 25 C 31 13, 49 37, 72 25 S 112 13, 134 25 S 158 36, 172 25'];
-   tracks.forEach(d=>node('path',{class:'ski',d}));
-   if(state==='closed'){
-    node('path',{class:'cross',d:'M 85 10 L 99 28 M 99 10 L 85 28'});
-   }
+   node('path',{class:'ski',d:'M 10 12 C 33 -1 53 25 76 12 S 116 -1 139 12 S 180 25 204 12 S 248 -1 272 12 S 294 23 310 12'});
+   node('path',{class:'ski',d:'M 10 26 C 33 13 53 39 76 26 S 116 13 139 26 S 180 39 204 26 S 248 13 272 26 S 294 37 310 26'});
   }
-  node('path',{class:'direction',d:'M 176 19 L 163 12 L 163 26 Z',style:state==='bus'?'fill:#315b81':''});
-  if(reverse)svg.style.transform='scaleX(-1)';
+  node('path',{class:'direction',d:arrow,style:state==='bus'?'fill:#315b81':''});
   return svg;
  }
  function demoWay(a,b,state,reverse){
-  const row=el('div','demo-way '+state),name=el('span','demo-label',a+' → '+b+(state==='bus'?' · En bus':state==='closed'?' · Cerrado':' · Abierto'));
-  const wrap=el('span','demo-route-wrap');wrap.append(routeSvg(state,reverse));if(state==='bus')wrap.append(el('span','demo-bus-caption','EN BUS'));row.append(name,wrap);return row;
+  const row=el('div','demo-way '+state),name=el('span','demo-label',a+' a '+b+(state==='bus'?', en bus':state==='closed'?', cerrado':', abierto'));
+  const wrap=el('span','demo-route-wrap');wrap.append(routeSvg(state,reverse));if(state==='bus')wrap.append(el('span','demo-bus-caption','BUS'));row.append(name,wrap);return row;
  }
  function demoPair(a,b,i,single){
   const row=el('div','demo-pair'),names=el('div','demo-names');
