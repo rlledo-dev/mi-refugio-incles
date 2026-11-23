@@ -1,7 +1,7 @@
 {
   "source": "https://www.grandvalira.com/es/estacion/estado-pistas",
   "source_last_updated": "2026-11-18T16:11:00+01:00",
-  "retrieved_at": "2026-11-23T05:04:23.102280+00:00",
+  "retrieved_at": "2026-11-23T06:35:44.051980+00:00",
   "live": true,
   "station": "Grandvalira",
   "summary": {
@@ -29,60 +29,31 @@
   "sectors": [
     {
       "name": "Encamp",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 16
-      }
+      "status": "unknown"
     },
     {
       "name": "Canillo",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 15
-      }
+      "status": "unknown"
     },
     {
       "name": "El Tarter",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 21
-      }
+      "status": "unknown"
     },
     {
       "name": "Soldeu",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 37
-      }
+      "status": "unknown"
     },
     {
       "name": "Peretol",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 2
-      }
+      "status": "unknown"
     },
     {
       "name": "Grau Roig",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 35
-      }
+      "status": "unknown"
     },
     {
       "name": "Pas de la Casa",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 16
-      }
+      "status": "unknown"
     }
-  ],
-  "source_note": "Desglose sectorial respaldado por parte de Grandvalira de 18/11/2026; no es una comprobación individual en tiempo real."
+  ]
 }
