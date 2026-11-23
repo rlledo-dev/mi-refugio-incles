@@ -33,13 +33,13 @@ html.integrado .box{box-shadow:none}
 .demo-way{display:block;padding:1px 0}
 .demo-way .demo-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .demo-route-wrap{display:block;width:100%;position:relative}
-.demo-route{width:100%;height:38px;overflow:hidden}
+.demo-route{width:100%;height:64px;overflow:hidden}
 .demo-route .ski{stroke-width:2.8}
 .demo-way.closed .demo-route .ski{stroke-dasharray:10 8}
 .demo-route .direction{stroke:none}
 .demo-bus-caption{display:block;text-align:center;font-size:10px;margin-top:-2px;margin-bottom:3px}
 .demo-way.bus{margin-bottom:3px}
-@media(max-width:590px){.demo-pair{padding:10px 1px 12px}.demo-names{font-size:13px}.demo-route{height:34px}}
+@media(max-width:590px){.demo-pair{padding:10px 1px 12px}.demo-names{font-size:13px}.demo-route{height:58px}}
 </style></head><body><main><div class="top"><a class="back" href="./index.html">‹ Mi Refugio en Incles</a><button class="refresh" id="refresh" type="button">↻ Actualizar</button></div>
 <section class="box"><div class="banner"><div class="status-dot" id="stationDot">?</div><div><h1 id="stationTitle">Estado de Grandvalira</h1><p id="stationSubtitle">Consultando el parte oficial…</p></div></div><div class="stats" id="stats"><div class="stat"><span class="icon">⛷</span><div><strong>—</strong><small>Pistas abiertas</small></div></div><div class="stat"><span class="icon">🚡</span><div><strong>—</strong><small>Remontes abiertos</small></div></div><div class="stat"><span class="icon">↗</span><div><strong>—</strong><small>Esquiables</small></div></div><div class="stat"><span class="icon">❄</span><div><strong>—</strong><small>Espesor de nieve</small></div></div></div></section>
 <div id="notice" class="notice" role="status">Esperando datos verificables de Grandvalira.</div><section class="box"><h2>Por sectores</h2><div class="sector-list" id="sectors"></div></section><section class="box"><div class="links"><h2>🚡 Enlaces entre sectores</h2><div id="connections" class="empty">Sin detalle disponible de los enlaces.</div><button id="more" class="more" type="button" hidden>Ver todos los enlaces ›</button></div></section><div class="meta" id="updated"></div><a class="official" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar el parte oficial de Grandvalira ↗</a></main>
@@ -72,30 +72,58 @@ function update(d){
  box.append(el('div','demo-alert','DEMO VISUAL · Estados inventados. No utilizar para esquiar.'));
  function routeSvg(state,reverse){
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  svg.setAttribute('viewBox','0 0 320 38');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
-  svg.setAttribute('aria-label',state==='bus'?'Carretera y autobús con punta de flecha integrada':state==='closed'?'Dos líneas rectas rojas discontinuas, X negra y punta de flecha integrada':'Dos huellas sinuosas verdes que llegan a la base de la punta de flecha');
+  svg.setAttribute('viewBox','0 0 320 64');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
+  svg.setAttribute('aria-label',state==='bus'?'Autobús con esquiador dentro y esquís en el maletero':state==='closed'?'Esquiador parado con esquís al hombro, enlace cerrado':'Esquiador en movimiento sobre huellas verdes, enlace abierto');
   const node=(tag,attrs,text)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;svg.append(n);return n};
-  // Dos trazos terminan exactamente en la base vertical de una punta triangular.
-  const base=reverse?28:292;
-  const left=reverse?base:10,right=reverse?310:base;
-  const tip=reverse?4:316;
-  const arrow='M '+tip+' 19 L '+base+' 5 L '+base+' 33 Z';
-  const arrowColor=state==='bus'?'#315b81':state==='closed'?'#d72c38':'#169b52';
+  const group=(attrs)=>node('g',attrs);
+  const child=(parent,tag,attrs,text)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;parent.append(n);return n};
+  const base=reverse?28:292,left=reverse?base:10,right=reverse?310:base,tip=reverse?4:316;
+  const arrow='M '+tip+' 37 L '+base+' 24 L '+base+' 50 Z';
   if(state==='bus'){
-   node('path',{class:'road-edge',d:'M '+left+' 8 L '+right+' 8 M '+left+' 30 L '+right+' 30'});
-   node('path',{class:'road-mid',d:'M '+left+' 19 L '+right+' 19'});
-   node('rect',{x:145,y:8,width:31,height:22,rx:4,fill:'#eaf2f8'});
-   node('text',{class:'bus',x:160,y:19},'🚌');
+   node('path',{class:'road-edge',d:'M '+left+' 29 L '+right+' 29 M '+left+' 53 L '+right+' 53'});
+   node('path',{class:'road-mid',d:'M '+left+' 41 L '+right+' 41'});
+   // Autobús dibujado como SVG, con esquiador visible por la ventana y esquís guardados detrás.
+   const bus=group({transform:'translate(116 6)'});
+   child(bus,'rect',{x:0,y:9,width:100,height:37,rx:7,fill:'#17608f',stroke:'#17394e','stroke-width':1.5});
+   child(bus,'rect',{x:9,y:15,width:20,height:15,rx:2,fill:'#c9e8f5'});
+   child(bus,'rect',{x:33,y:15,width:24,height:15,rx:2,fill:'#c9e8f5'});
+   child(bus,'rect',{x:61,y:15,width:24,height:15,rx:2,fill:'#c9e8f5'});
+   child(bus,'circle',{cx:71,cy:20,r:4.5,fill:'#e9ac72'});
+   child(bus,'path',{d:'M 64 30 L 64 26 Q 71 21 78 26 L 78 30 Z',fill:'#ee8b24'});
+   child(bus,'path',{d:'M 66 16 Q 71 11 76 16',stroke:'#203c52','stroke-width':4,fill:'none'});
+   child(bus,'circle',{cx:22,cy:47,r:8,fill:'#243d4b'});
+   child(bus,'circle',{cx:79,cy:47,r:8,fill:'#243d4b'});
+   child(bus,'circle',{cx:22,cy:47,r:3.5,fill:'white'});
+   child(bus,'circle',{cx:79,cy:47,r:3.5,fill:'white'});
+   child(bus,'rect',{x:-22,y:15,width:24,height:30,rx:3,fill:'#263f50',stroke:'#8ca6b4','stroke-width':2});
+   child(bus,'path',{d:'M -16 20 L -16 39 M -10 20 L -10 39 M -4 20 L -4 39',stroke:'#ff9e2b','stroke-width':3,'stroke-linecap':'round'});
   }else if(state==='closed'){
-   node('path',{class:'ski',d:'M '+left+' 12 L '+right+' 12 M '+left+' 26 L '+right+' 26'});
-   node('path',{class:'cross',d:'M 151 7 L 169 31 M 169 7 L 151 31'});
+   node('path',{class:'ski',d:'M '+left+' 31 L '+right+' 31 M '+left+' 45 L '+right+' 45'});
+   node('path',{class:'cross',d:'M 151 25 L 169 51 M 169 25 L 151 51'});
+   // Esquiador quieto al inicio, con esquís al hombro, mirando hacia el enlace.
+   const x=reverse?264:34;
+   const person=group({transform:'translate('+x+' 0)'+(reverse?' scale(-1 1)':'')});
+   child(person,'path',{d:'M -13 10 L 17 5 M -13 13 L 17 8',stroke:'#243847','stroke-width':3,'stroke-linecap':'round'});
+   child(person,'circle',{cx:0,cy:16,r:6,fill:'#efb17f'});
+   child(person,'path',{d:'M -7 13 Q 0 5 7 12',stroke:'#253b4c','stroke-width':4,fill:'none'});
+   child(person,'path',{d:'M -6 23 L 6 23 L 9 38 L -7 38 Z',fill:'#e64041'});
+   child(person,'path',{d:'M -6 26 L -14 19 L -9 13 M 6 26 L 13 19 L 8 12',stroke:'#243847','stroke-width':3,fill:'none','stroke-linecap':'round'});
+   child(person,'path',{d:'M -3 38 L -4 55 M 6 38 L 8 55',stroke:'#26323c','stroke-width':5,'stroke-linecap':'round'});
   }else{
-   const a=reverse?base:10,b=reverse?310:base;
-   const wiggle=(y)=>'M '+a+' '+y+' C '+(a+(b-a)*.10)+' '+(y-11)+' '+(a+(b-a)*.18)+' '+(y+11)+' '+(a+(b-a)*.28)+' '+y+' S '+(a+(b-a)*.46)+' '+(y-11)+' '+(a+(b-a)*.55)+' '+y+' S '+(a+(b-a)*.73)+' '+(y+11)+' '+(a+(b-a)*.82)+' '+y+' S '+(a+(b-a)*.94)+' '+(y-8)+' '+b+' '+y;
-   node('path',{class:'ski',d:wiggle(12)});
-   node('path',{class:'ski',d:wiggle(26)});
+   const wiggle=(y)=>'M '+left+' '+y+' C '+(left+(right-left)*.12)+' '+(y-9)+' '+(left+(right-left)*.20)+' '+(y+9)+' '+(left+(right-left)*.30)+' '+y+' S '+(left+(right-left)*.48)+' '+(y-9)+' '+(left+(right-left)*.58)+' '+y+' S '+(left+(right-left)*.78)+' '+(y+9)+' '+(left+(right-left)*.86)+' '+y+' S '+(left+(right-left)*.96)+' '+(y-7)+' '+right+' '+y;
+   node('path',{class:'ski',d:wiggle(31)});
+   node('path',{class:'ski',d:wiggle(45)});
+   const skier=group({transform:'translate(104 2)'+(reverse?' scale(-1 1)':'')});
+   child(skier,'path',{d:'M -20 43 L 13 49 M -17 47 L 15 53',stroke:'#193b5d','stroke-width':2.6,'stroke-linecap':'round'});
+   child(skier,'path',{d:'M -4 28 L -9 41 L 6 45 M 5 29 L 9 39 L 0 44',stroke:'#184d86','stroke-width':4,fill:'none','stroke-linecap':'round'});
+   child(skier,'path',{d:'M -5 12 L 7 16 L 8 30 L -5 27 Z',fill:'#1684cf'});
+   child(skier,'circle',{cx:3,cy:7,r:5,fill:'#efb17f'});
+   child(skier,'path',{d:'M -3 5 Q 2 -3 8 4',stroke:'#174b76','stroke-width':4,fill:'none'});
+   child(skier,'path',{d:'M -4 16 L -16 25 L -24 22 M 6 18 L 17 27',stroke:'#193b5d','stroke-width':3,fill:'none','stroke-linecap':'round'});
+   child(skier,'path',{d:'M -24 22 L -28 52 M 17 27 L 23 52',stroke:'#536e83','stroke-width':1.5});
+   child(skier,'rect',{x:-9,y:11,width:7,height:12,rx:2,fill:'#f18c2b'});
   }
-  node('path',{class:'direction',d:arrow,style:'fill:'+arrowColor});
+  node('path',{class:'direction',d:arrow,style:'fill:'+(state==='bus'?'#315b81':state==='closed'?'#d72c38':'#169b52')});
   return svg;
  }
  function demoWay(a,b,state,reverse){
