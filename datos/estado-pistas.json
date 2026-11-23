@@ -84,5 +84,63 @@
       }
     }
   ],
-  "source_note": "Desglose por sectores verificado en el parte oficial de Grandvalira fechado 18/11/2026 16:11. La fecha de descarga registrada permanece sin modificar; no implica monitorización en tiempo real."
+  "source_note": "Los 14 nombres de conexiones figuran en el parte oficial de Grandvalira fechado 18/11/2026 16:11; 0/14 enlaces abiertos. Se representa cada enlace como cerrado a partir del total global 0/14, sin verificación independiente del estado de cada conexión. No son datos en tiempo real.",
+  "connections": [
+    {
+      "name": "Encamp - Grau Roig",
+      "status": "closed"
+    },
+    {
+      "name": "Encamp - Peretol",
+      "status": "closed"
+    },
+    {
+      "name": "Encamp - Soldeu",
+      "status": "closed"
+    },
+    {
+      "name": "Canillo - El Tarter",
+      "status": "closed"
+    },
+    {
+      "name": "El Tarter - Canillo",
+      "status": "closed"
+    },
+    {
+      "name": "El Tarter - Encamp",
+      "status": "closed"
+    },
+    {
+      "name": "El Tarter - Soldeu",
+      "status": "closed"
+    },
+    {
+      "name": "Soldeu - El Tarter",
+      "status": "closed"
+    },
+    {
+      "name": "Soldeu - Encamp",
+      "status": "closed"
+    },
+    {
+      "name": "Peretol - Encamp",
+      "status": "closed"
+    },
+    {
+      "name": "Grau Roig - Encamp",
+      "status": "closed"
+    },
+    {
+      "name": "Grau Roig - Pas de la Casa",
+      "status": "closed"
+    },
+    {
+      "name": "Grau Roig - Peretol",
+      "status": "closed"
+    },
+    {
+      "name": "Pas de la Casa - Grau Roig",
+      "status": "closed"
+    }
+  ]
 }
