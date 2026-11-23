@@ -29,31 +29,60 @@
   "sectors": [
     {
       "name": "Encamp",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 16
+      }
     },
     {
       "name": "Canillo",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 15
+      }
     },
     {
       "name": "El Tarter",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 21
+      }
     },
     {
       "name": "Soldeu",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 37
+      }
     },
     {
       "name": "Peretol",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 2
+      }
     },
     {
       "name": "Grau Roig",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 35
+      }
     },
     {
       "name": "Pas de la Casa",
-      "status": "unknown"
+      "status": "closed",
+      "runs": {
+        "open": 0,
+        "total": 16
+      }
     }
-  ]
+  ],
+  "source_note": "Desglose por sectores verificado en el parte oficial de Grandvalira fechado 18/11/2026 16:11. La fecha de descarga registrada permanece sin modificar; no implica monitorización en tiempo real."
 }
