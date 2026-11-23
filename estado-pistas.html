@@ -12,6 +12,20 @@ html.integrado .box{box-shadow:none}
 
 /* Maqueta temporal: enlaces ficticios, aislados de los datos de pistas. */
 .demo-alert{background:#fff0cf;color:#71480c;padding:11px 12px;border-radius:10px;font-size:13px;font-weight:750;margin-bottom:10px}.demo-pair{border-bottom:1px solid #e2e8ec;padding:11px 3px}.demo-pair:last-child{border:0}.demo-names{display:flex;justify-content:space-between;gap:10px;font-size:15px;font-weight:750;margin-bottom:7px}.demo-way{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;padding:3px 0;font-weight:650}.demo-way.open{color:#148c42}.demo-way.closed{color:#d22e3a}.demo-track{font-size:19px;white-space:nowrap;letter-spacing:-2px}.demo-way.closed .demo-track{text-decoration:line-through;text-decoration-thickness:2px}.demo-small{font-size:12px;color:#657480;margin-top:8px}
+/* Trazados de la maqueta: esquís y carretera según cada dirección. */
+.demo-way{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,44%);gap:10px;align-items:center;padding:7px 0}
+.demo-way .demo-label{font-size:12px;line-height:1.25}
+.demo-route{width:100%;height:38px;display:block;overflow:visible}
+.demo-route .ski{fill:none;stroke:#169b52;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.demo-way.closed .demo-route .ski{stroke:#d72c38;stroke-dasharray:8 7}
+.demo-route .cross{stroke:#141414;stroke-width:3.5;stroke-linecap:round}
+.demo-route .road-edge{stroke:#486477;stroke-width:2.8;fill:none}
+.demo-route .road-mid{stroke:#e2a527;stroke-width:2;stroke-dasharray:8 6;fill:none}
+.demo-route .direction{fill:#169b52}
+.demo-way.closed .demo-route .direction{fill:#d72c38}
+.demo-route .bus{font-size:19px;text-anchor:middle;dominant-baseline:middle}
+.demo-way.bus{color:#315b81}
+@media(max-width:390px){.demo-way{grid-template-columns:minmax(0,1fr) 46%;gap:5px}.demo-way .demo-label{font-size:11px}}
 </style></head><body><main><div class="top"><a class="back" href="./index.html">‹ Mi Refugio en Incles</a><button class="refresh" id="refresh" type="button">↻ Actualizar</button></div>
 <section class="box"><div class="banner"><div class="status-dot" id="stationDot">?</div><div><h1 id="stationTitle">Estado de Grandvalira</h1><p id="stationSubtitle">Consultando el parte oficial…</p></div></div><div class="stats" id="stats"><div class="stat"><span class="icon">⛷</span><div><strong>—</strong><small>Pistas abiertas</small></div></div><div class="stat"><span class="icon">🚡</span><div><strong>—</strong><small>Remontes abiertos</small></div></div><div class="stat"><span class="icon">↗</span><div><strong>—</strong><small>Esquiables</small></div></div><div class="stat"><span class="icon">❄</span><div><strong>—</strong><small>Espesor de nieve</small></div></div></div></section>
 <div id="notice" class="notice" role="status">Esperando datos verificables de Grandvalira.</div><section class="box"><h2>Por sectores</h2><div class="sector-list" id="sectors"></div></section><section class="box"><div class="links"><h2>🚡 Enlaces entre sectores</h2><div id="connections" class="empty">Sin detalle disponible de los enlaces.</div><button id="more" class="more" type="button" hidden>Ver todos los enlaces ›</button></div></section><div class="meta" id="updated"></div><a class="official" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar el parte oficial de Grandvalira ↗</a></main>
@@ -42,8 +56,39 @@ function update(d){
  const demoSingles=[['El Tarter','Encamp'],['Grau Roig','Peretol']];
  const box=$('connections'),more=$('more');more.hidden=true;box.className='';box.replaceChildren();
  box.append(el('div','demo-alert','DEMO VISUAL · Estados inventados. No utilizar para esquiar.'));
- function demoWay(a,b,state,reverse){const row=el('div','demo-way '+state),name=el('span','',a+' → '+b),track=el('span','demo-track',reverse?'◀━━━━━━━━':'━━━━━━━━➤');row.append(name,track);return row}
- function demoPair(a,b,i,single){const row=el('div','demo-pair'),names=el('div','demo-names');names.append(el('span','',a),el('span','',b));row.append(names,demoWay(a,b,i%3===0?'open':'closed',false));if(!single)row.append(demoWay(b,a,i%3===1?'open':'closed',true));return row}
+ function routeSvg(state,reverse){
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox','0 0 180 38');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
+  svg.setAttribute('aria-label',state==='bus'?'Carretera con autobús, conexión simulada':state==='closed'?'Huellas de esquís interrumpidas, cerrado simulado':'Huellas de esquís continuas, abierto simulado');
+  const node=(tag,attrs,text)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;svg.append(n);return n};
+  if(state==='bus'){
+   node('path',{class:'road-edge',d:'M 8 8 L 172 8 M 8 30 L 172 30'});
+   node('path',{class:'road-mid',d:'M 8 19 L 172 19'});
+   node('text',{class:'bus',x:90,y:19},'🚌');
+  }else{
+   const tracks=['M 8 12 C 31 0, 49 24, 72 12 S 112 0, 134 12 S 158 23, 172 12','M 8 25 C 31 13, 49 37, 72 25 S 112 13, 134 25 S 158 36, 172 25'];
+   tracks.forEach(d=>node('path',{class:'ski',d}));
+   if(state==='closed'){
+    node('path',{class:'cross',d:'M 85 10 L 99 28 M 99 10 L 85 28'});
+   }
+  }
+  if(state!=='bus')node('path',{class:'direction',d:reverse?'M 4 19 L 17 12 L 17 26 Z':'M 176 19 L 163 12 L 163 26 Z'});
+  if(reverse)svg.style.transform='scaleX(-1)';
+  return svg;
+ }
+ function demoWay(a,b,state,reverse){
+  const row=el('div','demo-way '+state),name=el('span','demo-label',a+' → '+b+(state==='bus'?' · En bus':state==='closed'?' · Cerrado':' · Abierto'));
+  row.append(name,routeSvg(state,reverse));return row;
+ }
+ function demoPair(a,b,i,single){
+  const row=el('div','demo-pair'),names=el('div','demo-names');
+  names.append(el('span','',a),el('span','',b));row.append(names);
+  const forward=['open','closed','bus','open','closed','bus','closed','bus'];
+  const backward=['closed','open','closed','bus','open','closed'];
+  row.append(demoWay(a,b,forward[i%forward.length],false));
+  if(!single)row.append(demoWay(b,a,backward[i%backward.length],true));
+  return row;
+ }
  demoPairs.forEach(([a,b],i)=>box.append(demoPair(a,b,i,false)));
  box.append(el('div','demo-small','Enlaces de sentido único (simulación):'));
  demoSingles.forEach(([a,b],i)=>box.append(demoPair(a,b,i+6,true)));
