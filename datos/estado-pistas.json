@@ -1,7 +1,7 @@
 {
   "source": "https://www.grandvalira.com/es/estacion/estado-pistas",
   "source_last_updated": "2026-11-18T16:11:00+01:00",
-  "retrieved_at": "2026-11-22T16:10:56.761188+00:00",
+  "retrieved_at": "2026-11-23T05:04:23.102280+00:00",
   "live": true,
   "station": "Grandvalira",
   "summary": {
@@ -29,118 +29,31 @@
   "sectors": [
     {
       "name": "Encamp",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 16
-      }
+      "status": "unknown"
     },
     {
       "name": "Canillo",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 15
-      }
+      "status": "unknown"
     },
     {
       "name": "El Tarter",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 21
-      }
+      "status": "unknown"
     },
     {
       "name": "Soldeu",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 37
-      }
+      "status": "unknown"
     },
     {
       "name": "Peretol",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 2
-      }
+      "status": "unknown"
     },
     {
       "name": "Grau Roig",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 35
-      }
+      "status": "unknown"
     },
     {
       "name": "Pas de la Casa",
-      "status": "closed",
-      "runs": {
-        "open": 0,
-        "total": 16
-      }
-    }
-  ],
-  "source_note": "Los 14 nombres de conexiones figuran en el parte oficial de Grandvalira fechado 18/11/2026 16:11; 0/14 enlaces abiertos. Se representa cada enlace como cerrado a partir del total global 0/14, sin verificación independiente del estado de cada conexión. No son datos en tiempo real.",
-  "connections": [
-    {
-      "name": "Encamp - Grau Roig",
-      "status": "closed"
-    },
-    {
-      "name": "Encamp - Peretol",
-      "status": "closed"
-    },
-    {
-      "name": "Encamp - Soldeu",
-      "status": "closed"
-    },
-    {
-      "name": "Canillo - El Tarter",
-      "status": "closed"
-    },
-    {
-      "name": "El Tarter - Canillo",
-      "status": "closed"
-    },
-    {
-      "name": "El Tarter - Encamp",
-      "status": "closed"
-    },
-    {
-      "name": "El Tarter - Soldeu",
-      "status": "closed"
-    },
-    {
-      "name": "Soldeu - El Tarter",
-      "status": "closed"
-    },
-    {
-      "name": "Soldeu - Encamp",
-      "status": "closed"
-    },
-    {
-      "name": "Peretol - Encamp",
-      "status": "closed"
-    },
-    {
-      "name": "Grau Roig - Encamp",
-      "status": "closed"
-    },
-    {
-      "name": "Grau Roig - Pas de la Casa",
-      "status": "closed"
-    },
-    {
-      "name": "Grau Roig - Peretol",
-      "status": "closed"
-    },
-    {
-      "name": "Pas de la Casa - Grau Roig",
-      "status": "closed"
+      "status": "unknown"
     }
   ]
 }
