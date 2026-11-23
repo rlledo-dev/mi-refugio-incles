@@ -6,11 +6,11 @@
 /* Dentro de Mi Refugio: el panel principal conserva la isla flotante. */
 html.integrado,html.integrado body{background:transparent}
 html.integrado .top{display:none}
-html.integrado main{max-width:none;padding:0 0 16px}
+html.integrado main{max-width:none;padding:0}
 html.integrado .box{box-shadow:none}
 </style></head><body><main><div class="top"><a class="back" href="./index.html">‹ Mi Refugio en Incles</a><button class="refresh" id="refresh" type="button">↻ Actualizar</button></div>
 <section class="box"><div class="banner"><div class="status-dot" id="stationDot">?</div><div><h1 id="stationTitle">Estado de Grandvalira</h1><p id="stationSubtitle">Consultando el parte oficial…</p></div></div><div class="stats" id="stats"><div class="stat"><span class="icon">⛷</span><div><strong>—</strong><small>Pistas abiertas</small></div></div><div class="stat"><span class="icon">🚡</span><div><strong>—</strong><small>Remontes abiertos</small></div></div><div class="stat"><span class="icon">↗</span><div><strong>—</strong><small>Esquiables</small></div></div><div class="stat"><span class="icon">❄</span><div><strong>—</strong><small>Espesor de nieve</small></div></div></div></section>
-<div id="notice" class="notice" role="status">Esperando datos verificables de Grandvalira.</div><section class="box"><h2>Por sectores</h2><div class="sector-list" id="sectors"></div></section><section class="box"><div class="links"><h2>🚡 Enlaces entre sectores</h2><div id="connections" class="empty">No hay datos confirmados de los enlaces.</div><button id="more" class="more" type="button" hidden>Ver todos los enlaces ›</button></div></section><div class="meta" id="updated"></div><a class="official" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar el parte oficial de Grandvalira ↗</a></main>
+<div id="notice" class="notice" role="status">Esperando datos verificables de Grandvalira.</div><section class="box"><h2>Por sectores</h2><div class="sector-list" id="sectors"></div></section><section class="box"><div class="links"><h2>🚡 Enlaces entre sectores</h2><div id="connections" class="empty">Sin detalle disponible de los enlaces.</div><button id="more" class="more" type="button" hidden>Ver todos los enlaces ›</button></div></section><div class="meta" id="updated"></div><a class="official" href="https://www.grandvalira.com/es/estacion/estado-pistas" target="_blank" rel="noopener noreferrer">Consultar el parte oficial de Grandvalira ↗</a></main>
 <script>
 const $=id=>document.getElementById(id),MAX_AGE=60*60*1000;
 const sectorOrder=['Soldeu','El Tarter','Canillo','Encamp','Peretol','Grau Roig','Pas de la Casa'];
@@ -33,7 +33,7 @@ function update(d){
  $('sectors').replaceChildren(...sectorOrder.map(name=>{const s=byName.get(name)||{},state=known?s.status:'unknown',row=el('div','sector'+(['Soldeu','El Tarter'].includes(name)?' featured':'')),title=el('div','sector-name'),dot=el('span','led '+(state||'')),nameNode=el('span','',name),pill=el('span','pill '+(state||''),labelStatus(state)),count=el('span','count',known&&s.runs&&s.runs.open!=null&&s.runs.total!=null?fmt(s.runs.open)+' / '+fmt(s.runs.total)+' pistas':'—'),arrow=el('span','arrow','›');title.append(dot,nameNode);row.append(title,pill,count,arrow);return row}));
  const connections=Array.isArray(d.connections)?d.connections:[];const entries=connections.filter(c=>c&&typeof c==='object'&&c.name&&c.status);
  const box=$('connections'),more=$('more');let expanded=false;
- function draw(){box.replaceChildren();if(!known||!entries.length){box.append(el('div','empty','No hay datos disponibles de los enlaces.'));more.hidden=true;return}const shown=expanded?entries:entries.slice(0,5);box.append(...shown.map(c=>{const row=el('div','link-row'),status=c.status||'unknown',icon=el('span','mark '+status,status==='open'?'✔':status==='closed'?'✖':'●'),name=el('strong','',c.name),pill=el('span','pill '+status,labelStatus(status));row.append(icon,name,pill);return row}));more.hidden=entries.length<=5;more.textContent=expanded?'Mostrar menos ↑':'Ver los '+entries.length+' enlaces ›'}
+ function draw(){box.replaceChildren();if(!known||!entries.length){box.append(el('div','empty',known&&sum.links&&sum.links.total!=null?'Grandvalira indica '+fmt(sum.links.open)+' / '+fmt(sum.links.total)+' enlaces abiertos. El detalle por conexión todavía no está disponible.':'No hay información verificada sobre los enlaces.'));more.hidden=true;return}const shown=expanded?entries:entries.slice(0,5);box.append(...shown.map(c=>{const row=el('div','link-row'),status=c.status||'unknown',icon=el('span','mark '+status,status==='open'?'✔':status==='closed'?'✖':'●'),name=el('strong','',c.name),pill=el('span','pill '+status,labelStatus(status));row.append(icon,name,pill);return row}));more.hidden=entries.length<=5;more.textContent=expanded?'Mostrar menos ↑':'Ver los '+entries.length+' enlaces ›'}
  more.onclick=()=>{expanded=!expanded;draw()};draw();
  $('updated').textContent='Fecha del parte indicada por la fuente: '+dateLabel(d.source_last_updated)+' · Última consulta registrada: '+dateLabel(d.retrieved_at)+(fresh?'':' · Consulta no reciente');
 }
@@ -45,10 +45,10 @@ $('refresh').addEventListener('click',load);load();
  document.documentElement.classList.add('integrado');
  let lastHeight=0;
  function sendHeight(){
-  const height=Math.ceil(document.documentElement.scrollHeight);
+  const main=document.querySelector('main');const height=Math.ceil(main.getBoundingClientRect().height);
   if(height!==lastHeight){lastHeight=height;window.parent.postMessage({type:'refugio-pistas-height',height},location.origin)}
  }
- if(typeof ResizeObserver!=='undefined')new ResizeObserver(sendHeight).observe(document.body);
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(sendHeight).observe(document.querySelector('main'));
  window.addEventListener('load',sendHeight);
  window.addEventListener('resize',sendHeight);
  setTimeout(sendHeight,150);
