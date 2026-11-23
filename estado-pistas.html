@@ -73,23 +73,29 @@ function update(d){
  function routeSvg(state,reverse){
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.setAttribute('viewBox','0 0 320 38');svg.setAttribute('class','demo-route');svg.setAttribute('role','img');
-  svg.setAttribute('aria-label',state==='bus'?'Carretera y autobús, dirección indicada por la flecha':state==='closed'?'Dos líneas rojas rectas discontinuas, cruz negra y flecha':'Dos huellas sinuosas verdes con flecha');
+  svg.setAttribute('aria-label',state==='bus'?'Carretera y autobús con punta de flecha integrada':state==='closed'?'Dos líneas rectas rojas discontinuas, X negra y punta de flecha integrada':'Dos huellas sinuosas verdes que llegan a la base de la punta de flecha');
   const node=(tag,attrs,text)=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;svg.append(n);return n};
-  // El sentido se dibuja en la geometría, no se invierte el icono del autobús.
-  const arrow=reverse?'M 4 19 L 23 8 L 23 30 Z':'M 316 19 L 297 8 L 297 30 Z';
+  // Dos trazos terminan exactamente en la base vertical de una punta triangular.
+  const base=reverse?28:292;
+  const left=reverse?base:10,right=reverse?310:base;
+  const tip=reverse?4:316;
+  const arrow='M '+tip+' 19 L '+base+' 5 L '+base+' 33 Z';
+  const arrowColor=state==='bus'?'#315b81':state==='closed'?'#d72c38':'#169b52';
   if(state==='bus'){
-   node('path',{class:'road-edge',d:'M 10 8 L 310 8 M 10 30 L 310 30'});
-   node('path',{class:'road-mid',d:'M 10 19 L 310 19'});
+   node('path',{class:'road-edge',d:'M '+left+' 8 L '+right+' 8 M '+left+' 30 L '+right+' 30'});
+   node('path',{class:'road-mid',d:'M '+left+' 19 L '+right+' 19'});
    node('rect',{x:145,y:8,width:31,height:22,rx:4,fill:'#eaf2f8'});
    node('text',{class:'bus',x:160,y:19},'🚌');
   }else if(state==='closed'){
-   node('path',{class:'ski',d:'M 10 12 L 310 12 M 10 26 L 310 26'});
+   node('path',{class:'ski',d:'M '+left+' 12 L '+right+' 12 M '+left+' 26 L '+right+' 26'});
    node('path',{class:'cross',d:'M 151 7 L 169 31 M 169 7 L 151 31'});
   }else{
-   node('path',{class:'ski',d:'M 10 12 C 33 -1 53 25 76 12 S 116 -1 139 12 S 180 25 204 12 S 248 -1 272 12 S 294 23 310 12'});
-   node('path',{class:'ski',d:'M 10 26 C 33 13 53 39 76 26 S 116 13 139 26 S 180 39 204 26 S 248 13 272 26 S 294 37 310 26'});
+   const a=reverse?base:10,b=reverse?310:base;
+   const wiggle=(y)=>'M '+a+' '+y+' C '+(a+(b-a)*.10)+' '+(y-11)+' '+(a+(b-a)*.18)+' '+(y+11)+' '+(a+(b-a)*.28)+' '+y+' S '+(a+(b-a)*.46)+' '+(y-11)+' '+(a+(b-a)*.55)+' '+y+' S '+(a+(b-a)*.73)+' '+(y+11)+' '+(a+(b-a)*.82)+' '+y+' S '+(a+(b-a)*.94)+' '+(y-8)+' '+b+' '+y;
+   node('path',{class:'ski',d:wiggle(12)});
+   node('path',{class:'ski',d:wiggle(26)});
   }
-  node('path',{class:'direction',d:arrow,style:state==='bus'?'fill:#315b81':''});
+  node('path',{class:'direction',d:arrow,style:'fill:'+arrowColor});
   return svg;
  }
  function demoWay(a,b,state,reverse){
