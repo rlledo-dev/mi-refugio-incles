@@ -23,7 +23,7 @@ function dateLabel(value){const t=Date.parse(value||'');return Number.isFinite(t
 function update(d){
  const fresh=freshness(d),known=hasData(d),sum=d.summary||{},runs=sum.runs||{},lifts=sum.lifts||{},km=sum.skiable_km||{},snow=sum.snow_depth_cm||{};
  const open=known&&Number(runs.open)>0,closed=known&&Number(runs.open)===0;
- $('stationTitle').textContent=open?'Estación abierta':closed?'Estación cerrada':'Estado de Grandvalira';
+ $('stationTitle').textContent=open?(fresh?'Estación abierta':'Último estado: abierta'):closed?(fresh?'Estación cerrada':'Último estado: cerrada'):'Estado de Grandvalira';
  $('stationDot').textContent=open?'✓':closed?'×':'?';$('stationDot').className='status-dot'+(open?' open':closed?' closed':'');
  $('stationSubtitle').textContent=fresh?'Datos comprobados recientemente':'Último parte disponible · sin comprobación reciente';
  const values=[['⛷',known?fmt(runs.open)+' / '+fmt(runs.total):'—','Pistas abiertas'],['🚡',known?fmt(lifts.open)+' / '+fmt(lifts.total):'—','Remontes abiertos'],['↗',known?fmt(km.open)+' km':'—','Esquiables'],['❄',known&&snow.min!=null&&snow.max!=null?fmt(snow.min)+'–'+fmt(snow.max)+' cm':'—','Espesor de nieve']];
