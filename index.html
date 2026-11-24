@@ -293,13 +293,14 @@ function hostStars(x){const n=Number(x.hostRating);return Number.isInteger(n)&&n
   if(service.id!=='AND-S032'||!service.phone)return '';
   return 'https://wa.me/'+service.phone.replace(/[^0-9]/g,'');
 }
-async function servicesView(){if(servicesMap){servicesMap.remove();servicesMap=null}const root=document.getElementById('detailContent');root.replaceChildren();const h=document.createElement('h2');h.textContent='📍 Cerca de ti';const note=document.createElement('p');note.className='muted';note.textContent='Servicios útiles desde Incles · consulta horarios antes de ir';root.append(h,note);let data=[];try{const response=await fetch('./servicios.json?v=29',{cache:'no-store'});if(!response.ok)throw Error('No disponible');data=await response.json()}catch(e){root.append('No se han podido cargar los servicios.');show('detail');return}const search=document.createElement('input');
+async function servicesView(initialCategory='Todos',initialSubcategory=''){if(servicesMap){servicesMap.remove();servicesMap=null}const root=document.getElementById('detailContent');root.replaceChildren();const h=document.createElement('h2');h.textContent='📍 Cerca de ti';const note=document.createElement('p');note.className='muted';note.textContent='Servicios útiles desde Incles · consulta horarios antes de ir';root.append(h,note);let data=[];try{const response=await fetch('./servicios.json?v=29',{cache:'no-store'});if(!response.ok)throw Error('No disponible');data=await response.json()}catch(e){root.append('No se han podido cargar los servicios.');show('detail');return}const search=document.createElement('input');
 search.type='search';
 search.className='restaurant-search';
 search.placeholder='Buscar por nombre, categoría o localidad…';
 search.setAttribute('aria-label','Buscar en Cerca de ti');
 root.append(search);
-let category='Todos';
+let category=data.some(x=>x.category===initialCategory)?initialCategory:'Todos';
+search.value=initialSubcategory;
 const filters=document.createElement('div');filters.className='browse-filters';filters.style.cssText='display:flex;gap:7px;overflow-x:auto;padding:8px 0 12px';for(const cat of ['Todos',...new Set(data.map(x=>x.category))]){const b=document.createElement('button');b.textContent=cat;b.style.cssText='border:0;border-radius:20px;padding:9px 12px;white-space:nowrap';b.onclick=()=>{category=cat;renderResults()};filters.append(b)}root.append(filters);const mapEl=document.createElement('div');mapEl.className='restaurant-map';mapEl.id='servicesMap';root.append(mapEl);const list=document.createElement('div');root.append(list);show('detail');let markers=null;
 if(typeof L!=='undefined'){
   servicesMap=L.map(mapEl).setView([42.545,1.595],10);
@@ -802,7 +803,19 @@ items.forEach((x,i)=>{if(i===9)return;add(x[1],x[2]||'Explorar',x.slice(1).filte
 add('Actividades','Explorar','actividades experiencias aventura nieve ocio',()=>activitiesView());add('Restaurantes','Explorar','restaurantes restaurante pizzería pizzeria pizza comer cocina',()=>restaurantView());
 ACTIVITIES.forEach((a,i)=>{if(a.name==='Mirador de Tristaina')return;add(a.name,'Actividades · '+a.cat,[a.name,a.place,a.cat].join(' '),()=>{activityDetail(i,a.cat);show('detail')})});
 guideSearchRestaurants.forEach(f=>{const p=f.properties||{};if(!p.name)return;add(p.name,'Restaurantes · '+(p.locality||p.category||''),[p.name,p.description,p.category,p.subcategory,p.locality].join(' '),async()=>{await restaurantView();const field=document.getElementById('restaurantSearch');if(field){field.value=p.name;renderRestaurants(p.name);guideScrollTarget('restaurantList')}})});
-guideSearchServices.forEach(s=>{if(!s.name)return;add(s.name,'Cerca de ti · '+(s.category||''),[s.name,s.category,s.town,s.description].join(' '),async()=>{await servicesView();const field=document.querySelector('#detailContent input[aria-label="Buscar en Cerca de ti"]');if(field){field.value=s.name;field.dispatchEvent(new Event('input',{bubbles:true}));guideScrollTarget('detailContent')}})});
+// Las categorías y subcategorías se muestran antes que los establecimientos individuales.
+const categories=[...new Set(guideSearchServices.map(s=>s.category).filter(Boolean))];
+for(const category of categories){
+ const singular=category.split(' ')[0].replace(/s$/,'');
+ if(guideMatches(category+' '+singular,q))add(category,'Cerca de ti · Categoría',category+' '+singular,()=>servicesView(category));
+}
+const subcategories=[...new Set(guideSearchServices.filter(s=>s.subcategory).map(s=>JSON.stringify([s.category,s.subcategory])))].map(s=>JSON.parse(s));
+for(const [category,subcategory] of subcategories){
+ const singular=subcategory.replace(/s$/,'');
+ const plural=subcategory.endsWith('a')?subcategory+'s':subcategory+'s';
+ if(guideMatches(subcategory+' '+singular+' '+plural,q))add(plural,'Cerca de ti · '+category,subcategory+' '+singular+' '+plural,()=>servicesView(category,subcategory));
+}
+guideSearchServices.forEach(s=>{if(!s.name)return;add(s.name,'Cerca de ti · '+(s.category||''),[s.name,s.category,s.subcategory,s.town,s.description].join(' '),async()=>{await servicesView();const field=document.querySelector('#detailContent input[aria-label="Buscar en Cerca de ti"]');if(field){field.value=s.name;field.dispatchEvent(new Event('input',{bubbles:true}));guideScrollTarget('detailContent')}})});
 if(!matches.length){root.textContent=guideSearchLoading&&guideSearchRestaurants.length===0&&guideSearchServices.length===0?'Sin resultados por ahora. Los lugares se cargarán si hay conexión.':'No encuentro resultados para esa búsqueda.';return}matches.slice(0,24).forEach(m=>{const b=document.createElement('button');b.type='button';const title=document.createElement('strong');title.textContent=m.label;const context=document.createElement('small');context.textContent=m.where;b.append(title,context);b.onclick=()=>guideOpenResult(m.action);root.append(b)})}
 document.getElementById('guideSearchInput').addEventListener('input',guideRenderResults);
 function detail(i){if(i===9){mountainRecipesView();return}if(i===8){pistesView();return}if(i===0){apartmentView();return}if(i===2){skiLockerView();return}if(i===7){servicesView();return}if(i===6){activitiesView();return}if(i===5){weatherView();return}if(i===4){camerasView();return}if(i===3){restaurantView();return}if(i===1){busView();return}const x=items[i];document.getElementById('detailContent').innerHTML='<h2>'+x[0]+' '+x[1]+'</h2><div class="card">'+x[4]+'</div>'+(x[5]?'<a class="link" target="_blank" rel="noopener noreferrer" href="'+x[5]+'">'+x[6]+' ↗</a>':'')+'<p class="note">Algunos apartados están pendientes de completar y verificar.</p>';show('detail')}
