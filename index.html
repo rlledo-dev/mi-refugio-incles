@@ -693,7 +693,7 @@ function apartmentView(){
  const title=document.createElement('h2');title.textContent='🏡 '+RefugeI18n.t('tile.0','El apartamento');root.append(title);
  if(!refugeGuest){
   const intro=document.createElement('div');intro.className='card';
-  intro.innerHTML='<h3>Tu hogar en Incles</h3><p>Un dormitorio, sofá cama, aparcamiento y guardaesquís. Un espacio cómodo para disfrutar de Andorra.</p><p class="note">Las instrucciones de uso de la vivienda están disponibles para huéspedes con una reserva autorizada.</p>';
+  intro.innerHTML='<h3></h3><p></p><p class="note"></p>';intro.children[0].textContent=RefugeI18n.t('sub.0','Tu hogar en Incles');intro.children[1].textContent=RefugeI18n.t('apt.public','Un dormitorio, sofá cama, aparcamiento y guardaesquís. Un espacio cómodo para disfrutar de Andorra.');intro.children[2].textContent=RefugeI18n.t('apt.private','Las instrucciones de uso de la vivienda están disponibles para huéspedes con una reserva autorizada.');
   root.append(intro);show('detail');return;
  }
  const intro=document.createElement('p');intro.className='muted';intro.textContent=RefugeI18n.t('apt.intro','Guía práctica de la vivienda · primera versión');root.append(intro);
@@ -718,7 +718,7 @@ function apartmentView(){
    p.style.marginTop='12px';card.append(p);
   }
   if(heading==='📶 Wi-Fi'){
-   const link=document.createElement('a');link.className='link';link.href='#stay';link.textContent='Ver mis datos Wi-Fi personalizados';
+   const link=document.createElement('a');link.className='link';link.href='#stay';link.textContent=RefugeI18n.t('apt.wifi','Ver mis datos Wi-Fi personalizados');
    link.addEventListener('click',event=>{event.preventDefault();show('stay');requestAnimationFrame(()=>document.getElementById('refugeWifi')?.closest('.card')?.scrollIntoView({behavior:'smooth',block:'start'}));});
    card.append(link);
   }
@@ -731,16 +731,16 @@ function apartmentView(){
   if(heading==='🫧 Lavadora'){
    const link=document.createElement('a');link.className='link';
    link.href='https://drive.google.com/file/d/10W6K-AVvAVdCx5IecZmrEYjfcx-WGkZX/view?usp=sharing';
-   link.target='_blank';link.rel='noopener noreferrer';link.textContent='Instrucciones lavadora';card.append(link);
+   link.target='_blank';link.rel='noopener noreferrer';link.textContent=RefugeI18n.t('apt.washer','Instrucciones lavadora');card.append(link);
   }
   if(heading==='🍽️ Lavaplatos'){
    const link=document.createElement('a');link.className='link';
    link.href='https://www.beko.com/content/dam/spain-es-aem/spain-es-aemProductCatalog/product-documents/7658153977-DFN28422X/es-ES-7658153977-201912090953859-User-Manual---File-Longes-ES.pdf#page=30';
-   link.target='_blank';link.rel='noopener noreferrer';link.textContent='Instrucciones lavaplatos';card.append(link);
+   link.target='_blank';link.rel='noopener noreferrer';link.textContent=RefugeI18n.t('apt.dish','Instrucciones lavaplatos');card.append(link);
   }
   root.append(card);
  }
- const note=document.createElement('p');note.className='note';note.textContent='Esta guía es una primera versión. Las fotografías y las instrucciones detalladas de plegado se incorporarán después de revisarlas.';root.append(note);
+ const note=document.createElement('p');note.className='note';note.textContent=RefugeI18n.t('apt.note','Esta guía es una primera versión. Las fotografías y las instrucciones detalladas de plegado se incorporarán después de revisarlas.');root.append(note);
  show('detail');
 }
 function pistesView(){
