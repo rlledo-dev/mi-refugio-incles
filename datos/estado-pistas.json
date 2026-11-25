@@ -1,7 +1,7 @@
 {
   "source": "https://www.grandvalira.com/es/estacion/estado-pistas",
   "source_last_updated": "2026-11-25T15:56:00+01:00",
-  "retrieved_at": "2026-11-25T20:21:19.173749+00:00",
+  "retrieved_at": "2026-11-25T21:00:00.215216+00:00",
   "live": true,
   "station": "Grandvalira",
   "summary": {
@@ -54,6 +54,1513 @@
     {
       "name": "Pas de la Casa",
       "status": "unknown"
+    }
+  ],
+  "items": [
+    {
+      "name": "Funicamp",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telecabina",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Cortals",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Cortals II",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Cortals III",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Pla de les Pedres",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Colibrí",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Enradort",
+      "sector": "encamp",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cortals I",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cortals II",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Baladre",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cortalets",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cortals",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Enllaç",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "La Burna",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Les deveses",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Neret",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Riu Cubil",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Solanella XL",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Xicoia",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Colibrí",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Concòrdia",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Enradort",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Riu Solanelles",
+      "sector": "encamp",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Canillo",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telecabina",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Jardí Forn",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Tubbing",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Encampadana",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Forn",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD4 Portella",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Clots",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Júnior Canillo",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Seig",
+      "sector": "canillo",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Escola",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Forn I",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Forn II",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jardí Forn",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Júnior",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cadernera",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Daina",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Geneta",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Perdiu",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Picot",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Rossinyol",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "La Font",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "La Pala",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Seig",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Gaig",
+      "sector": "canillo",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Escola Riba",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Jardí Riba",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TC10 Tarter",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telecabina",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Font Roges",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Llosada",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Refugi",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Riba",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD4 Tarter",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Llosada",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Tosa Espiolets",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF2 Riba",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Pi de Migdia",
+      "sector": "el-tarter",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jardí Riba",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Riba I",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Riba II",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Enllaç Esquirol",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Esquirol",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Guineu",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Oreneta",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pi de Migdia",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Teixó",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Variant Tamarro",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Accés Miquel",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Corb",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Esparver",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Isard",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Llop",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Miquel Baró",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Mussol",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tamarro",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Àliga",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Mufló",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Voltor",
+      "sector": "el-tarter",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Soldeu",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telecabina",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Estany",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Jardí Espiolets",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Bassots",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Escola",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Eslàlom",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Espiolets",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Gall de Bosc",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telecuerda",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TLC Espiolets",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telecuerda",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TLC Gall de Bosc",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TLC Solana",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telecuerda",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Pla de les Pedres",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Solana",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Soldeu",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Assaladors",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Planell de la Font",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Solanelles",
+      "sector": "soldeu",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bassots",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Escola I",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Escola Soldeu",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Espiolets",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Estany",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jardí Espiolets",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Astoret",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bosc fosc",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Fura",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Gall de Bosc",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Marmota",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Obac de la Solana",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Obaga",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Ós",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Paniquera",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Solana",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Variant Duc",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cucut",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Duc",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Llebre",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Obagot I",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Obagot II",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Obagot III",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pardal",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pinet",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pla de les Pedres",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Salvans",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Serra de les Solanelles",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Serrat de la Posa",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Torrallardona",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tritó",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Avet",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Cabirol",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Eslàlom",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Falcó",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "La Cova",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Trencalós",
+      "sector": "soldeu",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Bordes",
+      "sector": "peretol",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Peretol",
+      "sector": "peretol",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bordes 1",
+      "sector": "peretol",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bordes 2",
+      "sector": "peretol",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Jardí",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Clot",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Coma III",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Llac del Cubil",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Montmalús",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Moretó",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Pessons",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Pessons II",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Valira",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD4 Cubil",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD4 Les Antenes",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Coma Blanca",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Pic Blanc",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Llac del Cubil",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Xavi",
+      "sector": "grau-roig",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jardí de neu",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pessons",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Valira 1",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Valira 2",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bosc",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Bosquet",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Camí dels Pessons",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Clot",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Fugida I",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Fugida II",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Fugida III",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "L'Avi",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pastora",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Portella",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tobogan",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tortuga",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Aigües Tortes",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Diagonal",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Gençana",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Grandalles",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Grió",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Menera",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Montmalús",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Moretó",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pala central",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pala Nova",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Perdiu Blanca",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pista llarga",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Serrat Pinós",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Antenes",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Granota",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Mirador",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Riberal",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tamarro",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tub del Bosc",
+      "sector": "grau-roig",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tapís Les Abelletes",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Tapiz",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TC10 Els Pioners",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telecabina",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Les Abelletes",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TK Pic Negre",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesquí",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TLC Riberal I",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telecuerda",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TLC Riberal II",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telecuerda",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD4 Pas de la Casa",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSD6 Font Negre",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF2 Coll dels Isards",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Costa Rodona",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "TSF4 Solana",
+      "sector": "el-pas-de-la-casa",
+      "kind": "lift",
+      "category": "Telesilla",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Abelletes",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Escola",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jardí de neu",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Verde",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Fletxa",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Isards",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Pioners",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Port",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Tubs",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Azul",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Directa I",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Directa II",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Gavatxa",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Llac",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Roja",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Estadi Francesc Viladomat",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "FIS",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Jordi Anglès",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
+    },
+    {
+      "name": "Taupes",
+      "sector": "el-pas-de-la-casa",
+      "kind": "run",
+      "category": "Pista Negra",
+      "status": "Cerrado"
     }
   ]
 }

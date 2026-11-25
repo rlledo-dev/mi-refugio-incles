@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Lee el parte HTML público de Grandvalira. Nunca inventa estados ni fechas."""
 import json
+from html import unescape
 import re
 import urllib.request
 from datetime import datetime, timezone
@@ -28,6 +29,31 @@ class VisibleText(HTMLParser):
 def match_pair(text, label):
     m = re.search(label + r"\s*(\d+)\s*/\s*(\d+)", text, re.I)
     return {"open": int(m.group(1)), "total": int(m.group(2))} if m else None
+
+def extract_items(page):
+    """Read explicit per-item status within each sector's public report."""
+    items = []
+    sections = re.split(r'<div[^>]*class="board-pane board-pane--type-details[^"]*"[^>]*>', page)
+    for section in sections:
+        progress = re.search(r'id="(slopes|facilities)-progress_([a-z-]+)"', section)
+        if not progress:
+            continue
+        group, sector = progress.groups()
+        kind = "run" if group == "slopes" else "lift"
+        for badge in re.split(r'<div[^>]*class="badge [^"]*"[^>]*>', section)[1:]:
+            badge = badge.split("</div>", 1)[0]
+            name = re.search(r'<span class="badge__label">([^<]+)</span>', badge)
+            label = re.search(r'class="badge__icon[^"]*"[^>]*aria-label="([^"]+)"', badge)
+            if not name or not label:
+                continue
+            category, separator, status = unescape(label[1]).partition(" - ")
+            if not separator or (kind == "run") != category.startswith("Pista "):
+                continue
+            if kind == "lift" and category not in {"Tapiz", "Telecabina", "Telecuerda", "Telesilla", "Telesquí"}:
+                continue
+            items.append({"name": unescape(name[1]).strip(), "sector": sector,
+                          "kind": kind, "category": category, "status": status})
+    return items
 
 def main():
     req = urllib.request.Request(URL, headers={"User-Agent": "MiRefugioIncles/1.0 (+public ski report; contact via website)", "Accept-Language": "es"})
@@ -69,6 +95,7 @@ def main():
             "links": links,
         },
         "sectors": sectors,
+        "items": extract_items(page),
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     # No reescribir el JSON si el parte no ha cambiado: evita commits cada 30 minutos.
