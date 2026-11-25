@@ -19,7 +19,7 @@ const rows=[
 ["Navegación principal","Main navigation","Navigation principale","Navegació principal"],["Versión de la aplicación","App version","Version de l’application","Versió de l’aplicació"],["Logo de Mi Refugio en Incles","Mi Refugio en Incles logo","Logo de Mi Refugio en Incles","Logotip de Mi Refugio en Incles"],["Taquilla","Locker","Casier","Armariet"],["Propietario","Owner","Propriétaire","Propietari"]
 ];
 const dict={es:{},en:{},fr:{},ca:{}};
-for(const r of rows)for(const [i,l] of ["es","en","fr","ca"].entries())dict[l][r[0]]=r[i+1];
+for(const r of rows){dict.es[r[0]]=r[0];dict.en[r[0]]=r[1];dict.fr[r[0]]=r[2];dict.ca[r[0]]=r[3]}
 const locale={es:"es-ES",en:"en-GB",fr:"fr-FR",ca:"ca-ES"};
 function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]||source;
  const patterns=[
