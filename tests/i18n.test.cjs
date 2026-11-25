@@ -22,7 +22,10 @@ test('todos los diccionarios de dominio registran las mismas claves',()=>{
 test('el adaptador de contenido tiene cuatro variantes y no contiene credenciales',()=>{
  const source=fs.readFileSync(path.join(root,'i18n-content.js'),'utf8');
  assert.match(source,/const rows=\[/);
- assert.match(source,/\["es","en","fr","ca"\]/);
+ assert.match(source,/dict\.es\[r\[0\]\]=r\[0\]/);
+ assert.match(source,/dict\.en\[r\[0\]\]=r\[1\]/);
+ assert.match(source,/dict\.fr\[r\[0\]\]=r\[2\]/);
+ assert.match(source,/dict\.ca\[r\[0\]\]=r\[3\]/);
  assert.doesNotMatch(source,/[a-f0-9]{64}/i);
  assert.doesNotMatch(source,/34617400600|DEMO-CODIGO-NO-VALIDO/);
 });
