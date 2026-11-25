@@ -13,8 +13,11 @@ main{max-width:1100px;margin:auto;padding:12px} h1{font-size:1.25rem;margin:0 0 
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:9px}
 button{font:inherit;font-weight:650;color:inherit;background:white;border:1px solid #9ab2ba;border-radius:8px;padding:8px;cursor:pointer}
 #map{height:clamp(290px,66dvh,700px);border-radius:10px;background:#dae9ea}
-#map:fullscreen{width:100%;height:100%;border-radius:0}
-#report,#legend{margin:7px 0;font-size:.84rem} .photo{display:block;width:170px;max-width:100%;border-radius:6px;margin-top:7px}
+#map:fullscreen,#map.is-expanded{width:100%;height:100%;border-radius:0}
+#map.is-expanded{position:fixed;inset:0;z-index:1100}
+#closeMap{display:none;position:absolute;top:10px;right:10px;z-index:1001}
+#map:fullscreen #closeMap,#map.is-expanded #closeMap{display:block}
+#report,#legend,.credits{margin:7px 0;font-size:.84rem} .photo{display:block;width:170px;max-width:100%;border-radius:6px;margin-top:7px}
 </style>
 </head>
 <body>
@@ -25,9 +28,10 @@ button{font:inherit;font-weight:650;color:inherit;background:white;border:1px so
 <button type="button" id="overview">Ver ambos sectores</button>
 <button type="button" id="expand">Pantalla completa ⛶</button>
 </div>
-<div id="map" aria-label="Mapa del alojamiento, las pistas y los remontes"></div>
+<div id="map" aria-label="Mapa del alojamiento, las pistas y los remontes"><button type="button" id="closeMap">Cerrar mapa</button></div>
 <p id="legend">Verde · Abierto | Rojo · Cerrado | Ámbar · Otro estado | Gris · Sin confirmar. Línea discontinua · Remonte.</p>
 <p id="report" role="status">Cargando el mapa y el parte…</p>
+<p class="credits">Trazados de <a href="https://www.openskidata.org/">OpenSkiData</a> / <a href="https://openskimap.org/">OpenSkiMap.org</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors (ODbL)</a> · Skimap.org · Who’s On First · © Mapterhorn.</p>
 </main>
 </body>
 </html>

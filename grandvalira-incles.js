@@ -39,12 +39,29 @@ function initializeMap() {
       if (!mapElement.requestFullscreen) throw new Error('Pantalla completa no disponible');
       await mapElement.requestFullscreen();
     } catch {
-      // Safari en iPhone puede abrir la vista independiente a tamaño de página.
-      if (window.self !== window.top) window.open(location.href, '_blank', 'noopener');
-      else mapElement.scrollIntoView({block: 'start'});
+      if (window.self !== window.top) {
+        window.open(location.href, '_blank', 'noopener');
+        return;
+      }
+      mapElement.classList.add('is-expanded');
+      map.invalidateSize();
+      document.getElementById('closeMap').focus();
     }
   };
-  document.addEventListener('fullscreenchange', () => map.invalidateSize());
+  document.getElementById('closeMap').onclick = () => {
+    if (document.fullscreenElement === mapElement) {
+      document.exitFullscreen();
+    } else {
+      mapElement.classList.remove('is-expanded');
+      map.invalidateSize();
+    }
+    document.getElementById('expand').focus();
+  };
+  L.DomEvent.disableClickPropagation(document.getElementById('closeMap'));
+  document.addEventListener('fullscreenchange', () => {
+    map.invalidateSize();
+    if (document.fullscreenElement === mapElement) document.getElementById('closeMap').focus();
+  });
 
   const load = async path => {
     const response = await fetch(path, {cache: 'no-store'});
