@@ -7,7 +7,7 @@ const locale={es:"es-ES",en:"en-GB",fr:"fr-FR",ca:"ca-ES"};
 const compositeKeys=Object.keys(dict.es).filter(key=>key.length>=10).sort((a,b)=>b.length-a.length);
 const compositePattern=new RegExp(compositeKeys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|"),"g");
 function translateComposite(source,lang){return source.replace(compositePattern,key=>dict[lang][key]||key)}
-function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]||source; if(out===source&&lang!=='es'){out=source.replace(/¡Solo una parada!|También una sola parada\./g,key=>dict[lang][key]||key);}
+function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]||source; if(lang!=='es'&&source.includes('Precio público Grandvalira 2026-27:')){out=source.replace('Precio público Grandvalira 2026-27:',dict[lang]['Precio público Grandvalira 2026-27:']).replace(/\bdesde\b/gi,({en:'from',fr:'à partir de',ca:'des de'})[lang]);} if(out===source&&lang!=='es'){out=source.replace(/¡Solo una parada!|También una sola parada\./g,key=>dict[lang][key]||key);}
  const patterns=[
   [/^(\d+) ubicaciones encontradas( · Escribe para filtrar)?$/,m=>m[1]+" "+dict[lang]["ubicaciones encontradas"]+(m[2]?" · "+dict[lang]["Escribe para filtrar"]:"")],
   [/^Cámara en directo: (.+)$/,m=>dict[lang]["Cámara en directo:"]+" "+m[1]],
