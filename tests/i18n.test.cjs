@@ -34,7 +34,7 @@ test('la versión 1.3.0 y todos los recursos i18n están en la caché offline',(
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
  assert.match(html,/v1\.3\.0/);
- assert.match(html,/sw\.js\?v=73/);
+ assert.match(html,/sw\.js\?v=74/);
  for(const file of ['i18n.js','i18n-core.js','i18n-apartment.js','i18n-stay.js','i18n-arrival.js','i18n-guest.js','i18n-esim.js','i18n-content.js','i18n-complete.js'])assert.ok(sw.includes(`./${file}`),file);
- assert.match(sw,/mi-refugio-v73/);
+ assert.match(sw,/mi-refugio-v74/);
 });
