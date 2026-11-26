@@ -39,7 +39,7 @@ function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]
 }
 function localize(root=document){if(!root)return;const lang=RefugeI18n.language;
  const nodes=[];if(root.nodeType===3)nodes.push(root);else{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(w.nextNode())nodes.push(w.currentNode)}
- for(const node of nodes){if(node.parentElement?.closest("script,style,svg,code,textarea"))continue;const raw=node.nodeValue,trim=raw.trim();if(!trim)continue;if(!node.__refugeSource)node.__refugeSource=trim;const translated=value(node.__refugeSource),next=raw.replace(trim,translated);if(next!==raw)node.nodeValue=next}
+ for(const node of nodes){if(node.parentElement?.closest("script,style,svg,code,textarea,[data-i18n-fixed],[data-i18n]"))continue;const raw=node.nodeValue,trim=raw.trim();if(!trim)continue;if(!node.__refugeSource)node.__refugeSource=trim;const translated=value(node.__refugeSource),next=raw.replace(trim,translated);if(next!==raw)node.nodeValue=next}
  const elements=root.nodeType===1?[root,...root.querySelectorAll("[aria-label],[title],[placeholder]")]:[...document.querySelectorAll("[aria-label],[title],[placeholder]")];
  for(const el of elements)for(const attr of ["aria-label","title","placeholder"]){if(!el.hasAttribute?.(attr))continue;const key="refugeSource"+attr.replace(/(^|-)([a-z])/g,(_,dash,c)=>c.toUpperCase());el.dataset[key]??=el.getAttribute(attr);el.setAttribute(attr,value(el.dataset[key]))}
  document.documentElement.lang=lang;document.documentElement.dataset.locale=locale[lang];
