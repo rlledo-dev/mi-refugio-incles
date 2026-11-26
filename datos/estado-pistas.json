@@ -1,7 +1,7 @@
 {
   "source": "https://www.grandvalira.com/es/estacion/estado-pistas",
-  "source_last_updated": "2026-11-25T15:56:00+01:00",
-  "retrieved_at": "2026-11-25T21:00:00.215216+00:00",
+  "source_last_updated": "2026-11-26T15:57:00+01:00",
+  "retrieved_at": "2026-11-26T21:47:46.843825+00:00",
   "live": true,
   "station": "Grandvalira",
   "summary": {
@@ -18,8 +18,8 @@
       "total": 215
     },
     "snow_depth_cm": {
-      "min": 0,
-      "max": 0
+      "min": 10,
+      "max": 15
     },
     "links": {
       "open": 0,
