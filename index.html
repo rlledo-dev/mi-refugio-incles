@@ -301,7 +301,7 @@ search.setAttribute('aria-label','Buscar en Cerca de ti');
 root.append(search);
 let category=data.some(x=>x.category===initialCategory)?initialCategory:'Todos';
 search.value=initialSubcategory;
-const filters=document.createElement('div');filters.className='browse-filters';filters.style.cssText='display:flex;gap:7px;overflow-x:auto;padding:8px 0 12px';for(const cat of ['Todos',...new Set(data.map(x=>x.category))]){const b=document.createElement('button');b.textContent=cat;b.style.cssText='border:0;border-radius:20px;padding:9px 12px;white-space:nowrap';b.onclick=()=>{category=cat;renderResults()};filters.append(b)}root.append(filters);const mapEl=document.createElement('div');mapEl.className='restaurant-map';mapEl.id='servicesMap';root.append(mapEl);const list=document.createElement('div');root.append(list);show('detail');let markers=null;
+const filters=document.createElement('div');filters.className='browse-filters';filters.style.cssText='display:flex;gap:7px;overflow-x:auto;padding:8px 0 12px';for(const cat of ['Todos',...new Set(data.map(x=>x.category))]){const b=document.createElement('button');b.textContent=cat;b.dataset.category=cat;b.style.cssText='border:0;border-radius:20px;padding:9px 12px;white-space:nowrap';b.onclick=()=>{category=cat;renderResults()};filters.append(b)}root.append(filters);const mapEl=document.createElement('div');mapEl.className='restaurant-map';mapEl.id='servicesMap';root.append(mapEl);const list=document.createElement('div');root.append(list);show('detail');let markers=null;
 if(typeof L!=='undefined'){
   servicesMap=L.map(mapEl).setView([42.545,1.595],10);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(servicesMap);
@@ -312,7 +312,7 @@ if(typeof L!=='undefined'){
 }
 function renderResults(){
   for(const button of filters.children){
-    const selected=button.textContent===category;
+    const selected=button.dataset.category===category;
     button.setAttribute('aria-pressed',String(selected));
     button.style.background=selected?'#1c6474':'#e9f0f0';
     button.style.color=selected?'white':'#173342';
