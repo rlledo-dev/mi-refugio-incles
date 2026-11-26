@@ -45,5 +45,4 @@ RefugeI18n.localize=localize;RefugeI18n.localizeValue=value;RefugeI18n.locale=()
 let queued=false;const observer=new MutationObserver(()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;localize(document.body)})});
 function start(){localize(document);observer.observe(document.body,{childList:true,subtree:true,characterData:true});document.addEventListener("refuge:language",()=>localize(document))}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
-const complete=document.createElement("script");complete.src="./i18n-complete.js?v=1";complete.async=false;document.head.append(complete);
 })();
