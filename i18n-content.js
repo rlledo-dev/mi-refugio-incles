@@ -43,6 +43,6 @@ function localize(root=document){if(!root)return;const lang=RefugeI18n.language;
 }
 RefugeI18n.localize=localize;RefugeI18n.localizeValue=value;RefugeI18n.locale=()=>locale[RefugeI18n.language];
 let queued=false;const observer=new MutationObserver(()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;localize(document.body)})});
-function start(){localize(document);observer.observe(document.body,{childList:true,subtree:true,characterData:true});document.addEventListener("refuge:language",()=>localize(document))}
+function start(){localize(document);observer.observe(document.body,{childList:true,subtree:true});document.addEventListener("refuge:language",()=>localize(document))}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
