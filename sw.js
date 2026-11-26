@@ -1,4 +1,4 @@
-const CACHE='mi-refugio-v99';
+const CACHE='mi-refugio-v100';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./i18n.js?v=2','./i18n-core.js','./i18n-apartment.js','./i18n-stay.js','./i18n-arrival.js','./i18n-guest.js','./i18n-esim.js','./i18n-content.js?v=17','./restaurantes.geojson?v=4','./servicios.json?v=29','./estado-pistas.html','./camaras.html','./hero.png','./imagenes/actividades/peretol-nocturno.jpg?v=1.3.15'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([
