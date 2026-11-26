@@ -21,7 +21,17 @@ const rows=[
 const dict={es:{},en:{},fr:{},ca:{}};
 for(const r of rows){dict.es[r[0]]=r[0];dict.en[r[0]]=r[1];dict.fr[r[0]]=r[2];dict.ca[r[0]]=r[3]}
 const locale={es:"es-ES",en:"en-GB",fr:"fr-FR",ca:"ca-ES"};
-function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]||source;
+const compositeKeys=Object.keys(dict.es).filter(key=>key.length>=10).sort((a,b)=>b.length-a.length);
+const compositePattern=new RegExp(compositeKeys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|"),"g");
+function translateComposite(source,lang){
+ // Some interface blocks contain several sentences in the same text node. The
+ // old exact-match lookup translated the first known fragment and left the
+ // following sentence in Spanish. Replace known complete phrases, longest
+ // first and in one pass, so punctuation and inline markup no longer split the
+ // translation and translated text cannot be translated a second time.
+ return source.replace(compositePattern,key=>dict[lang][key]||key);
+}
+function value(source){const lang=RefugeI18n.language;let out=dict[lang][source]||translateComposite(source,lang);
  const patterns=[
   [/^(\d+) ubicaciones encontradas( · Escribe para filtrar)?$/,m=>m[1]+" "+dict[lang]["ubicaciones encontradas"]+(m[2]?" · "+dict[lang]["Escribe para filtrar"]:"")],
   [/^Cámara en directo: (.+)$/,m=>dict[lang]["Cámara en directo:"]+" "+m[1]],
