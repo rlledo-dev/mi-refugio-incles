@@ -60,6 +60,7 @@ const activityRows=[
   ]
 ];
 for(const [source,en,fr] of activityRows){dict.en[source]=en;dict.fr[source]=fr;}
+Object.assign(dict.fr,{"Moonbikes · Naturland":"Moonbikes · Naturland","Naturland · La Rabassa, cota 2000":"Naturland · La Rabassa, altitude 2 000 m","Conducción sobre nieve · Andorra Snow Challenge":"Conduite sur neige · Andorra Snow Challenge","Soldeu · Grandvalira":"Soldeu · Grandvalira","Museos de Andorra":"Musées d’Andorre","Canillo · Museo de la Moto y más":"Canillo · Musée de la moto et autres musées","Las siete parroquias de Andorra":"Les sept paroisses d’Andorre","Pistas altas":"Haut des pistes","El Tarter · sin dato actual":"El Tarter · données actuelles indisponibles","No hay restaurantes que coincidan con la búsqueda.":"Aucun restaurant ne correspond à votre recherche.","1 ubicación encontrada":"1 établissement trouvé"});Object.assign(dict.en,{"Must: Coulant":"Host’s pick: Coulant","Imprescindible: Coulant":"Host’s pick: Coulant"});
 const compositeKeys=[...new Set(Object.values(dict).flatMap(x=>Object.keys(x)))].filter(key=>key.length>=10).sort((a,b)=>b.length-a.length);
 const compositePattern=new RegExp(compositeKeys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|"),"g");
 function translateComposite(source,lang){return source.replace(compositePattern,key=>dict[lang][key]||key)}
@@ -86,7 +87,7 @@ let out=dict[lang][source]||source; if(lang==='en'&&/^1 ubicaciones encontradas$
   [/^Importe ofertado: (.+)$/,m=>dict[lang]["Importe ofertado"]+": "+m[1]]
  ];
  for(const [re,fn] of patterns){const m=source.match(re);if(m){out=fn(m);break}}
- if(out===source&&lang==='en')out=translateComposite(source,lang);
+ if(out===source&&(lang==='en'||lang==='fr'))out=translateComposite(source,lang);if(lang==='en')out=out.replace(/\\bMust:/g,'Host’s pick:');
  return out;
 }
 function localize(root=document){if(!root)return;const lang=RefugeI18n.language;
