@@ -1,5 +1,5 @@
-const CACHE='mi-refugio-v72';
-const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./i18n.js','./i18n-core.js','./i18n-apartment.js','./i18n-stay.js','./i18n-arrival.js','./i18n-guest.js','./i18n-esim.js','./i18n-content.js','./i18n-complete.js?v=1','./restaurantes.geojson?v=4','./servicios.json?v=29','./estado-pistas.html','./camaras.html','./hero.png'];
+const CACHE='mi-refugio-v73';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon.svg','./wifi-qr.js','./i18n.js','./i18n-core.js','./i18n-apartment.js','./i18n-stay.js','./i18n-arrival.js','./i18n-guest.js','./i18n-esim.js','./i18n-content.js?v=2','./i18n-complete.js?v=1','./restaurantes.geojson?v=4','./servicios.json?v=29','./estado-pistas.html','./camaras.html','./hero.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([
  caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('mi-refugio-')&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()
