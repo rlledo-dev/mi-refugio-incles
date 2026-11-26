@@ -461,7 +461,7 @@ function renderRefugeStay(){
  }
  for(const root of [arrival,parking,departure]){
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;
- while(node=walker.nextNode()){const original=node.nodeValue;const trimmed=original.trim();const key=window.refugeArrivalText[trimmed];if(key)node.nodeValue=original.replace(trimmed,RefugeI18n.t(key,trimmed));else if(trimmed.startsWith('Hora de entrada: '))node.nodeValue=original.replace('Hora de entrada:',RefugeI18n.t(window.refugeArrivalText['Hora de entrada:'],'Hora de entrada:'));}
+ while(node=walker.nextNode()){const original=node.nodeValue;const trimmed=original.trim();const match=trimmed.match(/^([.,;:!?]*\s*)(.*?)(\s*[.,;:!?]*)$/);const dict=window.refugeArrivalText;const key=dict[trimmed]||(match&&dict[match[2]]);if(key){const translated=dict[trimmed]?RefugeI18n.t(key,trimmed):match[1]+RefugeI18n.t(key,match[2])+match[3];node.nodeValue=original.replace(trimmed,translated);}else if(trimmed.startsWith('Hora de entrada: '))node.nodeValue=original.replace('Hora de entrada:',RefugeI18n.t(window.refugeArrivalText['Hora de entrada:'],'Hora de entrada:'));}
  }
  renderArrivalMap();
 }
