@@ -43,6 +43,7 @@ body.tv-mode .link,body.tv-mode .back{font-size:20px;padding:15px 22px}
 @media(max-height:680px){body.tv-mode #home .hero{height:155px;padding:16px 5vw}body.tv-mode #home .hero h1{font-size:33px}body.tv-mode .content{padding-top:13px}body.tv-mode .tile{min-height:145px}}
 
 
+.bed-guide{min-width:0;margin-top:12px;padding:12px;border:1px solid #d9e3e5;border-radius:12px;background:#f5f9f9;overflow:hidden}.bed-guide summary{cursor:pointer;font-weight:650}.bed-guide img{display:block;width:100%;max-width:100%;height:auto;margin:12px auto 0;border-radius:10px}.bed-guide p{margin:10px 0 0}
 /* La guía se adapta al espacio disponible; el modo TV conserva sus reglas. */
 .activity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media(min-width:600px){
@@ -59,7 +60,7 @@ body.tv-mode .link,body.tv-mode .back{font-size:20px;padding:15px 22px}
  body:not(.tv-mode) .browse-filters{flex-wrap:wrap;overflow-x:visible!important}
  body:not(.tv-mode) .card p,body:not(.tv-mode) .card li,body:not(.tv-mode) #detailContent>p{max-width:72ch;overflow-wrap:anywhere}
  body:not(.tv-mode) .apartment-instruction{max-width:840px;margin-inline:auto!important}
- body:not(.tv-mode) .apartment-instruction img{max-width:480px;margin-inline:auto}.bed-guide{margin-top:12px;padding:12px;border:1px solid #d9e3e5;border-radius:12px;background:#f5f9f9}.bed-guide summary{cursor:pointer;font-weight:650}.bed-guide img{display:block;width:100%;max-width:100%;height:auto;margin:12px auto 0;border-radius:10px}.bed-guide p{margin:10px 0 0}
+ body:not(.tv-mode) .apartment-instruction>img{max-width:480px;margin-inline:auto}
  body:not(.tv-mode) .ski-hero-photo{max-width:760px;height:auto;max-height:none;margin-inline:auto;object-fit:contain}
  body:not(.tv-mode) .ski-photos{max-width:760px;margin-inline:auto}
  body:not(.tv-mode) .ski-photos img{height:auto;max-height:330px;object-fit:contain;background:#e8eff0}
@@ -149,7 +150,7 @@ let stored;try{stored=localStorage.getItem("refuge.language")}catch{}
 let language=multilingualEnabled?(valid(new URL(location.href).searchParams.get("lang"))||valid(stored)||(navigator.languages||[navigator.language]).map(valid).find(Boolean)||"es"):"es";
 const dictionaries={es:{},en:{},fr:{},ca:{}};
 function t(key,fallback=key,values={}){return (dictionaries[language][key]??dictionaries.es[key]??fallback).replace(/\{([\w]+)\}/g,(m,k)=>Object.hasOwn(values,k)?String(values[k]):m)}
-function render(){document.documentElement.lang=language;document.querySelectorAll("[data-i18n]").forEach(el=>{el.dataset.i18nFallback??=el.textContent;el.textContent=t(el.dataset.i18n,el.dataset.i18nFallback)});document.querySelectorAll("[data-i18n-label]").forEach(el=>{el.setAttribute("aria-label",t(el.dataset.i18nLabel));el.title=t(el.dataset.i18nLabel)});document.querySelectorAll(".refuge-version").forEach(el=>{el.textContent="v1.3.27 · "+language.toUpperCase();el.setAttribute("aria-label",language==="en"?"App version":"Versión de la aplicación")});document.dispatchEvent(new CustomEvent("refuge:language",{detail:{language}}))}
+function render(){document.documentElement.lang=language;document.querySelectorAll("[data-i18n]").forEach(el=>{el.dataset.i18nFallback??=el.textContent;el.textContent=t(el.dataset.i18n,el.dataset.i18nFallback)});document.querySelectorAll("[data-i18n-label]").forEach(el=>{el.setAttribute("aria-label",t(el.dataset.i18nLabel));el.title=t(el.dataset.i18nLabel)});document.querySelectorAll(".refuge-version").forEach(el=>{el.textContent="v1.3.28 · "+language.toUpperCase();el.setAttribute("aria-label",language==="en"?"App version":"Versión de la aplicación")});document.dispatchEvent(new CustomEvent("refuge:language",{detail:{language}}))}
 function setLanguage(value){if(!multilingualEnabled)return;const next=valid(value);if(!next)return;language=next;try{localStorage.setItem("refuge.language",next)}catch{}const url=new URL(location.href);url.searchParams.set("lang",next);history.replaceState(history.state,"",url);render()}
 window.RefugeI18n={multilingualEnabled,locale:()=>({es:"es-ES",en:"en-GB",fr:"fr-FR",ca:"ca-ES"}[language]),t,setLanguage,get language(){return language},register(locale,entries){if(supported.includes(locale))Object.assign(dictionaries[locale],entries)},render};
 })();
@@ -914,7 +915,7 @@ function detail(i){if(i===9){mountainRecipesView();return}if(i===8){pistesView()
     if(next>=0&&next<tiles.length){e.preventDefault();tiles[next].focus();}
   });
 })();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=106').catch(()=>{}));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=107').catch(()=>{}));
 // El contenido general funciona offline; los datos de reserva requieren validación online.
 (function(){
  function showOffline(){
